@@ -334,7 +334,8 @@ export default function EditProduct() {
           body: imageFile,
           headers: {
             ...upload_headers, // Gunakan header otentikasi spesifik yang diminta oleh S3
-            "Content-Type": contentType 
+            "Content-Type": contentType,
+            "x-amz-acl": "public-read" // <-- TAMBAHKAN BARIS INI JUGA! 
           }
         });
 
