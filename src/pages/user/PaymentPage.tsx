@@ -548,7 +548,7 @@ export default function PaymentPage() {
       
       try {
         // [PERBAIKAN] Menggunakan BASE_URL
-        const res = await fetch(`${BASE_URL}/addresses`, {
+        const res = await fetch(`${BASE_URL}/api/addresses`, {
           headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }
         });
         if (res.ok) {
@@ -584,7 +584,7 @@ export default function PaymentPage() {
         try {
           const token = localStorage.getItem("user_token");
           // [PERBAIKAN] Menggunakan BASE_URL
-          const res = await fetch(`${BASE_URL}/shipping/rates`, {
+          const res = await fetch(`${BASE_URL}/api/shipping/rates`, {
             method: "POST",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, Accept: "application/json" },
             body: JSON.stringify({ address_id: selectedAddressId, cart_ids: selectedItemIds })
@@ -620,7 +620,7 @@ export default function PaymentPage() {
     try {
       const token = localStorage.getItem("user_token");
       // [PERBAIKAN] Menggunakan BASE_URL
-      const res = await fetch(`${BASE_URL}/promo/verify`, {
+      const res = await fetch(`${BASE_URL}/api/promo/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, Accept: "application/json" },
         body: JSON.stringify({ promo_code: promoInput })
@@ -666,7 +666,7 @@ export default function PaymentPage() {
       };
 
       // [PERBAIKAN] Menggunakan BASE_URL
-      const res = await fetch(`${BASE_URL}/checkout`, {
+      const res = await fetch(`${BASE_URL}/api/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, Accept: "application/json" },
         body: JSON.stringify(payload)
