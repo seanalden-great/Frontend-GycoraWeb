@@ -34,7 +34,7 @@ export default function TrackingPage() {
 
       try {
         // 1. Ambil detail pesanan utama
-        const orderRes = await fetch(`http://127.0.0.1:8000/api/transactions/${id}`, {
+        const orderRes = await fetch(`https://backend-gycora-web.vercel.app/api/api/transactions/${id}`, {
           headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }
         });
         if (!orderRes.ok) throw new Error("Gagal mengambil detail pesanan.");
@@ -44,7 +44,7 @@ export default function TrackingPage() {
 
         // 2. Ambil data tracking dari Biteship API melalui Laravel
         try {
-          const trackRes = await fetch(`http://127.0.0.1:8000/api/transactions/${id}/tracking`, {
+          const trackRes = await fetch(`https://backend-gycora-web.vercel.app/api/api/transactions/${id}/tracking`, {
             headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }
           });
           if (trackRes.ok) {

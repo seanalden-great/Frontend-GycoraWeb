@@ -19,7 +19,7 @@ export default function AdminProducts() {
 
   // const fetchProducts = async () => {
   //   try {
-  //     const res = await fetch("http://127.0.0.1:8000/api/products");
+  //     const res = await fetch("https://backend-gycora-web.vercel.app/api/api/products");
   //     const data = await res.json();
   //     // PERBAIKAN: Tangani jika response langsung array atau dibungkus 'data'
   //     const responseData = data.data ? data.data : data;
@@ -33,7 +33,7 @@ export default function AdminProducts() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/products");
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/products");
       
       // Pengamanan: Cek apakah response itu JSON atau bukan
       const contentType = res.headers.get("content-type");
@@ -80,7 +80,7 @@ export default function AdminProducts() {
     if (result.isConfirmed) {
       try {
         const token = localStorage.getItem("admin_token");
-        await fetch(`http://127.0.0.1:8000/api/products/${id}`, { 
+        await fetch(`https://backend-gycora-web.vercel.app/api/api/products/${id}`, { 
             method: "DELETE",
             headers: { "Authorization": `Bearer ${token}` }
         });

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../config/api";
 
 export default function AddProduct() {
   const navigate = useNavigate(); 
@@ -17,7 +18,7 @@ export default function AddProduct() {
   });
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/categories")
+    fetch(`${BASE_URL}/api/categories`)
       .then((res) => res.json())
       .then((data) => setCategories(data.data ? data.data : data || []))
       .catch((err) => console.error("Gagal mengambil kategori:", err));
@@ -42,7 +43,7 @@ export default function AddProduct() {
     try {
       const token = localStorage.getItem("admin_token");
 
-      const res = await fetch("http://127.0.0.1:8000/api/products", {
+      const res = await fetch(`${BASE_URL}/api/products`, {
         method: "POST",
         headers: {
           "Accept": "application/json",

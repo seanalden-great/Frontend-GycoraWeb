@@ -13,7 +13,7 @@ export default function UserLogin() {
 
     try {
       // Pastikan port disesuaikan dengan server API Anda nanti (misal 8000 untuk Laravel)
-      const res = await fetch("http://127.0.0.1:8000/api/login", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ email, password }),

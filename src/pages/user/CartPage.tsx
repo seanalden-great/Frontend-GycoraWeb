@@ -56,7 +56,7 @@ export default function CartPage() {
     
     const token = localStorage.getItem("user_token");
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/carts/${item.id}`, {
+      const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/carts/${item.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ quantity: newQty }),
@@ -75,7 +75,7 @@ export default function CartPage() {
     const token = localStorage.getItem("user_token");
     try {
       // Langsung panggil API penghapusan
-      await fetch(`http://127.0.0.1:8000/api/carts/${id}`, {
+      await fetch(`https://backend-gycora-web.vercel.app/api/api/carts/${id}`, {
         method: "DELETE",
         headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
       });
@@ -90,7 +90,7 @@ export default function CartPage() {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/products");
+        const res = await fetch("https://backend-gycora-web.vercel.app/api/api/products");
         const data = await res.json();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const products: any[] = data.data ? data.data : data;
@@ -124,7 +124,7 @@ export default function CartPage() {
         return;
     }
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/carts", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/carts", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ product_id: product.id, quantity: 1 }),

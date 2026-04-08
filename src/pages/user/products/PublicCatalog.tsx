@@ -19,7 +19,7 @@ export default function PublicCatalog() {
     const fetchProducts = async () => {
       try {
         // Sesuaikan URL jika nanti menggunakan Laravel API
-        const res = await fetch("http://127.0.0.1:8000/api/products");
+        const res = await fetch("https://backend-gycora-web.vercel.app/api/api/products");
         if (!res.ok) throw new Error("Gagal mengambil data produk");
         // const data = await res.json();
 

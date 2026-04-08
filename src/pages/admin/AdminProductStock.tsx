@@ -27,7 +27,7 @@ export default function AdminProductStock() {
     try {
       const token = localStorage.getItem("admin_token");
       // Asumsi rute di backend adalah /api/product-stocks
-      const res = await fetch("http://127.0.0.1:8000/api/admin/product-stocks", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/admin/product-stocks", {
         headers: { "Authorization": `Bearer ${token}` }
       });
       const data = await res.json();
@@ -68,7 +68,7 @@ export default function AdminProductStock() {
       try {
         const token = localStorage.getItem("admin_token");
         // Endpoint sesuai ProductStockController@store di Laravel Anda
-        const res = await fetch(`http://127.0.0.1:8000/api/admin/product-stocks/${productId}`, {
+        const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/admin/product-stocks/${productId}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

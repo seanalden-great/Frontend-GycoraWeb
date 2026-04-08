@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../config/api";
 
 interface Category {
   id: number;
@@ -21,7 +22,7 @@ export default function AdminCategories() {
     try {
       setLoading(true);
       // Ganti localhost:8080 menjadi localhost:8000 jika sudah pakai Laravel API
-      const res = await fetch("http://127.0.0.1:8000/api/categories");
+      const res = await fetch("${BASE_URL}/api/categories");
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
       setCategories(data || []);
@@ -98,8 +99,8 @@ export default function AdminCategories() {
       if (result.isConfirmed && result.value) {
         try {
           const url = isEdit
-            ? `http://127.0.0.1:8000/api/categories/${categoryToEdit.id}`
-            : "http://127.0.0.1:8000/api/categories";
+            ? `${BASE_URL}/api/categories/${categoryToEdit.id}`
+            : "${BASE_URL}/api/categories";
 
           const method = isEdit ? "PUT" : "POST";
 
@@ -155,7 +156,7 @@ export default function AdminCategories() {
       try {
         const token = localStorage.getItem("admin_token");
 
-        const res = await fetch(`http://127.0.0.1:8000/api/categories/${id}`, {
+        const res = await fetch(`${BASE_URL}/api/categories/${id}`, {
           method: "DELETE",
           headers: {
             // <-- TAMBAHKAN HEADER INI

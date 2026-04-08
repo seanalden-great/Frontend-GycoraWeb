@@ -373,7 +373,7 @@ export default function TransactionPage() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("admin_token");
-      const res = await fetch("http://127.0.0.1:8000/api/admin/transactions", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/admin/transactions", {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -443,7 +443,7 @@ export default function TransactionPage() {
       try {
         const token = localStorage.getItem("admin_token");
         const res = await fetch(
-          `http://127.0.0.1:8000/api/admin/transactions/${id}/${endpoint}`,
+          `https://backend-gycora-web.vercel.app/api/api/admin/transactions/${id}/${endpoint}`,
           {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },

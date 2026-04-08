@@ -359,7 +359,7 @@ export default function OrderPage() {
   const autoCancelSilent = async (id: number) => {
     try {
       const token = localStorage.getItem("user_token");
-      await fetch(`http://127.0.0.1:8000/api/transactions/${id}/cancel`, {
+      await fetch(`https://backend-gycora-web.vercel.app/api/api/transactions/${id}/cancel`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -429,7 +429,7 @@ export default function OrderPage() {
     setLoading(true);
     try {
       const token = localStorage.getItem("user_token");
-      const res = await fetch("http://127.0.0.1:8000/api/transactions", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/transactions", {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -514,7 +514,7 @@ export default function OrderPage() {
       try {
         const token = localStorage.getItem("user_token");
         const res = await fetch(
-          `http://127.0.0.1:8000/api/transactions/${id}/cancel`,
+          `https://backend-gycora-web.vercel.app/api/api/transactions/${id}/cancel`,
           {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
@@ -601,7 +601,7 @@ export default function OrderPage() {
         formData.append("proof_file", formValues.file);
 
         const res = await fetch(
-          `http://127.0.0.1:8000/api/transactions/${id}/refund-request`,
+          `https://backend-gycora-web.vercel.app/api/api/transactions/${id}/refund-request`,
           {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
@@ -634,7 +634,7 @@ export default function OrderPage() {
     try {
       const token = localStorage.getItem("user_token");
       const res = await fetch(
-        `http://127.0.0.1:8000/api/transactions/${id}/refund-process`,
+        `https://backend-gycora-web.vercel.app/api/api/transactions/${id}/refund-process`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

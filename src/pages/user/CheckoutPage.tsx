@@ -61,7 +61,7 @@ export default function CheckoutPage() {
   // Fetch Buku Alamat
   const fetchAddresses = async (token: string) => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/addresses", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/addresses", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
       const cartIds = cartItems.map(item => item.id);
 
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/shipping-rates", {
+        const res = await fetch("https://backend-gycora-web.vercel.app/api/api/shipping-rates", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -157,7 +157,7 @@ export default function CheckoutPage() {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/checkout", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

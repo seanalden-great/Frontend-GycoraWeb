@@ -31,7 +31,7 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/products/${id}`);
+        const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/products/${id}`);
         if (!res.ok) throw new Error("Produk tidak ditemukan");
         const responseData = await res.json();
         // --- PERBAIKAN DI SINI ---
@@ -68,7 +68,7 @@ export default function ProductDetail() {
     setIsAdding(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/carts", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/carts", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

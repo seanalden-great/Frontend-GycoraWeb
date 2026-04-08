@@ -25,7 +25,7 @@ export default function AdminProductDetail() {
   useEffect(() => {
     const fetchProductDetail = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/api/products/${id}`);
+        const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/products/${id}`);
         if (!res.ok) throw new Error("Produk tidak ditemukan");
         
         const data = await res.json();
@@ -59,7 +59,7 @@ export default function AdminProductDetail() {
     if (result.isConfirmed) {
       try {
         const token = localStorage.getItem("admin_token");
-        const res = await fetch(`http://127.0.0.1:8000/api/products/${id}`, { 
+        const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/products/${id}`, { 
             method: "DELETE",
             headers: { "Authorization": `Bearer ${token}` }
         });

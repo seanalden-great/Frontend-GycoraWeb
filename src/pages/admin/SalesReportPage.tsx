@@ -54,7 +54,7 @@ export default function SalesReportPage() {
       if (filters.search) queryParams.append("search", filters.search);
 
       const res = await fetch(
-        `http://127.0.0.1:8000/api/admin/sales-report?${queryParams.toString()}`,
+        `https://backend-gycora-web.vercel.app/api/api/admin/sales-report?${queryParams.toString()}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },

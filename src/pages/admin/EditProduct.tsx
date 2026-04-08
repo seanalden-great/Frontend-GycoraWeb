@@ -32,11 +32,11 @@ export default function EditProduct() {
     const fetchInitialData = async () => {
       try {
         setLoading(true);
-        const catRes = await fetch("http://127.0.0.1:8000/api/categories");
+        const catRes = await fetch("https://backend-gycora-web.vercel.app/api/api/categories");
         const rawCatData = await catRes.json();
         setCategories(rawCatData.data ? rawCatData.data : rawCatData || []);
 
-        const prodRes = await fetch(`http://127.0.0.1:8000/api/products/${id}`);
+        const prodRes = await fetch(`https://backend-gycora-web.vercel.app/api/api/products/${id}`);
         if (!prodRes.ok) throw new Error("Produk tidak ditemukan");
         
         const rawProdData = await prodRes.json();
@@ -93,7 +93,7 @@ export default function EditProduct() {
     try {
       const token = localStorage.getItem("admin_token"); 
 
-      const res = await fetch(`http://127.0.0.1:8000/api/products/${id}`, {
+      const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/products/${id}`, {
         method: "POST", 
         headers: {
             "Accept": "application/json",

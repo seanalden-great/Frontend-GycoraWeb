@@ -66,7 +66,7 @@ export default function UserProfile() {
 
   const fetchAddresses = async (token: string) => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/addresses", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/addresses", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -98,7 +98,7 @@ export default function UserProfile() {
     const token = localStorage.getItem("user_token");
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/profile", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/profile", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -173,8 +173,8 @@ export default function UserProfile() {
     const token = localStorage.getItem("user_token");
     const method = editingId ? "PUT" : "POST";
     const url = editingId
-      ? `http://127.0.0.1:8000/api/addresses/${editingId}`
-      : "http://127.0.0.1:8000/api/addresses";
+      ? `https://backend-gycora-web.vercel.app/api/api/addresses/${editingId}`
+      : "https://backend-gycora-web.vercel.app/api/api/addresses";
 
     try {
       const res = await fetch(url, {
@@ -216,7 +216,7 @@ export default function UserProfile() {
     });
     if (result.isConfirmed) {
       const token = localStorage.getItem("user_token");
-      await fetch(`http://127.0.0.1:8000/api/addresses/${id}`, {
+      await fetch(`https://backend-gycora-web.vercel.app/api/api/addresses/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

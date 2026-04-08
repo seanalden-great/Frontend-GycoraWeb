@@ -71,7 +71,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     try {
       // Pastikan port ini sesuai dengan server Golang Anda (misal 8080 atau 8000)
-      const res = await fetch("http://127.0.0.1:8000/api/carts", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/carts", {
         headers: { Authorization: `Bearer ${token}`, "Accept": "application/json" },
       });
       if (res.ok) {

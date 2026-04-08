@@ -80,7 +80,7 @@ export default function PaymentPage() {
       }
       
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/addresses", {
+        const res = await fetch("https://backend-gycora-web.vercel.app/api/api/addresses", {
           headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }
         });
         if (res.ok) {
@@ -115,7 +115,7 @@ export default function PaymentPage() {
         setRawShippingRates([]);
         try {
           const token = localStorage.getItem("user_token");
-          const res = await fetch("http://127.0.0.1:8000/api/shipping/rates", {
+          const res = await fetch("https://backend-gycora-web.vercel.app/api/api/shipping/rates", {
             method: "POST",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, Accept: "application/json" },
             body: JSON.stringify({ address_id: selectedAddressId, cart_ids: selectedItemIds })
@@ -150,7 +150,7 @@ export default function PaymentPage() {
     setIsVerifyingPromo(true);
     try {
       const token = localStorage.getItem("user_token");
-      const res = await fetch("http://127.0.0.1:8000/api/promo/verify", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/promo/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, Accept: "application/json" },
         body: JSON.stringify({ promo_code: promoInput })
@@ -195,7 +195,7 @@ export default function PaymentPage() {
         promo_code: appliedPromoCode,
       };
 
-      const res = await fetch("http://127.0.0.1:8000/api/checkout", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, Accept: "application/json" },
         body: JSON.stringify(payload)

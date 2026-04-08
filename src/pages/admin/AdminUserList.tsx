@@ -21,7 +21,7 @@ const fetchUsers = async () => {
       const token = localStorage.getItem("admin_token");
 
       // 2. Tambahkan header Authorization dan Accept
-      const res = await fetch("http://127.0.0.1:8000/api/admin/users", {
+      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/admin/users", {
         headers: {
           "Accept": "application/json",
           "Authorization": `Bearer ${token}`
