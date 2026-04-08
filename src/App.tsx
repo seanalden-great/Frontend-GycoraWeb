@@ -39,6 +39,7 @@ import TrackingPage from "./pages/user/TrackingPage";
 import TransactionPage from "./pages/admin/TransactionPage";
 import TransactionDetailPage from "./pages/admin/TransactionDetailPage";
 import SalesReportPage from "./pages/admin/SalesReportPage";
+import PaymentSuccessPage from "./pages/user/PaymentSuccessPage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -87,6 +88,7 @@ export default function App() {
             <Route path="/cart" element={<CartPage />} />
             {/* <Route path="/checkout" element={<CheckoutPage />} /> */}
             <Route path="/checkout" element={<PaymentPage />} />
+            <Route path="/payment-success" element={<PaymentSuccessPage />} />
             <Route path="/tracking/:id" element={<TrackingPage />} />
             {/* Tambahkan Route lainnya (profile, checkout, dll) di sini nanti */}
 
