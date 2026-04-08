@@ -302,6 +302,21 @@ export default function EditProduct() {
         const ext = imageFile.name.split('.').pop();
         const contentType = imageFile.type;
 
+        // const presignedRes = await fetch(`${BASE_URL}/api/products/presigned-url`, {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        //   body: JSON.stringify({ extension: ext, content_type: contentType })
+        // });
+        
+        // if (!presignedRes.ok) throw new Error("Gagal mengambil Pre-signed URL");
+        // const { upload_url, file_url } = await presignedRes.json();
+
+        // const s3UploadRes = await fetch(upload_url, {
+        //   method: "PUT",
+        //   body: imageFile,
+        //   headers: { "Content-Type": contentType }
+        // });
+
         const presignedRes = await fetch(`${BASE_URL}/api/products/presigned-url`, {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
@@ -309,12 +324,18 @@ export default function EditProduct() {
         });
         
         if (!presignedRes.ok) throw new Error("Gagal mengambil Pre-signed URL");
-        const { upload_url, file_url } = await presignedRes.json();
+        
+        // Tangkap upload_headers dari backend Laravel
+        const { upload_url, upload_headers, file_url } = await presignedRes.json();
 
+        // Gunakan upload_url sebagai URL, dan gabungkan upload_headers untuk keamanan S3
         const s3UploadRes = await fetch(upload_url, {
           method: "PUT",
           body: imageFile,
-          headers: { "Content-Type": contentType }
+          headers: {
+            ...upload_headers, // Gunakan header otentikasi spesifik yang diminta oleh S3
+            "Content-Type": contentType 
+          }
         });
 
         if (!s3UploadRes.ok) throw new Error("Gagal mengunggah ke S3");

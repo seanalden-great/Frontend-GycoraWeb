@@ -198,7 +198,23 @@ export default function AddProduct() {
         const ext = imageFile.name.split('.').pop();
         const contentType = imageFile.type;
 
-        // A. Minta izin & URL S3 sementara ke Backend
+        // // A. Minta izin & URL S3 sementara ke Backend
+        // const presignedRes = await fetch(`${BASE_URL}/api/products/presigned-url`, {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+        //   body: JSON.stringify({ extension: ext, content_type: contentType })
+        // });
+        
+        // if (!presignedRes.ok) throw new Error("Gagal mengambil Pre-signed URL");
+        // const { upload_url, file_url } = await presignedRes.json();
+
+        // // B. Upload file langsung ke URL Clever Cloud S3
+        // const s3UploadRes = await fetch(upload_url, {
+        //   method: "PUT",
+        //   body: imageFile,
+        //   headers: { "Content-Type": contentType } // Wajib sama persis dengan yang direquest
+        // });
+
         const presignedRes = await fetch(`${BASE_URL}/api/products/presigned-url`, {
           method: "POST",
           headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
@@ -206,13 +222,18 @@ export default function AddProduct() {
         });
         
         if (!presignedRes.ok) throw new Error("Gagal mengambil Pre-signed URL");
-        const { upload_url, file_url } = await presignedRes.json();
+        
+        // Tangkap upload_headers dari backend Laravel
+        const { upload_url, upload_headers, file_url } = await presignedRes.json();
 
-        // B. Upload file langsung ke URL Clever Cloud S3
+        // Gunakan upload_url sebagai URL, dan gabungkan upload_headers untuk keamanan S3
         const s3UploadRes = await fetch(upload_url, {
           method: "PUT",
           body: imageFile,
-          headers: { "Content-Type": contentType } // Wajib sama persis dengan yang direquest
+          headers: {
+            ...upload_headers, // Gunakan header otentikasi spesifik yang diminta oleh S3
+            "Content-Type": contentType 
+          }
         });
 
         if (!s3UploadRes.ok) throw new Error("Gagal mengunggah ke S3");
