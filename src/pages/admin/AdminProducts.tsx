@@ -80,7 +80,7 @@
 //     if (result.isConfirmed) {
 //       try {
 //         const token = localStorage.getItem("admin_token");
-//         await fetch(`https://backend-gycora-web.vercel.app/api/api/products/${id}`, { 
+//         await fetch(`${BASE_URL}/api/products/${id}`, { 
 //             method: "DELETE",
 //             headers: { "Authorization": `Bearer ${token}` }
 //         });

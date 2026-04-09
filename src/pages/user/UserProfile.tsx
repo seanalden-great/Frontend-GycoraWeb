@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Ganti dari next/navigation
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../config/api";
 
 interface Address {
   id: number;
@@ -66,7 +67,7 @@ export default function UserProfile() {
 
   const fetchAddresses = async (token: string) => {
     try {
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/addresses", {
+      const res = await fetch(`${BASE_URL}/api/addresses`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -98,7 +99,7 @@ export default function UserProfile() {
     const token = localStorage.getItem("user_token");
 
     try {
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/profile", {
+      const res = await fetch(`${BASE_URL}/api/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -173,8 +174,8 @@ export default function UserProfile() {
     const token = localStorage.getItem("user_token");
     const method = editingId ? "PUT" : "POST";
     const url = editingId
-      ? `https://backend-gycora-web.vercel.app/api/api/addresses/${editingId}`
-      : "https://backend-gycora-web.vercel.app/api/api/addresses";
+      ? `${BASE_URL}/api/addresses/${editingId}`
+      : `${BASE_URL}/api/addresses`;
 
     try {
       const res = await fetch(url, {
@@ -216,7 +217,7 @@ export default function UserProfile() {
     });
     if (result.isConfirmed) {
       const token = localStorage.getItem("user_token");
-      await fetch(`https://backend-gycora-web.vercel.app/api/api/addresses/${id}`, {
+      await fetch(`${BASE_URL}/api/addresses/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

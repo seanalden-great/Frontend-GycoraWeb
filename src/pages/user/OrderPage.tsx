@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../config/api";
 
 export default function OrderPage() {
   const navigate = useNavigate();
@@ -359,7 +360,7 @@ export default function OrderPage() {
   const autoCancelSilent = async (id: number) => {
     try {
       const token = localStorage.getItem("user_token");
-      await fetch(`https://backend-gycora-web.vercel.app/api/api/transactions/${id}/cancel`, {
+      await fetch(`${BASE_URL}/api/transactions/${id}/cancel`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -429,7 +430,7 @@ export default function OrderPage() {
     setLoading(true);
     try {
       const token = localStorage.getItem("user_token");
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/transactions", {
+      const res = await fetch(`${BASE_URL}/api/transactions`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -514,7 +515,7 @@ export default function OrderPage() {
       try {
         const token = localStorage.getItem("user_token");
         const res = await fetch(
-          `https://backend-gycora-web.vercel.app/api/api/transactions/${id}/cancel`,
+          `${BASE_URL}/api/transactions/${id}/cancel`,
           {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
@@ -601,7 +602,7 @@ export default function OrderPage() {
         formData.append("proof_file", formValues.file);
 
         const res = await fetch(
-          `https://backend-gycora-web.vercel.app/api/api/transactions/${id}/refund-request`,
+          `${BASE_URL}/api/transactions/${id}/refund-request`,
           {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
@@ -634,7 +635,7 @@ export default function OrderPage() {
     try {
       const token = localStorage.getItem("user_token");
       const res = await fetch(
-        `https://backend-gycora-web.vercel.app/api/api/transactions/${id}/refund-process`,
+        `${BASE_URL}/api/transactions/${id}/refund-process`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

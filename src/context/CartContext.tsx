@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { BASE_URL } from "../config/api";
 
 // // Tipe data berdasarkan struktur dari API Golang
 // export interface CartItem {
@@ -71,7 +72,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     try {
       // Pastikan port ini sesuai dengan server Golang Anda (misal 8080 atau 8000)
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/carts", {
+      const res = await fetch(`${BASE_URL}/api/carts`, {
         headers: { Authorization: `Bearer ${token}`, "Accept": "application/json" },
       });
       if (res.ok) {

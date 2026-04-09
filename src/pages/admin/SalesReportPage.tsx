@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo } from "react";
 import html2pdf from "html2pdf.js";
 import * as XLSX from "xlsx";
+import { BASE_URL } from "../../config/api";
 
 export default function SalesReportPage() {
   const currentYear = new Date().getFullYear();
@@ -54,7 +55,7 @@ export default function SalesReportPage() {
       if (filters.search) queryParams.append("search", filters.search);
 
       const res = await fetch(
-        `https://backend-gycora-web.vercel.app/api/api/admin/sales-report?${queryParams.toString()}`,
+        `${BASE_URL}/api/admin/sales-report?${queryParams.toString()}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },

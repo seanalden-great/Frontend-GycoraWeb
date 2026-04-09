@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // Ganti dari next/navigation
 import Swal from "sweetalert2";
 import { useCart } from "../../../context/CartContext"; 
+import { BASE_URL } from "../../../config/api";
 
 interface Product {
   id: number;
@@ -31,7 +32,7 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/products/${id}`);
+        const res = await fetch(`${BASE_URL}/api/products/${id}`);
         if (!res.ok) throw new Error("Produk tidak ditemukan");
         const responseData = await res.json();
         // --- PERBAIKAN DI SINI ---
@@ -68,7 +69,7 @@ export default function ProductDetail() {
     setIsAdding(true);
 
     try {
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/carts", {
+      const res = await fetch(`${BASE_URL}/api/carts`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

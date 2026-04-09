@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import html2pdf from "html2pdf.js";
 import * as XLSX from "xlsx";
+import { BASE_URL } from "../../config/api";
 
 export default function TransactionPage() {
   const navigate = useNavigate();
@@ -373,7 +374,7 @@ export default function TransactionPage() {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("admin_token");
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/admin/transactions", {
+      const res = await fetch(`${BASE_URL}/api/admin/transactions`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -443,7 +444,7 @@ export default function TransactionPage() {
       try {
         const token = localStorage.getItem("admin_token");
         const res = await fetch(
-          `https://backend-gycora-web.vercel.app/api/api/admin/transactions/${id}/${endpoint}`,
+          `${BASE_URL}/api/admin/transactions/${id}/${endpoint}`,
           {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },

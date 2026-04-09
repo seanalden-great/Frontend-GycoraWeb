@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { BASE_URL } from "../../config/api";
 
 export default function TrackingPage() {
   const { id } = useParams<{ id: string }>();
@@ -34,7 +35,7 @@ export default function TrackingPage() {
 
       try {
         // 1. Ambil detail pesanan utama
-        const orderRes = await fetch(`https://backend-gycora-web.vercel.app/api/api/transactions/${id}`, {
+        const orderRes = await fetch(`${BASE_URL}/api/transactions/${id}`, {
           headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }
         });
         if (!orderRes.ok) throw new Error("Gagal mengambil detail pesanan.");
@@ -44,7 +45,7 @@ export default function TrackingPage() {
 
         // 2. Ambil data tracking dari Biteship API melalui Laravel
         try {
-          const trackRes = await fetch(`https://backend-gycora-web.vercel.app/api/api/transactions/${id}/tracking`, {
+          const trackRes = await fetch(`${BASE_URL}/api/transactions/${id}/tracking`, {
             headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }
           });
           if (trackRes.ok) {

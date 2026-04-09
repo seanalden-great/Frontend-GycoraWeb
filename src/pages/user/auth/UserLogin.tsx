@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"; // Ganti import next
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../../config/api";
 
 export default function UserLogin() {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ export default function UserLogin() {
 
     try {
       // Pastikan port disesuaikan dengan server API Anda nanti (misal 8000 untuk Laravel)
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/login", {
+      const res = await fetch(`${BASE_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ email, password }),

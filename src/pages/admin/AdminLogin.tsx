@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Ganti import next/navigation
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../config/api";
 
 export default function AdminLogin() {
   const navigate = useNavigate(); // Ganti useRouter
@@ -14,7 +15,7 @@ export default function AdminLogin() {
 
     try {
       // Sesuaikan port API jika nanti beralih penuh ke Laravel (misal localhost:8000)
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/admin/login", {
+      const res = await fetch(`${BASE_URL}/api/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

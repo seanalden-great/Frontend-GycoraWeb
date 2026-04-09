@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Ganti dari next/link
+import { BASE_URL } from "../../../config/api";
 
 interface Product {
   id: number;
@@ -19,7 +20,7 @@ export default function PublicCatalog() {
     const fetchProducts = async () => {
       try {
         // Sesuaikan URL jika nanti menggunakan Laravel API
-        const res = await fetch("https://backend-gycora-web.vercel.app/api/api/products");
+        const res = await fetch(`${BASE_URL}/api/products`);
         if (!res.ok) throw new Error("Gagal mengambil data produk");
         // const data = await res.json();
 

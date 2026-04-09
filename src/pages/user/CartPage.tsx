@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useCart, type CartItem, type Product } from "../../context/CartContext";
+import { BASE_URL } from "../../config/api";
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export default function CartPage() {
     
     const token = localStorage.getItem("user_token");
     try {
-      const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/carts/${item.id}`, {
+      const res = await fetch(`${BASE_URL}/api/carts/${item.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ quantity: newQty }),
@@ -75,7 +76,7 @@ export default function CartPage() {
     const token = localStorage.getItem("user_token");
     try {
       // Langsung panggil API penghapusan
-      await fetch(`https://backend-gycora-web.vercel.app/api/api/carts/${id}`, {
+      await fetch(`${BASE_URL}/api/carts/${id}`, {
         method: "DELETE",
         headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
       });
@@ -90,7 +91,7 @@ export default function CartPage() {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const res = await fetch("https://backend-gycora-web.vercel.app/api/api/products");
+        const res = await fetch(`${BASE_URL}/api/products`);
         const data = await res.json();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const products: any[] = data.data ? data.data : data;
@@ -124,7 +125,7 @@ export default function CartPage() {
         return;
     }
     try {
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/carts", {
+      const res = await fetch(`${BASE_URL}/api/carts`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ product_id: product.id, quantity: 1 }),

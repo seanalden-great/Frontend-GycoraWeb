@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; // Ganti import next
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../../config/api";
 
 export default function UserRegister() {
   const navigate = useNavigate(); // Ganti useRouter
@@ -35,7 +36,7 @@ export default function UserRegister() {
 
     try {
       // Pastikan port disesuaikan dengan server API Anda nanti (misal 8000 untuk Laravel)
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/register", {
+      const res = await fetch(`${BASE_URL}/api/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

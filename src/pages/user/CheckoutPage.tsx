@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Ganti dari next/navigation
 import Swal from "sweetalert2";
 import { useCart } from "../../context/CartContext"; // Sesuaikan path import
+import { BASE_URL } from "../../config/api";
 
 interface Address {
   id: number;
@@ -61,7 +62,7 @@ export default function CheckoutPage() {
   // Fetch Buku Alamat
   const fetchAddresses = async (token: string) => {
     try {
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/addresses", {
+      const res = await fetch(`${BASE_URL}/api/addresses`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
@@ -89,7 +90,7 @@ export default function CheckoutPage() {
       const cartIds = cartItems.map(item => item.id);
 
       try {
-        const res = await fetch("https://backend-gycora-web.vercel.app/api/api/shipping-rates", {
+        const res = await fetch(`${BASE_URL}/api/shipping-rates`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -157,7 +158,7 @@ export default function CheckoutPage() {
     };
 
     try {
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/checkout", {
+      const res = await fetch(`${BASE_URL}/api/checkout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

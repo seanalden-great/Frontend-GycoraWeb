@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Mengganti useRouter dari Next.js
 import Swal from "sweetalert2";
+import { BASE_URL } from "../../config/api";
 
 export default function ContactUs() {
   const navigate = useNavigate(); // Menggunakan useNavigate
@@ -34,7 +35,7 @@ export default function ContactUs() {
 
     try {
       // Pastikan URL API sesuai dengan backend Anda (misalnya jika pindah ke Laravel menjadi port 8000)
-      const res = await fetch("https://backend-gycora-web.vercel.app/api/api/contact", {
+      const res = await fetch(`${BASE_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

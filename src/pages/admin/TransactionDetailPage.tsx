@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import html2pdf from "html2pdf.js";
+import { BASE_URL } from "../../config/api";
 
 export default function TransactionDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -39,7 +40,7 @@ export default function TransactionDetailPage() {
       setTrackingLoading(true);
       try {
         const token = localStorage.getItem("admin_token");
-        const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/admin/transactions/${trxId}/tracking`, {
+        const res = await fetch(`${BASE_URL}/api/admin/transactions/${trxId}/tracking`, {
           headers: { "Authorization": `Bearer ${token}` }
         });
         if (res.ok) {
@@ -65,7 +66,7 @@ export default function TransactionDetailPage() {
         
         // Background sync to ensure fresh data
         try {
-          const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/admin/transactions/${id}`, {
+          const res = await fetch(`${BASE_URL}/api/admin/transactions/${id}`, {
             headers: { "Authorization": `Bearer ${token}` }
           });
           if (res.ok) {
@@ -77,7 +78,7 @@ export default function TransactionDetailPage() {
         }
       } else {
         try {
-          const res = await fetch(`https://backend-gycora-web.vercel.app/api/api/admin/transactions/${id}`, {
+          const res = await fetch(`${BASE_URL}/api/admin/transactions/${id}`, {
             headers: { "Authorization": `Bearer ${token}` }
           });
           if (res.ok) {

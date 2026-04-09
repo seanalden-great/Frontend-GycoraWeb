@@ -22,7 +22,7 @@ export default function AdminCategories() {
     try {
       setLoading(true);
       // Ganti localhost:8080 menjadi localhost:8000 jika sudah pakai Laravel API
-      const res = await fetch("${BASE_URL}/api/categories");
+      const res = await fetch(`${BASE_URL}/api/categories`);
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const data = await res.json();
       setCategories(data || []);
@@ -100,7 +100,7 @@ export default function AdminCategories() {
         try {
           const url = isEdit
             ? `${BASE_URL}/api/categories/${categoryToEdit.id}`
-            : "${BASE_URL}/api/categories";
+            : `${BASE_URL}/api/categories`;
 
           const method = isEdit ? "PUT" : "POST";
 
