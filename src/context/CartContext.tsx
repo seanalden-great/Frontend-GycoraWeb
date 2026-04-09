@@ -33,6 +33,7 @@ import { BASE_URL } from "../config/api";
 
 // --- 1. BUAT INTERFACE PRODUCT TERPISAH ---
 export interface Product {
+  color: string;
   id: number; // Pastikan 'id' ada di sini
   name: string;
   price: number;
