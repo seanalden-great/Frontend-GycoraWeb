@@ -40,6 +40,7 @@ import TransactionPage from "./pages/admin/TransactionPage";
 import TransactionDetailPage from "./pages/admin/TransactionDetailPage";
 import SalesReportPage from "./pages/admin/SalesReportPage";
 import PaymentSuccessPage from "./pages/user/PaymentSuccessPage";
+import InactiveProductPage from "./pages/admin/InactiveProductPage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -189,6 +190,14 @@ export default function App() {
               element={
                 <AdminLayout>
                   <SalesReportPage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/products/inactive"
+              element={
+                <AdminLayout>
+                  <InactiveProductPage />
                 </AdminLayout>
               }
             />
