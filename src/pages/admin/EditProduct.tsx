@@ -237,6 +237,9 @@ export default function EditProduct() {
     stock: "", // Hanya untuk display
     description: "",
     benefits: "",
+    color: "",          // <-- BARU (String dipisahkan koma)
+    variant_video: "",  // <-- BARU
+    status: "active",   // <-- BARU
     image_url: "", // Untuk menyimpan referensi URL lama
   });
 
@@ -254,6 +257,17 @@ export default function EditProduct() {
         const rawProdData = await prodRes.json();
         const prodData = rawProdData.data ? rawProdData.data : rawProdData;
 
+        // setFormData({
+        //   category_id: prodData.category_id ? prodData.category_id.toString() : "", 
+        //   sku: prodData.sku || "",
+        //   name: prodData.name || "",
+        //   price: prodData.price ? prodData.price.toString() : "", 
+        //   stock: prodData.stock ? prodData.stock.toString() : "0", 
+        //   description: prodData.description || "",
+        //   benefits: prodData.benefits || "",
+        //   image_url: prodData.image_url || "",
+        // });
+
         setFormData({
           category_id: prodData.category_id ? prodData.category_id.toString() : "", 
           sku: prodData.sku || "",
@@ -263,6 +277,10 @@ export default function EditProduct() {
           description: prodData.description || "",
           benefits: prodData.benefits || "",
           image_url: prodData.image_url || "",
+          // --- TAMBAHAN 3 BARIS INI KAWAN ---
+          color: Array.isArray(prodData.color) ? prodData.color.join(", ") : (prodData.color || ""),
+          variant_video: prodData.variant_video || "",
+          status: prodData.status || "active",
         });
         
         if (prodData.image_url) setPreview(prodData.image_url);
@@ -410,6 +428,27 @@ export default function EditProduct() {
               <label className="block mb-2 text-sm font-semibold text-gray-700">Ganti Foto Produk (Opsional)</label>
               <input type="file" accept="image/*" onChange={handleImageChange} className="text-xs outline-none cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-gycora-light file:text-gycora-dark hover:file:bg-gycora/20" />
             </div>
+          </div>
+
+          {/* BARIS BARU: VIDEO & STATUS */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <label className="block mb-2 text-sm font-semibold text-gray-700">Video Demo (URL Youtube/S3)</label>
+              <input type="text" placeholder="https://..." value={formData.variant_video} className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-gycora focus:ring-1 focus:ring-gycora transition-all" onChange={(e) => setFormData({ ...formData, variant_video: e.target.value })} />
+            </div>
+            <div>
+              <label className="block mb-2 text-sm font-semibold text-gray-700">Status Awal</label>
+              <select required value={formData.status} className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-gycora focus:ring-1 focus:ring-gycora transition-all" onChange={(e) => setFormData({ ...formData, status: e.target.value })}>
+                <option value="active">Aktif (Tampil di Katalog)</option>
+                <option value="inactive">Nonaktif (Sembunyikan)</option>
+              </select>
+            </div>
+          </div>
+
+          {/* BARIS BARU: VARIAN WARNA */}
+          <div>
+            <label className="block mb-2 text-sm font-semibold text-gray-700">Varian Warna (Pisahkan dengan koma)</label>
+            <input type="text" placeholder="Misal: Merah, Putih, Hitam" value={formData.color} className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-gycora focus:ring-1 focus:ring-gycora transition-all" onChange={(e) => setFormData({ ...formData, color: e.target.value })} />
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

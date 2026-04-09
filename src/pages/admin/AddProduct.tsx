@@ -172,6 +172,9 @@ export default function AddProduct() {
     stock: "0",
     description: "",
     benefits: "",
+    color: "",          // <-- BARU (String dipisahkan koma)
+    variant_video: "",  // <-- BARU
+    status: "active",   // <-- BARU
   });
 
   useEffect(() => {
@@ -243,9 +246,15 @@ export default function AddProduct() {
 
       Swal.fire({ title: "Menyimpan Data...", allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
+      // Format color menjadi Array untuk Laravel
+      const colorArray = formData.color 
+            ? formData.color.split(",").map(c => c.trim()).filter(c => c) 
+            : null;
+
       // 2. SIMPAN DATA KE LARAVEL (Gunakan format JSON yang lebih cepat dan bersih)
       const payload = {
         ...formData,
+        color: colorArray,
         image_url: uploadedImageUrl // Masukkan URL S3 ke database
       };
 
