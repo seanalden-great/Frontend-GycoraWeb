@@ -1269,9 +1269,39 @@ export default function UserProfile() {
       return;
     }
 
+    // setUser(JSON.parse(storedUser));
+    // fetchAddresses(token);
+
+    // 1. Tampilkan data dari local storage dulu agar UI cepat me-render (Optimistic)
     setUser(JSON.parse(storedUser));
+    
+    // 2. Ambil data terbaru dari database di background (termasuk update Poin!)
+    fetchUserProfile(token);
+    
+    // 3. Ambil data alamat
     fetchAddresses(token);
   }, [navigate]); 
+
+  // FUNGSI BARU: Mengambil data user terbaru dari database
+  const fetchUserProfile = async (token: string) => {
+    try {
+      // Biasanya di Laravel Sanctum, endpoint bawaan untuk ambil data user adalah /api/user
+      const res = await fetch(`${BASE_URL}/api/user`, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json"
+        },
+      });
+      
+      if (res.ok) {
+        const freshUser = await res.json();
+        setUser(freshUser); // Update tampilan UI dengan poin terbaru
+        localStorage.setItem("user_data", JSON.stringify(freshUser)); // Update local storage agar sinkron
+      }
+    } catch (error) {
+      console.error("Gagal mengambil data profil terbaru:", error);
+    }
+  };
 
   const fetchAddresses = async (token: string) => {
     try {
