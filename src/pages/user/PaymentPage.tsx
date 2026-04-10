@@ -1495,7 +1495,6 @@ export default function PaymentPage() {
   
   const { cartItems } = useCart();
 
-  // Ambil ID yang dipilih dari CartPage
   const selectedItemIds: number[] = location.state?.selectedIds || [];
 
   const [isPageLoading, setIsPageLoading] = useState(true);
@@ -1869,7 +1868,7 @@ export default function PaymentPage() {
               {addresses.length > 0 && (
                 <button 
                   onClick={handleOpenAddressModal} 
-                  className="text-xs font-bold text-emerald-600 hover:text-emerald-800 transition-colors"
+                  className="text-xs font-bold transition-colors text-emerald-600 hover:text-emerald-800"
                 >
                   + Tambah Alamat
                 </button>
@@ -2104,7 +2103,7 @@ export default function PaymentPage() {
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-gray-50">
               <h3 className="text-lg font-bold text-gray-900">Tambah Alamat Baru</h3>
-              <button onClick={() => setIsAddressModalOpen(false)} className="text-gray-400 hover:text-gray-900 transition-colors">
+              <button onClick={() => setIsAddressModalOpen(false)} className="text-gray-400 transition-colors hover:text-gray-900">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
