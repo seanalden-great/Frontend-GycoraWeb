@@ -43,6 +43,8 @@ import PaymentSuccessPage from "./pages/user/PaymentSuccessPage";
 import InactiveProductPage from "./pages/admin/InactiveProductPage";
 import SubscriberPage from "./pages/admin/SubscriberPage";
 import AdminProfilePage from "./pages/admin/AdminProfilePage";
+import MessageViewPage from "./pages/admin/MessageViewPage";
+import DetailMessageViewPage from "./pages/admin/DetailMessageViewPage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -209,11 +211,27 @@ export default function App() {
                 </AdminLayout>
               }
             />
-             <Route
+            <Route
               path="/admin/profile"
               element={
                 <AdminLayout>
                   <AdminProfilePage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/messages"
+              element={
+                <AdminLayout>
+                  <MessageViewPage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/messages/:id"
+              element={
+                <AdminLayout>
+                  <DetailMessageViewPage />
                 </AdminLayout>
               }
             />
