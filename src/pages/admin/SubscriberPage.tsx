@@ -31,7 +31,7 @@ export default function SubscriberPage() {
     } finally {
       setTimeout(() => {
         setIsLoading(false);
-      }, 400); // Penundaan kecil untuk estetika efek loading
+      }, 400);
     }
   };
 
