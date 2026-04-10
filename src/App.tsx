@@ -41,6 +41,7 @@ import TransactionDetailPage from "./pages/admin/TransactionDetailPage";
 import SalesReportPage from "./pages/admin/SalesReportPage";
 import PaymentSuccessPage from "./pages/user/PaymentSuccessPage";
 import InactiveProductPage from "./pages/admin/InactiveProductPage";
+import SubscriberPage from "./pages/admin/SubscriberPage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -92,8 +93,6 @@ export default function App() {
             <Route path="/payment-success" element={<PaymentSuccessPage />} />
             <Route path="/tracking/:id" element={<TrackingPage />} />
             {/* Tambahkan Route lainnya (profile, checkout, dll) di sini nanti */}
-
-            
             {/* --- RUTE KHUSUS ADMIN --- */}
             {/* Semua rute admin dibungkus manual menggunakan element AdminLayout */}
             <Route
@@ -198,6 +197,14 @@ export default function App() {
               element={
                 <AdminLayout>
                   <InactiveProductPage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/subscribers"
+              element={
+                <AdminLayout>
+                  <SubscriberPage />
                 </AdminLayout>
               }
             />
