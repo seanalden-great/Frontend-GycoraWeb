@@ -42,6 +42,7 @@ import SalesReportPage from "./pages/admin/SalesReportPage";
 import PaymentSuccessPage from "./pages/user/PaymentSuccessPage";
 import InactiveProductPage from "./pages/admin/InactiveProductPage";
 import SubscriberPage from "./pages/admin/SubscriberPage";
+import AdminProfilePage from "./pages/admin/AdminProfilePage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -205,6 +206,14 @@ export default function App() {
               element={
                 <AdminLayout>
                   <SubscriberPage />
+                </AdminLayout>
+              }
+            />
+             <Route
+              path="/admin/profile"
+              element={
+                <AdminLayout>
+                  <AdminProfilePage />
                 </AdminLayout>
               }
             />
