@@ -144,7 +144,6 @@ export default function SubscriberPage() {
 
           <tbody className="text-gray-600">
             {isLoading ? (
-              // Skeleton Loading State
               Array.from({ length: 5 }).map((_, i) => (
                 <tr key={`skeleton-${i}`} className="border-b border-gray-50 animate-pulse">
                   <td className="py-6 pl-2">
