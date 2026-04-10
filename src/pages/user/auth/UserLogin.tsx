@@ -150,7 +150,7 @@ export default function UserLogin() {
           <img src={logoGycora} alt="Gycora Logo" className="object-contain h-10" />
         </div>
         
-        <h1 className="mb-2 text-3xl font-extrabold text-center text-gray-900">Masuk</h1>
+        <h1 className="mb-2 text-3xl font-extrabold text-center text-gray-900">Login</h1>
         <p className="mb-8 text-sm text-center text-gray-500">Selamat datang kembali di Gycora.</p>
 
         <form onSubmit={handleLogin} className="space-y-5">
@@ -181,7 +181,7 @@ export default function UserLogin() {
             disabled={loading}
             className="w-full px-4 py-3 font-bold text-white transition-colors bg-gray-900 rounded-lg hover:bg-gray-800 disabled:opacity-70"
           >
-            {loading ? "Memproses..." : "Masuk"}
+            {loading ? "Memproses..." : "Login"}
           </button>
         </form>
 
