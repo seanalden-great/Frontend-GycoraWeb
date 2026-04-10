@@ -1565,7 +1565,6 @@ export default function PaymentPage() {
     return total - promoDiscountAmount;
   }, [checkoutTotalAmount, shippingMethod, selectedRate, checkoutCount, promoDiscountAmount]);
 
-  // FUNGSI FETCH ALAMAT (Dibuat terpisah agar bisa dipanggil ulang setelah tambah alamat)
   const fetchAddresses = async (token: string) => {
     try {
       const res = await fetch(`${BASE_URL}/api/addresses`, {
