@@ -1589,7 +1589,6 @@ export default function PaymentPage() {
     }
   };
 
-  // --- INITIALIZATION ---
   useEffect(() => {
     // PROTEKSI: Jika tidak ada item yang dipilih, tendang ke Cart
     if (selectedItemIds.length === 0) {
