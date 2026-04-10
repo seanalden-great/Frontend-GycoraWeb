@@ -45,6 +45,7 @@ import SubscriberPage from "./pages/admin/SubscriberPage";
 import AdminProfilePage from "./pages/admin/AdminProfilePage";
 import MessageViewPage from "./pages/admin/MessageViewPage";
 import DetailMessageViewPage from "./pages/admin/DetailMessageViewPage";
+import FavoritePage from "./pages/user/FavoritePage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -95,6 +96,7 @@ export default function App() {
             <Route path="/checkout" element={<PaymentPage />} />
             <Route path="/payment-success" element={<PaymentSuccessPage />} />
             <Route path="/tracking/:id" element={<TrackingPage />} />
+            <Route path="/favorites" element={<FavoritePage />} />
             {/* Tambahkan Route lainnya (profile, checkout, dll) di sini nanti */}
             {/* --- RUTE KHUSUS ADMIN --- */}
             {/* Semua rute admin dibungkus manual menggunakan element AdminLayout */}
