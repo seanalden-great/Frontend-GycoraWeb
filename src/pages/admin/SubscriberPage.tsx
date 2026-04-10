@@ -3,7 +3,6 @@ import { useState, useEffect, useMemo } from "react";
 import { BASE_URL } from "../../config/api";
 
 export default function SubscriberPage() {
-  // --- STATE ---
   const [subscribers, setSubscribers] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
