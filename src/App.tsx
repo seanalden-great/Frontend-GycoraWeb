@@ -49,6 +49,8 @@ import FavoritePage from "./pages/user/FavoritePage";
 import CategoryCoaPage from "./pages/admin/CategoryCoaPage";
 import CoaPage from "./pages/admin/CoaPage";
 import TransferReceivePage from "./pages/admin/TransferReceivePage";
+import SupplierPage from "./pages/admin/SupplierPage";
+import InvoicePage from "./pages/admin/InvoicePage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -262,6 +264,22 @@ export default function App() {
               element={
                 <AdminLayout>
                   <TransferReceivePage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/suppliers"
+              element={
+                <AdminLayout>
+                  <SupplierPage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/invoices"
+              element={
+                <AdminLayout>
+                  <InvoicePage />
                 </AdminLayout>
               }
             />
