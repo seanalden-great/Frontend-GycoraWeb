@@ -241,6 +241,245 @@
 //   );
 // }
 
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+// /* eslint-disable react-hooks/set-state-in-effect */
+// import { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom"; 
+// import { 
+//   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+//   PieChart, Pie, Cell, Legend
+// } from 'recharts';
+// import { BASE_URL } from "../../config/api";
+
+// // Palet warna hijau khas Gycora dari gelap ke terang
+// const PIE_COLORS = ['#065f46', '#059669', '#10b981', '#34d399', '#6ee7b7'];
+
+// export default function AdminDashboard() {
+//   const navigate = useNavigate();
+//   const [adminName, setAdminName] = useState("Admin");
+//   const [loading, setLoading] = useState(true);
+
+//   // --- STATE UNTUK DATA DASHBOARD ---
+//   const [stats, setStats] = useState<any>({});
+//   const [revenueData, setRevenueData] = useState<any[]>([]);
+//   const [popularProducts, setPopularProducts] = useState<any[]>([]);
+
+//   useEffect(() => {
+//     const userStr = localStorage.getItem("admin_user");
+//     const token = localStorage.getItem("admin_token");
+
+//     if (!token || !userStr) {
+//       navigate("/admin/login");
+//       return;
+//     }
+
+//     const user = JSON.parse(userStr);
+//     setAdminName(user.first_name);
+
+//     const fetchDashboardData = async () => {
+//       try {
+//         const res = await fetch(`${BASE_URL}/api/admin/dashboard/master-data`, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             Accept: "application/json"
+//           }
+//         });
+
+//         if (res.ok) {
+//           const data = await res.json();
+//           setStats(data.stats || {});
+//           setRevenueData(data.revenue || []);
+          
+//           // Mengolah data Popular Products agar format key sesuai dengan Recharts (name & value)
+//           const formattedPopular = (data.popular || []).map((item: any) => ({
+//             name: item.name,
+//             value: Number(item.total_sold)
+//           }));
+//           setPopularProducts(formattedPopular);
+//         } else if (res.status === 401) {
+//           localStorage.removeItem("admin_token");
+//           localStorage.removeItem("admin_user");
+//           navigate("/admin/login");
+//         }
+//       } catch (error) {
+//         console.error("Gagal mengambil data dashboard:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchDashboardData();
+//   }, [navigate]);
+
+//   // Format angka ke format Rupiah
+//   const formatRupiah = (angka: number) => {
+//     return new Intl.NumberFormat('id-ID', {
+//       style: 'currency',
+//       currency: 'IDR',
+//       minimumFractionDigits: 0,
+//     }).format(angka || 0);
+//   };
+
+//   const formatRupiahTooltip = (value: any) => [formatRupiah(value), 'Pendapatan'];
+
+//   if (loading) {
+//     return (
+//       <div className="flex items-center justify-center min-h-[500px]">
+//         <div className="flex flex-col items-center">
+//           <div className="w-12 h-12 border-4 border-gray-200 rounded-full border-t-gycora animate-spin"></div>
+//           <p className="mt-4 text-xs font-bold tracking-widest uppercase text-gycora animate-pulse">Memuat Dasbor...</p>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="p-8 pb-20 mx-auto space-y-8 font-sans max-w-7xl animate-fade-in-up">
+      
+//       {/* HEADER DASHBOARD */}
+//       <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+//         <div>
+//           <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Dashboard</h1>
+//           <p className="mt-1 text-gray-500">Selamat datang kembali, <span className="font-semibold text-gycora">{adminName}</span>. Berikut performa Gycora hari ini.</p>
+//         </div>
+//       </div>
+
+//       {/* STATISTIK UTAMA */}
+//       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+//         {/* Card 1: Pendapatan */}
+//         <div className="relative p-6 overflow-hidden bg-white border border-gray-100 shadow-sm rounded-2xl group">
+//           <div className="absolute top-0 right-0 p-4 transition-transform transform translate-x-4 -translate-y-4 opacity-10 group-hover:scale-110">
+//             <svg className="w-24 h-24 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+//           </div>
+//           <p className="mb-1 text-sm font-semibold tracking-wider text-gray-500 uppercase">Total Pendapatan</p>
+//           <h3 className="text-2xl font-extrabold text-gray-900 truncate" title={formatRupiah(stats.total_sales)}>
+//             {formatRupiah(stats.total_sales)}
+//           </h3>
+//           <p className={`flex items-center gap-1 mt-2 text-sm font-medium ${stats.sales_growth >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+//             {stats.sales_growth >= 0 ? (
+//               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+//             ) : (
+//               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6" /></svg>
+//             )}
+//             {stats.sales_growth >= 0 ? '+' : ''}{stats.sales_growth}% dari bulan lalu
+//           </p>
+//         </div>
+
+//         {/* Card 2: Pesanan / Transaksi */}
+//         <div className="relative p-6 overflow-hidden bg-white border border-gray-100 shadow-sm rounded-2xl group">
+//           <p className="mb-1 text-sm font-semibold tracking-wider text-gray-500 uppercase">Total Transaksi</p>
+//           <h3 className="text-3xl font-extrabold text-gray-900">{stats.total_transactions || 0}</h3>
+//           <p className={`flex items-center gap-1 mt-2 text-sm font-medium ${stats.transaction_growth >= 0 ? 'text-amber-500' : 'text-red-500'}`}>
+//             {stats.transaction_growth >= 0 ? (
+//               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+//             ) : (
+//               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6" /></svg>
+//             )}
+//             {stats.transaction_growth >= 0 ? '+' : ''}{stats.transaction_growth}% dari bulan lalu
+//           </p>
+//         </div>
+
+//         {/* Card 3: Katalog Produk */}
+//         <div className="relative p-6 overflow-hidden bg-white border border-gray-100 shadow-sm rounded-2xl group">
+//           <p className="mb-1 text-sm font-semibold tracking-wider text-gray-500 uppercase">Katalog Produk</p>
+//           <h3 className="text-3xl font-extrabold text-gray-900">{stats.total_products || 0}</h3>
+//           <p className="flex items-center gap-1 mt-2 text-sm font-medium text-blue-500">
+//             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+//             +{stats.new_products_growth || 0} produk baru bulan ini
+//           </p>
+//         </div>
+
+//         {/* Card 4: Pelanggan Baru */}
+//         <div className="relative p-6 overflow-hidden text-white border shadow-lg bg-gradient-to-br from-gycora to-gycora-dark rounded-2xl border-emerald-700">
+//           <p className="mb-1 text-sm font-semibold tracking-wider uppercase text-emerald-100">Total Pelanggan</p>
+//           <h3 className="text-3xl font-extrabold">{stats.total_users || 0}</h3>
+//           <p className="mt-2 text-sm font-medium text-white">
+//             +{stats.new_users_growth || 0} pengguna baru bulan ini!
+//           </p>
+//         </div>
+//       </div>
+
+//       {/* BARIS GRAFIK: BAR CHART & PIE CHART */}
+//       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        
+//         {/* BAR CHART PENJUALAN (Col-span 2) */}
+//         <div className="p-6 bg-white border border-gray-100 shadow-sm lg:col-span-2 rounded-2xl">
+//           <div className="flex items-center justify-between mb-6">
+//             <h2 className="text-lg font-bold text-gray-900">Tren Pendapatan 6 Bulan Terakhir</h2>
+//           </div>
+          
+//           <div className="w-full h-72">
+//             {revenueData.length > 0 ? (
+//               <ResponsiveContainer width="100%" height="100%" debounce={300}>
+//                 <BarChart data={revenueData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+//                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+//                   <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#6b7280', fontSize: 12}} dy={10} />
+//                   <YAxis axisLine={false} tickLine={false} tick={{fill: '#6b7280', fontSize: 12}} tickFormatter={(val) => `Rp${(val/1000000).toFixed(0)}M`} />
+//                   <Tooltip 
+//                     cursor={{fill: '#f9fafb'}} 
+//                     contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'}}
+//                     formatter={formatRupiahTooltip}
+//                   />
+//                   <Bar dataKey="total" fill="#059669" radius={[4, 4, 0, 0]} maxBarSize={40} />
+//                 </BarChart>
+//               </ResponsiveContainer>
+//             ) : (
+//               <div className="flex items-center justify-center w-full h-full text-sm italic text-gray-400">
+//                 Belum ada data transaksi dalam 6 bulan terakhir.
+//               </div>
+//             )}
+//           </div>
+//         </div>
+
+//         {/* PIE CHART PRODUK POPULER (Col-span 1) */}
+//         <div className="flex flex-col p-6 bg-white border border-gray-100 shadow-sm rounded-2xl">
+//           <h2 className="mb-2 text-lg font-bold text-gray-900">Top Produk Terlaris</h2>
+//           <p className="mb-6 text-xs text-gray-500">Berdasarkan volume penjualan historis</p>
+          
+//           <div className="flex-1 min-h-[250px]">
+//             {popularProducts.length > 0 ? (
+//               <ResponsiveContainer width="100%" height="100%" debounce={300}>
+//                 <PieChart>
+//                   <Pie
+//                     data={popularProducts}
+//                     cx="50%"
+//                     cy="45%"
+//                     innerRadius={50}
+//                     outerRadius={80}
+//                     paddingAngle={5}
+//                     dataKey="value"
+//                     stroke="none"
+//                   >
+//                     {popularProducts.map((_entry, index) => (
+//                       <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
+//                     ))}
+//                   </Pie>
+//                   <Tooltip 
+//                     contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'}}
+//                     formatter={(value: any) => [`${value} Unit`, 'Terjual']}
+//                   />
+//                   <Legend 
+//                     verticalAlign="bottom" 
+//                     height={36}
+//                     iconType="circle"
+//                     iconSize={8}
+//                     wrapperStyle={{ fontSize: '11px', color: '#4b5563' }}
+//                   />
+//                 </PieChart>
+//               </ResponsiveContainer>
+//             ) : (
+//               <div className="flex items-center justify-center w-full h-full text-sm italic text-gray-400">
+//                 Belum ada data penjualan produk.
+//               </div>
+//             )}
+//           </div>
+//         </div>
+
+//       </div>
+//     </div>
+//   );
+// }
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
@@ -251,7 +490,6 @@ import {
 } from 'recharts';
 import { BASE_URL } from "../../config/api";
 
-// Palet warna hijau khas Gycora dari gelap ke terang
 const PIE_COLORS = ['#065f46', '#059669', '#10b981', '#34d399', '#6ee7b7'];
 
 export default function AdminDashboard() {
@@ -259,8 +497,17 @@ export default function AdminDashboard() {
   const [adminName, setAdminName] = useState("Admin");
   const [loading, setLoading] = useState(true);
 
-  // --- STATE UNTUK DATA DASHBOARD ---
-  const [stats, setStats] = useState<any>({});
+  // Initial state kosong agar tidak error saat render pertama (blurred)
+  const [stats, setStats] = useState<any>({
+    total_sales: 0,
+    sales_growth: 0,
+    total_transactions: 0,
+    transaction_growth: 0,
+    total_products: 0,
+    new_products_growth: 0,
+    total_users: 0,
+    new_users_growth: 0
+  });
   const [revenueData, setRevenueData] = useState<any[]>([]);
   const [popularProducts, setPopularProducts] = useState<any[]>([]);
 
@@ -277,6 +524,7 @@ export default function AdminDashboard() {
     setAdminName(user.first_name);
 
     const fetchDashboardData = async () => {
+      // Kita beri sedikit delay buatan (misal 500ms) agar animasi "muncul" terlihat lebih dramatis
       try {
         const res = await fetch(`${BASE_URL}/api/admin/dashboard/master-data`, {
           headers: {
@@ -289,29 +537,23 @@ export default function AdminDashboard() {
           const data = await res.json();
           setStats(data.stats || {});
           setRevenueData(data.revenue || []);
-          
-          // Mengolah data Popular Products agar format key sesuai dengan Recharts (name & value)
           const formattedPopular = (data.popular || []).map((item: any) => ({
             name: item.name,
             value: Number(item.total_sold)
           }));
           setPopularProducts(formattedPopular);
-        } else if (res.status === 401) {
-          localStorage.removeItem("admin_token");
-          localStorage.removeItem("admin_user");
-          navigate("/admin/login");
         }
       } catch (error) {
         console.error("Gagal mengambil data dashboard:", error);
       } finally {
-        setLoading(false);
+        // Delay sedikit sebelum melepas blur untuk efek transisi yang mulus
+        setTimeout(() => setLoading(false), 300);
       }
     };
 
     fetchDashboardData();
   }, [navigate]);
 
-  // Format angka ke format Rupiah
   const formatRupiah = (angka: number) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -322,156 +564,94 @@ export default function AdminDashboard() {
 
   const formatRupiahTooltip = (value: any) => [formatRupiah(value), 'Pendapatan'];
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[500px]">
-        <div className="flex flex-col items-center">
-          <div className="w-12 h-12 border-4 border-gray-200 rounded-full border-t-gycora animate-spin"></div>
-          <p className="mt-4 text-xs font-bold tracking-widest uppercase text-gycora animate-pulse">Memuat Dasbor...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="p-8 pb-20 mx-auto space-y-8 font-sans max-w-7xl animate-fade-in-up">
+    <div className="relative min-h-screen font-sans bg-gray-50/50">
       
-      {/* HEADER DASHBOARD */}
-      <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Dashboard</h1>
-          <p className="mt-1 text-gray-500">Selamat datang kembali, <span className="font-semibold text-gycora">{adminName}</span>. Berikut performa Gycora hari ini.</p>
-        </div>
-      </div>
-
-      {/* STATISTIK UTAMA */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {/* Card 1: Pendapatan */}
-        <div className="relative p-6 overflow-hidden bg-white border border-gray-100 shadow-sm rounded-2xl group">
-          <div className="absolute top-0 right-0 p-4 transition-transform transform translate-x-4 -translate-y-4 opacity-10 group-hover:scale-110">
-            <svg className="w-24 h-24 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+      {/* LOADING OVERLAY: Muncul hanya saat loading */}
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-500 bg-white/10 backdrop-blur-sm">
+          <div className="flex flex-col items-center">
+            {/* Animasi Spinner yang lebih subtle */}
+            <div className="w-10 h-10 border-4 rounded-full border-gycora/20 border-t-gycora animate-spin"></div>
+            <p className="mt-4 text-[10px] font-bold tracking-[0.3em] uppercase text-gycora animate-pulse">
+              Synchronizing
+            </p>
           </div>
-          <p className="mb-1 text-sm font-semibold tracking-wider text-gray-500 uppercase">Total Pendapatan</p>
-          <h3 className="text-2xl font-extrabold text-gray-900 truncate" title={formatRupiah(stats.total_sales)}>
-            {formatRupiah(stats.total_sales)}
-          </h3>
-          <p className={`flex items-center gap-1 mt-2 text-sm font-medium ${stats.sales_growth >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
-            {stats.sales_growth >= 0 ? (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-            ) : (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6" /></svg>
-            )}
-            {stats.sales_growth >= 0 ? '+' : ''}{stats.sales_growth}% dari bulan lalu
-          </p>
         </div>
+      )}
 
-        {/* Card 2: Pesanan / Transaksi */}
-        <div className="relative p-6 overflow-hidden bg-white border border-gray-100 shadow-sm rounded-2xl group">
-          <p className="mb-1 text-sm font-semibold tracking-wider text-gray-500 uppercase">Total Transaksi</p>
-          <h3 className="text-3xl font-extrabold text-gray-900">{stats.total_transactions || 0}</h3>
-          <p className={`flex items-center gap-1 mt-2 text-sm font-medium ${stats.transaction_growth >= 0 ? 'text-amber-500' : 'text-red-500'}`}>
-            {stats.transaction_growth >= 0 ? (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-            ) : (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6" /></svg>
-            )}
-            {stats.transaction_growth >= 0 ? '+' : ''}{stats.transaction_growth}% dari bulan lalu
-          </p>
-        </div>
-
-        {/* Card 3: Katalog Produk */}
-        <div className="relative p-6 overflow-hidden bg-white border border-gray-100 shadow-sm rounded-2xl group">
-          <p className="mb-1 text-sm font-semibold tracking-wider text-gray-500 uppercase">Katalog Produk</p>
-          <h3 className="text-3xl font-extrabold text-gray-900">{stats.total_products || 0}</h3>
-          <p className="flex items-center gap-1 mt-2 text-sm font-medium text-blue-500">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-            +{stats.new_products_growth || 0} produk baru bulan ini
-          </p>
-        </div>
-
-        {/* Card 4: Pelanggan Baru */}
-        <div className="relative p-6 overflow-hidden text-white border shadow-lg bg-gradient-to-br from-gycora to-gycora-dark rounded-2xl border-emerald-700">
-          <p className="mb-1 text-sm font-semibold tracking-wider uppercase text-emerald-100">Total Pelanggan</p>
-          <h3 className="text-3xl font-extrabold">{stats.total_users || 0}</h3>
-          <p className="mt-2 text-sm font-medium text-white">
-            +{stats.new_users_growth || 0} pengguna baru bulan ini!
-          </p>
-        </div>
-      </div>
-
-      {/* BARIS GRAFIK: BAR CHART & PIE CHART */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      {/* WRAPPER KONTEN: Di sinilah animasi blur bekerja */}
+      <div 
+        className={`p-8 pb-20 mx-auto space-y-8 max-w-7xl transition-all duration-1000 ease-out ${
+          loading 
+            ? "blur-2xl opacity-0 scale-95 pointer-events-none" 
+            : "blur-0 opacity-100 scale-100"
+        }`}
+      >
         
-        {/* BAR CHART PENJUALAN (Col-span 2) */}
-        <div className="p-6 bg-white border border-gray-100 shadow-sm lg:col-span-2 rounded-2xl">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-bold text-gray-900">Tren Pendapatan 6 Bulan Terakhir</h2>
+        {/* HEADER DASHBOARD */}
+        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">Dashboard</h1>
+            <p className="mt-1 text-gray-500">Selamat datang kembali, <span className="font-semibold text-gycora">{adminName}</span>.</p>
           </div>
-          
-          <div className="w-full h-72">
-            {revenueData.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%" debounce={300}>
-                <BarChart data={revenueData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+        </div>
+
+        {/* STATISTIK UTAMA */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="relative p-6 bg-white border border-gray-100 shadow-sm rounded-2xl group">
+            <p className="mb-1 text-xs font-bold tracking-widest text-gray-400 uppercase">Total Pendapatan</p>
+            <h3 className="text-2xl font-black text-gray-900">{formatRupiah(stats.total_sales)}</h3>
+          </div>
+
+          <div className="relative p-6 bg-white border border-gray-100 shadow-sm rounded-2xl group">
+            <p className="mb-1 text-xs font-bold tracking-widest text-gray-400 uppercase">Total Transaksi</p>
+            <h3 className="text-3xl font-black text-gray-900">{stats.total_transactions}</h3>
+          </div>
+
+          <div className="relative p-6 bg-white border border-gray-100 shadow-sm rounded-2xl group">
+            <p className="mb-1 text-xs font-bold tracking-widest text-gray-400 uppercase">Katalog Produk</p>
+            <h3 className="text-3xl font-black text-gray-900">{stats.total_products}</h3>
+          </div>
+
+          <div className="relative p-6 text-white border shadow-lg bg-gradient-to-br from-gycora to-gycora-dark rounded-2xl border-emerald-700">
+            <p className="mb-1 text-xs font-bold tracking-widest uppercase text-emerald-100">Total Pelanggan</p>
+            <h3 className="text-3xl font-black">{stats.total_users}</h3>
+          </div>
+        </div>
+
+        {/* GRAFIK */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <div className="p-6 bg-white border border-gray-100 shadow-sm lg:col-span-2 rounded-2xl">
+            <h2 className="mb-6 text-lg font-bold text-gray-900">Tren Pendapatan</h2>
+            <div className="w-full h-72">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={revenueData}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
-                  <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#6b7280', fontSize: 12}} dy={10} />
-                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#6b7280', fontSize: 12}} tickFormatter={(val) => `Rp${(val/1000000).toFixed(0)}M`} />
-                  <Tooltip 
-                    cursor={{fill: '#f9fafb'}} 
-                    contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'}}
-                    formatter={formatRupiahTooltip}
-                  />
-                  <Bar dataKey="total" fill="#059669" radius={[4, 4, 0, 0]} maxBarSize={40} />
+                  <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 11}} />
+                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontSize: 11}} />
+                  <Tooltip cursor={{fill: '#f9fafb'}} contentStyle={{borderRadius: '12px', border: 'none'}} formatter={formatRupiahTooltip} />
+                  <Bar dataKey="total" fill="#059669" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
-            ) : (
-              <div className="flex items-center justify-center w-full h-full text-sm italic text-gray-400">
-                Belum ada data transaksi dalam 6 bulan terakhir.
-              </div>
-            )}
+            </div>
           </div>
-        </div>
 
-        {/* PIE CHART PRODUK POPULER (Col-span 1) */}
-        <div className="flex flex-col p-6 bg-white border border-gray-100 shadow-sm rounded-2xl">
-          <h2 className="mb-2 text-lg font-bold text-gray-900">Top Produk Terlaris</h2>
-          <p className="mb-6 text-xs text-gray-500">Berdasarkan volume penjualan historis</p>
-          
-          <div className="flex-1 min-h-[250px]">
-            {popularProducts.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%" debounce={300}>
+          <div className="p-6 bg-white border border-gray-100 shadow-sm rounded-2xl">
+            <h2 className="mb-6 text-lg font-bold text-gray-900">Produk Terlaris</h2>
+            <div className="w-full h-72">
+              <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie
-                    data={popularProducts}
-                    cx="50%"
-                    cy="45%"
-                    innerRadius={50}
-                    outerRadius={80}
-                    paddingAngle={5}
-                    dataKey="value"
-                    stroke="none"
-                  >
-                    {popularProducts.map((_entry, index) => (
+                  <Pie data={popularProducts} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
+                    {popularProducts.map((_, index) => (
                       <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip 
-                    contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'}}
-                    formatter={(value: any) => [`${value} Unit`, 'Terjual']}
-                  />
-                  <Legend 
-                    verticalAlign="bottom" 
-                    height={36}
-                    iconType="circle"
-                    iconSize={8}
-                    wrapperStyle={{ fontSize: '11px', color: '#4b5563' }}
-                  />
+                  <Tooltip />
+                  <Legend iconType="circle" wrapperStyle={{fontSize: '11px'}} />
                 </PieChart>
               </ResponsiveContainer>
-            ) : (
-              <div className="flex items-center justify-center w-full h-full text-sm italic text-gray-400">
-                Belum ada data penjualan produk.
-              </div>
-            )}
+            </div>
           </div>
         </div>
 
