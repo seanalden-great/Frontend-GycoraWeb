@@ -46,6 +46,8 @@ import AdminProfilePage from "./pages/admin/AdminProfilePage";
 import MessageViewPage from "./pages/admin/MessageViewPage";
 import DetailMessageViewPage from "./pages/admin/DetailMessageViewPage";
 import FavoritePage from "./pages/user/FavoritePage";
+import CategoryCoaPage from "./pages/admin/CategoryCoaPage";
+import CoaPage from "./pages/admin/CoaPage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -234,6 +236,23 @@ export default function App() {
               element={
                 <AdminLayout>
                   <DetailMessageViewPage />
+                </AdminLayout>
+              }
+            />
+            {/* Accounting */}
+            <Route
+              path="/admin/category-coas"
+              element={
+                <AdminLayout>
+                  <CategoryCoaPage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/coas"
+              element={
+                <AdminLayout>
+                  <CoaPage />
                 </AdminLayout>
               }
             />
