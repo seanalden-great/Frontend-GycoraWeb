@@ -48,6 +48,7 @@ import DetailMessageViewPage from "./pages/admin/DetailMessageViewPage";
 import FavoritePage from "./pages/user/FavoritePage";
 import CategoryCoaPage from "./pages/admin/CategoryCoaPage";
 import CoaPage from "./pages/admin/CoaPage";
+import TransferReceivePage from "./pages/admin/TransferReceivePage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -253,6 +254,14 @@ export default function App() {
               element={
                 <AdminLayout>
                   <CoaPage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/transfer-receive"
+              element={
+                <AdminLayout>
+                  <TransferReceivePage />
                 </AdminLayout>
               }
             />

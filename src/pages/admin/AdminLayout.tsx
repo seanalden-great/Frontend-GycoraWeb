@@ -1943,6 +1943,7 @@ export default function AdminLayout({
                <p className="px-4 mt-2 mb-2 text-xs font-semibold tracking-wider text-gray-400 uppercase transition-opacity duration-300">Accounting</p>
             ) : <div className="h-4 mt-2"></div>}
             
+            {/* LINK 1: COA */}
             <Link 
               to="/admin/coas" 
               title={!isSidebarOpen ? "Chart of Accounts" : ""} 
@@ -1957,6 +1958,23 @@ export default function AdminLayout({
               </svg>
               {isSidebarOpen && <span className="truncate">Chart of Accounts</span>}
             </Link>
+
+            {/* LINK 2: TRANSFER & RECEIVE */}
+            <Link 
+              to="/admin/transfer-receive" 
+              title={!isSidebarOpen ? "Transfer & Receive" : ""} 
+              className={`flex items-center gap-3 py-2.5 rounded-lg font-medium group transition-colors ${
+                pathname.includes('/transfer-receive')
+                  ? "bg-gycora-light text-gycora-dark" 
+                  : "text-gray-700 hover:bg-gray-100"
+              } ${isSidebarOpen ? "px-4" : "justify-center px-0"}`}
+            >
+              <svg className={`w-6 h-6 shrink-0 transition-colors ${pathname.includes('/transfer-receive') ? "text-gycora" : "text-gray-400 group-hover:text-gycora"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+              {isSidebarOpen && <span className="truncate">Transfer & Receive</span>}
+            </Link>
+
           </div>
 
         </nav>
