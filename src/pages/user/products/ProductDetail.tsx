@@ -889,6 +889,442 @@
 //   );
 // }
 
+// import { useState, useEffect, useMemo } from "react";
+// import { useParams, useNavigate } from "react-router-dom"; 
+// import Swal from "sweetalert2";
+// import { useCart } from "../../../context/CartContext"; 
+// import { BASE_URL } from "../../../config/api";
+
+// interface Product {
+//   id: number;
+//   category_id: number;
+//   category_name: string;
+//   sku: string;
+//   name: string;
+//   slug: string;
+//   description: string;
+//   benefits: string;
+//   price: number;
+//   stock: number;
+//   image_url: string;
+//   variant_images?: string[]; 
+//   variant_video?: string;
+//   color?: string[];
+// }
+
+// export default function ProductDetail() {
+//   const { id } = useParams<{ id: string }>(); 
+//   const navigate = useNavigate(); 
+  
+//   const [product, setProduct] = useState<Product | null>(null);
+//   const [loading, setLoading] = useState(true);
+//   const [quantity, setQuantity] = useState(1);
+//   const [isAdding, setIsAdding] = useState(false); 
+  
+//   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+//   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
+//   // STATE BARU: Status Favorit produk ini
+//   const [isFavorited, setIsFavorited] = useState(false);
+
+//   const { cartItems, fetchCart } = useCart(); 
+
+//   useEffect(() => {
+//     const fetchProduct = async () => {
+//       try {
+//         const res = await fetch(`${BASE_URL}/api/products/${id}`);
+//         if (!res.ok) throw new Error("Produk tidak ditemukan");
+//         const responseData = await res.json();
+        
+//         const productObject = responseData.data ? responseData.data : responseData;
+//         setProduct(productObject);
+//       } catch (error) {
+//         console.error("Gagal memuat produk:", error);
+//         navigate("/products");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     // FUNGSI BARU: Mengecek apakah produk ini difavoritkan
+//     const checkWishlistStatus = async () => {
+//       const token = localStorage.getItem("user_token");
+//       if (!token) return;
+
+//       try {
+//         const res = await fetch(`${BASE_URL}/api/wishlists`, {
+//           headers: { Authorization: `Bearer ${token}`, Accept: "application/json" }
+//         });
+//         if (res.ok) {
+//           const data = await res.json();
+//           // Cek apakah ID produk ini ada di daftar wishlist user
+//           // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//           const isWished = data.some((item: any) => item.product_id === Number(id));
+//           setIsFavorited(isWished);
+//         }
+//       } catch (error) {
+//         console.error("Gagal memeriksa wishlist:", error);
+//       }
+//     };
+
+//     if (id) {
+//       fetchProduct();
+//       checkWishlistStatus();
+//     }
+//   }, [id, navigate]);
+
+//   // FUNGSI BARU: Toggle Favorit di halaman detail
+//   const handleToggleWishlist = async () => {
+//     const token = localStorage.getItem("user_token");
+//     if (!token) {
+//       Swal.fire({
+//         title: "Login Diperlukan",
+//         text: "Silakan masuk ke akun Anda untuk menyimpan produk ke favorit.",
+//         icon: "info",
+//         showCancelButton: true,
+//         confirmButtonColor: "#059669",
+//         cancelButtonColor: "#d33",
+//         confirmButtonText: "Ke Halaman Login",
+//         cancelButtonText: "Batal"
+//       }).then((result) => {
+//         if (result.isConfirmed) navigate("/login");
+//       });
+//       return;
+//     }
+
+//     // Optimistic update
+//     setIsFavorited(!isFavorited);
+
+//     try {
+//       const res = await fetch(`${BASE_URL}/api/wishlists/toggle`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "Authorization": `Bearer ${token}`,
+//           "Accept": "application/json"
+//         },
+//         body: JSON.stringify({ product_id: product?.id })
+//       });
+//       if (!res.ok) throw new Error("Gagal");
+//     } catch (error) {
+//       // Revert jika gagal
+//       setIsFavorited(!isFavorited);
+//       console.error(error);
+//     }
+//   };
+
+
+//   // =========================================================================
+//   // LOGIKA PENYARINGAN VARIAN BERDASARKAN ISI KERANJANG
+//   // =========================================================================
+//   const colorsAlreadyInCart = useMemo(() => {
+//     if (!product) return [];
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//     return cartItems
+//       .filter((item: any) => item.product.id === product.id && item.color)
+//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//       .map((item: any) => item.color);
+//   }, [cartItems, product]);
+
+//   const availableColors = useMemo(() => {
+//     if (!product || !Array.isArray(product.color)) return [];
+//     return product.color.filter(c => !colorsAlreadyInCart.includes(c));
+//   }, [product, colorsAlreadyInCart]);
+
+//   const isFullyInCart = useMemo(() => {
+//     if (!product) return false;
+//     const hasColors = Array.isArray(product.color) && product.color.length > 0;
+    
+//     if (hasColors) {
+//       return availableColors.length === 0;
+//     } else {
+//       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//       return cartItems.some((item: any) => item.product.id === product.id);
+//     }
+//   }, [product, availableColors, cartItems]);
+
+//   useEffect(() => {
+//     if (availableColors.length > 0 && (!selectedColor || !availableColors.includes(selectedColor))) {
+//       setSelectedColor(availableColors[0]);
+//     }
+//   }, [availableColors, selectedColor]);
+
+//   // =========================================================================
+
+//   const gallery = useMemo(() => {
+//     if (!product) return [];
+//     const imgs = [];
+//     if (product.image_url) imgs.push(product.image_url);
+//     if (Array.isArray(product.variant_images)) {
+//       imgs.push(...product.variant_images);
+//     }
+//     return imgs;
+//   }, [product]);
+
+//   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % gallery.length);
+//   const prevImage = () => setCurrentImageIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
+
+//   const formatRupiah = (angka: number) => {
+//     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
+//   };
+
+//   const handleAddToCart = async () => {
+//     const token = localStorage.getItem("user_token");
+//     if (!token) {
+//       Swal.fire({
+//         title: "Login Diperlukan",
+//         text: "Silakan masuk ke akun Anda untuk mulai berbelanja.",
+//         icon: "info",
+//         confirmButtonColor: "#059669",
+//         confirmButtonText: "Ke Halaman Login"
+//       }).then(() => navigate("/login"));
+//       return;
+//     }
+
+//     if (product?.color && product.color.length > 0 && !selectedColor) {
+//        Swal.fire("Pilih Warna", "Silakan pilih varian warna terlebih dahulu.", "warning");
+//        return;
+//     }
+
+//     setIsAdding(true);
+
+//     try {
+//       const res = await fetch(`${BASE_URL}/api/carts`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+//         body: JSON.stringify({
+//           product_id: product?.id,
+//           quantity: quantity,
+//           color: selectedColor 
+//         })
+//       });
+
+//       const data = await res.json();
+
+//       if (res.ok) {
+//         const startEl = document.getElementById("product-image");
+//         const endEl = document.getElementById("cart-icon"); 
+        
+//         if (startEl && endEl && gallery.length > 0) {
+//           const startRect = startEl.getBoundingClientRect();
+//           const endRect = endEl.getBoundingClientRect();
+          
+//           const flyingImg = document.createElement("img");
+//           flyingImg.src = gallery[currentImageIndex]; 
+//           flyingImg.style.position = "fixed";
+//           flyingImg.style.top = `${startRect.top}px`;
+//           flyingImg.style.left = `${startRect.left}px`;
+//           flyingImg.style.width = `${startRect.width}px`;
+//           flyingImg.style.height = `${startRect.height}px`;
+//           flyingImg.style.borderRadius = "10%";
+//           flyingImg.style.zIndex = "9999";
+//           flyingImg.style.transition = "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)"; 
+//           document.body.appendChild(flyingImg);
+
+//           requestAnimationFrame(() => {
+//             flyingImg.style.top = `${endRect.top + 10}px`;
+//             flyingImg.style.left = `${endRect.left + 10}px`;
+//             flyingImg.style.width = "20px";
+//             flyingImg.style.height = "20px";
+//             flyingImg.style.opacity = "0.2";
+//             flyingImg.style.borderRadius = "50%";
+//           });
+
+//           setTimeout(() => {
+//             flyingImg.remove();
+//             fetchCart(); 
+//             navigate("/cart"); 
+//           }, 800);
+//         } else {
+//            fetchCart();
+//            navigate("/cart"); 
+//         }
+//       } else {
+//         Swal.fire("Gagal", data.message || "Stok tidak mencukupi", "error");
+//       }
+//     } catch (error) {
+//       Swal.fire("Error", "Gagal terhubung ke server", "error");
+//     } finally {
+//       setIsAdding(false);
+//     }
+//   };
+
+//   if (loading) return <div className="flex items-center justify-center min-h-screen font-sans bg-white"><div className="w-12 h-12 border-b-2 rounded-full animate-spin border-gycora"></div></div>;
+//   if (!product) return null;
+  
+//   const isOutOfStock = product.stock <= 0;
+
+//   return (
+//     <div className="min-h-screen py-12 font-sans bg-white">
+//       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+//         <div className="lg:grid lg:grid-cols-2 lg:gap-16">
+          
+//           {/* KIRI: MEDIA SECTION */}
+//           <div className="flex flex-col mb-10 lg:mb-0">
+//             <div id="product-image" className="relative group bg-gray-50 rounded-3xl overflow-hidden aspect-[4/5] md:aspect-square lg:aspect-[4/5] border border-gray-100 flex items-center justify-center">
+//               {gallery.length > 0 ? (
+//                 <>
+//                   {gallery.map((src, idx) => (
+//                     <img 
+//                       key={idx}
+//                       src={src} 
+//                       alt={`${product.name} - Varian ${idx}`} 
+//                       className={`absolute inset-0 object-cover object-center w-full h-full transition-opacity duration-300 ease-in-out ${idx === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+//                     />
+//                   ))}
+//                   {gallery.length > 1 && (
+//                     <>
+//                       <button onClick={prevImage} className="absolute z-20 p-3 text-gray-800 transition-opacity -translate-y-1/2 rounded-full shadow-md opacity-0 left-4 top-1/2 bg-white/90 hover:bg-white group-hover:opacity-100">
+//                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+//                       </button>
+//                       <button onClick={nextImage} className="absolute z-20 p-3 text-gray-800 transition-opacity -translate-y-1/2 rounded-full shadow-md opacity-0 right-4 top-1/2 bg-white/90 hover:bg-white group-hover:opacity-100">
+//                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+//                       </button>
+//                       <div className="absolute z-20 flex gap-2 bottom-6">
+//                         {gallery.map((_, idx) => (
+//                           <button key={idx} onClick={() => setCurrentImageIndex(idx)} className={`h-2 rounded-full transition-all shadow-sm ${idx === currentImageIndex ? 'bg-gycora w-6' : 'bg-white/80 hover:bg-white w-2'}`} />
+//                         ))}
+//                       </div>
+//                     </>
+//                   )}
+//                 </>
+//               ) : (
+//                 <div className="flex items-center justify-center w-full h-full text-gray-400">No Image</div>
+//               )}
+//               <div className="absolute z-20 top-6 left-6">
+//                 <span className="px-4 py-2 text-sm font-bold text-gray-900 rounded-full shadow-sm bg-white/90 backdrop-blur-md">
+//                   {product.category_name}
+//                 </span>
+//               </div>
+//             </div>
+
+//             {product.variant_video && (
+//               <div className="mt-8">
+//                 <h3 className="mb-3 text-sm font-bold tracking-widest text-gray-900 uppercase">Video Demo</h3>
+//                 <div className="overflow-hidden bg-black shadow-sm rounded-3xl">
+//                   <video src={product.variant_video} controls className="object-contain w-full h-64 md:h-80" />
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+
+//           {/* KANAN: PRODUCT DETAILS SECTION */}
+//           <div className="flex flex-col justify-center">
+             
+//              {/* AREA NAMA PRODUK DAN TOMBOL FAVORIT */}
+//              <div className="flex items-start justify-between gap-4 mb-2">
+//                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">{product.name}</h1>
+//                <button 
+//                  onClick={handleToggleWishlist}
+//                  className="flex items-center justify-center w-12 h-12 transition-colors bg-white border border-gray-200 rounded-full shadow-sm shrink-0 hover:bg-gray-50"
+//                  title="Simpan ke Favorit"
+//                >
+//                  <svg 
+//                    xmlns="http://www.w3.org/2000/svg" 
+//                    viewBox="0 0 24 24" 
+//                    strokeWidth={1.5} 
+//                    stroke="currentColor" 
+//                    className={`w-6 h-6 transition-all duration-300 ${isFavorited ? "fill-red-500 text-red-500 scale-110" : "fill-none text-gray-400 hover:text-red-500"}`}
+//                  >
+//                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+//                  </svg>
+//                </button>
+//              </div>
+
+//              <p className="mb-8 font-mono text-gray-500">SKU: {product.sku}</p>
+//              <div className="mb-8"><p className="text-4xl font-extrabold text-gycora">{formatRupiah(product.price)}</p></div>
+
+//              <div className="p-6 mb-10 border border-gray-100 bg-gray-50 rounded-2xl">
+                
+//                 {/* JIKA SEMUA VARIAN SUDAH ADA DI KERANJANG */}
+//                 {isFullyInCart ? (
+//                   <div className="py-8 text-center border bg-emerald-50 rounded-xl border-emerald-100">
+//                     <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 text-white rounded-full bg-emerald-500">
+//                       <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+//                     </div>
+//                     <h3 className="mb-2 text-lg font-bold text-emerald-900">Sudah di Keranjang</h3>
+//                     <p className="text-sm text-emerald-700">
+//                       {Array.isArray(product.color) && product.color.length > 0 
+//                         ? "Semua varian warna produk ini telah Anda masukkan ke keranjang." 
+//                         : "Produk ini sudah ada di dalam keranjang belanja Anda."}
+//                     </p>
+//                     <button onClick={() => navigate("/cart")} className="px-6 py-2 mt-6 text-xs font-bold tracking-widest text-white uppercase transition-colors rounded-full shadow-sm bg-gycora hover:bg-gycora-dark">
+//                       Lihat Keranjang
+//                     </button>
+//                   </div>
+//                 ) : (
+//                   <>
+//                     {/* VARIAN WARNA (HANYA TAMPILKAN YANG TERSEDIA) */}
+//                     {availableColors.length > 0 && (
+//                       <div className="pb-6 mb-6 border-b border-gray-200">
+//                         <h3 className="mb-3 text-sm font-bold text-gray-700">Pilih Varian Warna:</h3>
+//                         <div className="flex flex-wrap gap-3">
+//                           {availableColors.map((colorHex, idx) => (
+//                             <button
+//                               key={idx}
+//                               onClick={() => setSelectedColor(colorHex)}
+//                               className={`w-10 h-10 rounded-full border-2 transition-all shadow-sm ${selectedColor === colorHex ? 'border-gycora ring-2 ring-gycora/30 scale-110' : 'border-gray-200 hover:scale-105'}`}
+//                               style={{ backgroundColor: colorHex }}
+//                               title={`Pilih warna ${colorHex}`}
+//                             />
+//                           ))}
+//                         </div>
+//                       </div>
+//                     )}
+
+//                     <div className="flex items-center gap-4 mb-4">
+//                       <span className="text-sm font-semibold text-gray-700">Status Ketersediaan:</span>
+//                       {isOutOfStock ? (
+//                         <span className="px-3 py-1 text-sm font-bold text-red-600 rounded-full bg-red-50">Stok Habis</span>
+//                       ) : (
+//                         <span className="px-3 py-1 text-sm font-bold rounded-full text-emerald-600 bg-emerald-50">Tersedia ({product.stock} Unit)</span>
+//                       )}
+//                     </div>
+
+//                     <div className="flex flex-col gap-4 sm:flex-row">
+//                       <div className="flex items-center justify-between w-full bg-white border border-gray-300 rounded-xl sm:w-32 h-14">
+//                         <button onClick={() => setQuantity(Math.max(1, quantity - 1))} disabled={isOutOfStock} className="flex items-center justify-center w-10 h-full text-gray-600 transition-colors hover:text-gycora hover:bg-gray-50 rounded-l-xl disabled:opacity-50">-</button>
+//                         <span className="font-bold text-gray-900">{quantity}</span>
+//                         <button onClick={() => setQuantity(Math.min(product.stock, quantity + 1))} disabled={isOutOfStock} className="flex items-center justify-center w-10 h-full text-gray-600 transition-colors hover:text-gycora hover:bg-gray-50 rounded-r-xl disabled:opacity-50">+</button>
+//                       </div>
+                      
+//                       <button 
+//                         onClick={handleAddToCart}
+//                         disabled={isOutOfStock || isAdding}
+//                         className={`flex-1 h-14 rounded-xl text-lg font-bold transition-all ${
+//                           isOutOfStock 
+//                             ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+//                             : 'bg-gycora text-white hover:bg-gycora-dark shadow-[0_4px_14px_0_rgba(5,150,105,0.39)] hover:shadow-[0_6px_20px_rgba(5,150,105,0.23)] hover:-translate-y-0.5'
+//                         }`}
+//                       >
+//                         {isAdding ? "Memproses..." : (isOutOfStock ? 'Tidak Tersedia' : 'Beli Sekarang')}
+//                       </button>
+//                     </div>
+//                   </>
+//                 )}
+//              </div>
+
+//              <div className="space-y-8">
+//                 <div>
+//                   <h3 className="pb-2 mb-4 text-lg font-bold text-gray-900 border-b border-gray-200">Tentang Produk Ini</h3>
+//                   <div className="leading-relaxed prose-sm prose text-gray-600 whitespace-pre-wrap sm:prose max-w-none">{product.description}</div>
+//                 </div>
+//                 {product.benefits && (
+//                   <div>
+//                     <h3 className="pb-2 mb-4 text-lg font-bold text-gray-900 border-b border-gray-200">Manfaat Utama</h3>
+//                     <div className="p-5 border border-emerald-100 bg-emerald-50/50 rounded-2xl">
+//                       <p className="leading-relaxed text-gray-700 whitespace-pre-wrap">{product.benefits}</p>
+//                     </div>
+//                   </div>
+//                 )}
+//              </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
 import Swal from "sweetalert2";
@@ -909,7 +1345,8 @@ interface Product {
   image_url: string;
   variant_images?: string[]; 
   variant_video?: string;
-  color?: string[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  color?: any[];
 }
 
 export default function ProductDetail() {
@@ -924,7 +1361,6 @@ export default function ProductDetail() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
-  // STATE BARU: Status Favorit produk ini
   const [isFavorited, setIsFavorited] = useState(false);
 
   const { cartItems, fetchCart } = useCart(); 
@@ -946,7 +1382,6 @@ export default function ProductDetail() {
       }
     };
 
-    // FUNGSI BARU: Mengecek apakah produk ini difavoritkan
     const checkWishlistStatus = async () => {
       const token = localStorage.getItem("user_token");
       if (!token) return;
@@ -957,7 +1392,6 @@ export default function ProductDetail() {
         });
         if (res.ok) {
           const data = await res.json();
-          // Cek apakah ID produk ini ada di daftar wishlist user
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const isWished = data.some((item: any) => item.product_id === Number(id));
           setIsFavorited(isWished);
@@ -973,7 +1407,6 @@ export default function ProductDetail() {
     }
   }, [id, navigate]);
 
-  // FUNGSI BARU: Toggle Favorit di halaman detail
   const handleToggleWishlist = async () => {
     const token = localStorage.getItem("user_token");
     if (!token) {
@@ -992,9 +1425,7 @@ export default function ProductDetail() {
       return;
     }
 
-    // Optimistic update
     setIsFavorited(!isFavorited);
-
     try {
       const res = await fetch(`${BASE_URL}/api/wishlists/toggle`, {
         method: "POST",
@@ -1007,34 +1438,42 @@ export default function ProductDetail() {
       });
       if (!res.ok) throw new Error("Gagal");
     } catch (error) {
-      // Revert jika gagal
       setIsFavorited(!isFavorited);
       console.error(error);
     }
   };
 
-
   // =========================================================================
-  // LOGIKA PENYARINGAN VARIAN BERDASARKAN ISI KERANJANG
+  // PERBAIKAN LOGIKA PENYARINGAN VARIAN (SUPPORT OBJECT & STRING)
   // =========================================================================
   const colorsAlreadyInCart = useMemo(() => {
     if (!product) return [];
+    // Mengambil array "hex" dari warna-warna produk ini yang sudah ada di keranjang
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return cartItems
       .filter((item: any) => item.product.id === product.id && item.color)
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .map((item: any) => item.color);
+      .map((item: any) => {
+        try {
+          const parsed = JSON.parse(item.color);
+          return parsed.hex || item.color;
+        } catch {
+          return item.color; // Jika string lama
+        }
+      });
   }, [cartItems, product]);
 
   const availableColors = useMemo(() => {
     if (!product || !Array.isArray(product.color)) return [];
-    return product.color.filter(c => !colorsAlreadyInCart.includes(c));
+    return product.color.filter(c => {
+      const hex = typeof c === 'string' ? c : c.hex;
+      return !colorsAlreadyInCart.includes(hex);
+    });
   }, [product, colorsAlreadyInCart]);
 
   const isFullyInCart = useMemo(() => {
     if (!product) return false;
     const hasColors = Array.isArray(product.color) && product.color.length > 0;
-    
     if (hasColors) {
       return availableColors.length === 0;
     } else {
@@ -1044,11 +1483,17 @@ export default function ProductDetail() {
   }, [product, availableColors, cartItems]);
 
   useEffect(() => {
-    if (availableColors.length > 0 && (!selectedColor || !availableColors.includes(selectedColor))) {
-      setSelectedColor(availableColors[0]);
+    if (availableColors.length > 0) {
+      // Default terpilih di set ke JSON stringifier dari objek atau string itu sendiri
+      const firstColorStr = typeof availableColors[0] === 'string' ? availableColors[0] : JSON.stringify(availableColors[0]);
+      
+      if (!selectedColor || !availableColors.some(c => (typeof c === 'string' ? c : JSON.stringify(c)) === selectedColor)) {
+        setSelectedColor(firstColorStr);
+      }
+    } else {
+      setSelectedColor(null);
     }
   }, [availableColors, selectedColor]);
-
   // =========================================================================
 
   const gallery = useMemo(() => {
@@ -1095,7 +1540,7 @@ export default function ProductDetail() {
         body: JSON.stringify({
           product_id: product?.id,
           quantity: quantity,
-          color: selectedColor 
+          color: selectedColor // selectedColor sudah berupa JSON string aman untuk backend varchar
         })
       });
 
@@ -1159,7 +1604,6 @@ export default function ProductDetail() {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-16">
           
-          {/* KIRI: MEDIA SECTION */}
           <div className="flex flex-col mb-10 lg:mb-0">
             <div id="product-image" className="relative group bg-gray-50 rounded-3xl overflow-hidden aspect-[4/5] md:aspect-square lg:aspect-[4/5] border border-gray-100 flex items-center justify-center">
               {gallery.length > 0 ? (
@@ -1208,10 +1652,7 @@ export default function ProductDetail() {
             )}
           </div>
 
-          {/* KANAN: PRODUCT DETAILS SECTION */}
           <div className="flex flex-col justify-center">
-             
-             {/* AREA NAMA PRODUK DAN TOMBOL FAVORIT */}
              <div className="flex items-start justify-between gap-4 mb-2">
                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">{product.name}</h1>
                <button 
@@ -1219,13 +1660,7 @@ export default function ProductDetail() {
                  className="flex items-center justify-center w-12 h-12 transition-colors bg-white border border-gray-200 rounded-full shadow-sm shrink-0 hover:bg-gray-50"
                  title="Simpan ke Favorit"
                >
-                 <svg 
-                   xmlns="http://www.w3.org/2000/svg" 
-                   viewBox="0 0 24 24" 
-                   strokeWidth={1.5} 
-                   stroke="currentColor" 
-                   className={`w-6 h-6 transition-all duration-300 ${isFavorited ? "fill-red-500 text-red-500 scale-110" : "fill-none text-gray-400 hover:text-red-500"}`}
-                 >
+                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-6 h-6 transition-all duration-300 ${isFavorited ? "fill-red-500 text-red-500 scale-110" : "fill-none text-gray-400 hover:text-red-500"}`}>
                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                  </svg>
                </button>
@@ -1236,7 +1671,6 @@ export default function ProductDetail() {
 
              <div className="p-6 mb-10 border border-gray-100 bg-gray-50 rounded-2xl">
                 
-                {/* JIKA SEMUA VARIAN SUDAH ADA DI KERANJANG */}
                 {isFullyInCart ? (
                   <div className="py-8 text-center border bg-emerald-50 rounded-xl border-emerald-100">
                     <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 text-white rounded-full bg-emerald-500">
@@ -1254,20 +1688,28 @@ export default function ProductDetail() {
                   </div>
                 ) : (
                   <>
-                    {/* VARIAN WARNA (HANYA TAMPILKAN YANG TERSEDIA) */}
                     {availableColors.length > 0 && (
                       <div className="pb-6 mb-6 border-b border-gray-200">
                         <h3 className="mb-3 text-sm font-bold text-gray-700">Pilih Varian Warna:</h3>
                         <div className="flex flex-wrap gap-3">
-                          {availableColors.map((colorHex, idx) => (
-                            <button
-                              key={idx}
-                              onClick={() => setSelectedColor(colorHex)}
-                              className={`w-10 h-10 rounded-full border-2 transition-all shadow-sm ${selectedColor === colorHex ? 'border-gycora ring-2 ring-gycora/30 scale-110' : 'border-gray-200 hover:scale-105'}`}
-                              style={{ backgroundColor: colorHex }}
-                              title={`Pilih warna ${colorHex}`}
-                            />
-                          ))}
+                          {availableColors.map((c, idx) => {
+                            const hex = typeof c === 'string' ? c : c.hex;
+                            const name = typeof c === 'string' ? '' : c.name;
+                            const colorString = typeof c === 'string' ? c : JSON.stringify(c);
+                            const isSelected = selectedColor === colorString;
+
+                            return (
+                              <button
+                                key={idx}
+                                onClick={() => setSelectedColor(colorString)}
+                                className={`flex items-center gap-2 px-3 py-1.5 rounded-full border-2 transition-all shadow-sm ${isSelected ? 'border-gycora ring-2 ring-gycora/30 scale-105' : 'border-gray-200 hover:border-gray-300 hover:scale-105'}`}
+                                title={`Pilih warna ${name || hex}`}
+                              >
+                                <span className="w-5 h-5 border border-gray-300 rounded-full shadow-inner" style={{ backgroundColor: hex }}></span>
+                                {name && <span className={`text-xs font-bold ${isSelected ? 'text-gycora-dark' : 'text-gray-700'}`}>{name}</span>}
+                              </button>
+                            );
+                          })}
                         </div>
                       </div>
                     )}
