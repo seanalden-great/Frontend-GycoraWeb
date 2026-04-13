@@ -1737,7 +1737,7 @@ export default function CartPage() {
     }
     
     const token = localStorage.getItem("user_token");
-    const originalItems = [...localCartItems];
+    // const originalItems = [...localCartItems];
     
     setLocalCartItems((prevItems) => 
       prevItems.map((cartItem) => 
