@@ -2007,7 +2007,7 @@ export default function PaymentPage() {
                     </p>
                     
                     {/* BAGIAN WARNA DAN QTY YANG BARU */}
-                    <div className="flex items-center gap-2 mt-0.5">
+                    {/* <div className="flex items-center gap-2 mt-0.5">
                       <p className="text-[10px] text-gray-400">Qty: {item.quantity}</p>
                       {item.color && (
                         <>
@@ -2018,6 +2018,41 @@ export default function PaymentPage() {
                             title="Varian Warna"
                           ></div>
                         </>
+                      )}
+                    </div> */}
+
+                    {/* BAGIAN WARNA DAN QTY YANG BARU */}
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <p className="text-[10px] text-gray-400">Qty: {item.quantity}</p>
+                      {item.color && (
+                        (() => {
+                          let hex = item.color;
+                          let name = "";
+                          try {
+                            // Coba parse jika datanya berupa JSON String dari format baru
+                            const parsed = JSON.parse(item.color as string);
+                            if (parsed.hex) { 
+                              hex = parsed.hex; 
+                              name = parsed.name || ""; 
+                            }
+                          } catch {
+                            // Jika gagal parse, berarti datanya format jadul (hanya string hex)
+                          }
+
+                          return (
+                            <>
+                              <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                              <div className="flex items-center gap-1.5">
+                                <div 
+                                  className="w-3 h-3 border border-gray-300 rounded-full shadow-sm shrink-0" 
+                                  style={{ backgroundColor: hex }}
+                                  title={name || hex}
+                                ></div>
+                                {name && <span className="text-[10px] font-bold text-gray-500 uppercase">{name}</span>}
+                              </div>
+                            </>
+                          );
+                        })()
                       )}
                     </div>
 
