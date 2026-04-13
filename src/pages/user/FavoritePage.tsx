@@ -114,7 +114,7 @@ export default function FavoritePage() {
         </div>
 
         {/* LIST PRODUK FAVORIT */}
-        {wishlists.length > 0 ? (
+        {/* {wishlists.length > 0 ? (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {wishlists.map((item) => (
               <Link 
@@ -122,7 +122,6 @@ export default function FavoritePage() {
                 to={`/product/${item.product.id}`} 
                 className="relative flex flex-col overflow-hidden transition-all duration-300 bg-white border border-transparent group rounded-2xl hover:shadow-xl hover:border-gycora/20"
               >
-                {/* Product Image Area */}
                 <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden">
                   {item.product.image_url ? (
                     <img 
@@ -136,14 +135,12 @@ export default function FavoritePage() {
                     </div>
                   )}
                   
-                  {/* Badges */}
                   <div className="absolute flex flex-col gap-2 top-3 left-3">
                     <span className="px-2 py-1 text-xs font-bold text-gray-900 rounded-md shadow-sm bg-white/90 backdrop-blur-sm">
                       {item.product.category_name}
                     </span>
                   </div>
 
-                  {/* TOMBOL HAPUS FAVORIT (HEART ICON FILLED) */}
                   <button 
                     onClick={(e) => handleToggleWishlist(e, item.product.id)}
                     className="absolute z-20 flex items-center justify-center w-10 h-10 transition-transform bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-50 hover:scale-110"
@@ -159,7 +156,6 @@ export default function FavoritePage() {
                   </button>
                 </div>
 
-                {/* Product Info */}
                 <div className="flex flex-col flex-grow p-5">
                   <h3 className="mb-1 text-lg font-bold text-gray-900 transition-colors group-hover:text-gycora line-clamp-2">
                     {item.product.name}
@@ -172,6 +168,71 @@ export default function FavoritePage() {
                 </div>
               </Link>
             ))}
+          </div> */}
+          {/* LIST PRODUK FAVORIT */}
+        {wishlists.length > 0 ? (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {wishlists.map((item) => {
+              // PROTEKSI: Abaikan item jika produknya sudah dihapus dari database
+              if (!item.product) return null;
+
+              return (
+                <Link 
+                  key={item.id} 
+                  to={`/product/${item.product.id}`} 
+                  className="relative flex flex-col overflow-hidden transition-all duration-300 bg-white border border-transparent group rounded-2xl hover:shadow-xl hover:border-gycora/20"
+                >
+                  {/* Product Image Area */}
+                  <div className="relative aspect-[4/5] bg-gray-100 overflow-hidden">
+                    {item.product.image_url ? (
+                      <img 
+                        src={item.product.image_url} 
+                        alt={item.product.name} 
+                        className="object-cover object-center w-full h-full transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center w-full h-full font-medium text-gray-400">
+                        Belum ada gambar
+                      </div>
+                    )}
+                    
+                    {/* Badges */}
+                    <div className="absolute flex flex-col gap-2 top-3 left-3">
+                      <span className="px-2 py-1 text-xs font-bold text-gray-900 rounded-md shadow-sm bg-white/90 backdrop-blur-sm">
+                        {item.product.category_name}
+                      </span>
+                    </div>
+
+                    {/* TOMBOL HAPUS FAVORIT */}
+                    <button 
+                      onClick={(e) => handleToggleWishlist(e, item.product.id)}
+                      className="absolute z-20 flex items-center justify-center w-10 h-10 transition-transform bg-white rounded-full shadow-md top-3 right-3 hover:bg-gray-50 hover:scale-110"
+                      title="Hapus dari Favorit"
+                    >
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 24 24" 
+                        className="w-5 h-5 text-red-500 fill-current"
+                      >
+                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="flex flex-col flex-grow p-5">
+                    <h3 className="mb-1 text-lg font-bold text-gray-900 transition-colors group-hover:text-gycora line-clamp-2">
+                      {item.product.name}
+                    </h3>
+                    <div className="mt-auto">
+                      <p className="text-xl font-extrabold text-gycora">
+                        {formatRupiah(item.product.price)}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         ) : (
           !loading && (
