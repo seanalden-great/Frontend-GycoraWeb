@@ -51,6 +51,7 @@ import CoaPage from "./pages/admin/CoaPage";
 import TransferReceivePage from "./pages/admin/TransferReceivePage";
 import SupplierPage from "./pages/admin/SupplierPage";
 import InvoicePage from "./pages/admin/InvoicePage";
+import ScrollToTop from "./components/ScrollToTop";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -76,6 +77,10 @@ export default function App() {
   return (
     <CartProvider>
       <Router>
+        {/* LETAKKAN DI SINI! 
+        Setiap kali URL berubah, komponen ini akan mereset scroll ke atas 
+      */}
+      <ScrollToTop />
         <LayoutWrapper>
           <Routes>
             <Route path="/" element={<Home />} />
