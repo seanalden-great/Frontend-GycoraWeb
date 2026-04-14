@@ -143,7 +143,7 @@ import { BASE_URL } from "../../../config/api";
 interface Product {
   id: number;
   category_name: string;
-  sku: string;
+  // sku: string;
   name: string;
   price: number;
   stock: number;
@@ -342,7 +342,7 @@ export default function PublicCatalog() {
                   <h3 className="mb-1 text-lg font-bold text-gray-900 transition-colors group-hover:text-gycora line-clamp-2">
                     {product.name}
                   </h3>
-                  <p className="mb-4 font-mono text-sm text-gray-500">{product.sku}</p>
+                  {/* <p className="mb-4 font-mono text-sm text-gray-500">{product.sku}</p> */}
                   <div className="mt-auto">
                     <p className="text-xl font-extrabold text-gycora">
                       {formatRupiah(product.price)}
