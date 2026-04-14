@@ -1714,14 +1714,14 @@ export default function ProductDetail() {
                       </div>
                     )}
 
-                    <div className="flex items-center gap-4 mb-4">
+                    {/* <div className="flex items-center gap-4 mb-4">
                       <span className="text-sm font-semibold text-gray-700">Status Ketersediaan:</span>
                       {isOutOfStock ? (
                         <span className="px-3 py-1 text-sm font-bold text-red-600 rounded-full bg-red-50">Stok Habis</span>
                       ) : (
                         <span className="px-3 py-1 text-sm font-bold rounded-full text-emerald-600 bg-emerald-50">Tersedia ({product.stock} Unit)</span>
                       )}
-                    </div>
+                    </div> */}
 
                     <div className="flex flex-col gap-4 sm:flex-row">
                       <div className="flex items-center justify-between w-full bg-white border border-gray-300 rounded-xl sm:w-32 h-14">
