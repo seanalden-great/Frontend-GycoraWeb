@@ -834,11 +834,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config/api"; 
 
 // --- IMPORT 5 GAMBAR DARI LOKAL UNTUK SLIDER ---
-import slide1 from "../assets/hero_slide_1.jpg";
-import slide2 from "../assets/hero_slide_2.jpg";
-import slide3 from "../assets/hero_slide_3.jpg";
-import slide4 from "../assets/hero_slide_4.jpg";
-import slide5 from "../assets/hero_slide_5.jpg"; 
+import slide1 from "/landing_page_images/hero_slide_1.jpg";
+import slide2 from "/landing_page_images/assets/hero_slide_2.jpg";
+import slide3 from "/landing_page_images/assets/hero_slide_3.jpg";
+import slide4 from "/landing_page_images/assets/hero_slide_4.jpg";
+import slide5 from "/landing_page_images/assets/hero_slide_5.jpg"; 
 
 const heroSlides = [
   { id: 1, image: slide1, alt: "Gycora Premium Hair Care 1" },
