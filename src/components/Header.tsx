@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useEffect, useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
@@ -346,25 +347,227 @@
 //   );
 // }
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import Swal from "sweetalert2";
+// import { useCart } from "../context/CartContext"; 
+// import logoGycora from "../assets/gycora_logo.png"; // <-- Import Logo Gycora
+
+// export default function Header() {
+//   const navigate = useNavigate();
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const [userData, setUserData] = useState<any>(null);
+
+//   // const { cartItems, cartTotalItems, cartSubtotal, isCartOpen, setIsCartOpen, fetchCart } = useCart();
+//   const { cartTotalItems } = useCart();
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("user_token");
+//     const storedUser = localStorage.getItem("user_data");
+//     if (token && storedUser) {
+//       // eslint-disable-next-line react-hooks/set-state-in-effect
+//       setUserData(JSON.parse(storedUser));
+//     }
+//   }, []);
+
+//   const handleLogout = () => {
+//     Swal.fire({
+//       title: "Keluar?", icon: "warning", showCancelButton: true, confirmButtonColor: "#059669", cancelButtonColor: "#d33", confirmButtonText: "Ya, Keluar"
+//     }).then((result) => {
+//       if (result.isConfirmed) {
+//         localStorage.removeItem("user_token");
+//         localStorage.removeItem("user_data");
+//         setUserData(null);
+//         navigate("/");
+//         Swal.fire({ title: "Berhasil Keluar", icon: "success", timer: 1500, showConfirmButton: false });
+//       }
+//     });
+//   };
+
+//   // const handleRemoveItem = async (id: number) => {
+//   //   // Nanti sesuaikan URL API dengan Laravel (misal port 8000)
+//   //   const token = localStorage.getItem("user_token");
+//   //   await fetch(`http://localhost:8000/api/carts/${id}`, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
+//   //   fetchCart(); 
+//   // };
+
+//   // const handleUpdateQty = async (id: number, newQty: number) => {
+//   //   if (newQty < 1) return;
+//   //   const token = localStorage.getItem("user_token");
+//   //   const res = await fetch(`http://localhost:8000/api/carts/${id}`, {
+//   //     method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ quantity: newQty }),
+//   //   });
+//   //   if (!res.ok) Swal.fire("Peringatan", "Stok tidak mencukupi", "warning");
+//   //   fetchCart(); 
+//   // };
+
+//   // const formatRupiah = (angka: number) => {
+//   //   return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(angka);
+//   // };
+
+//   // --- FUNGSI BARU UNTUK CEK LOGIN SEBELUM KE HALAMAN ORDER ---
+//   // const handleOrderNavigation = () => {
+//   //   const token = localStorage.getItem("user_token");
+    
+//   //   if (!token) {
+//   //     Swal.fire({
+//   //       title: "Login Diperlukan",
+//   //       text: "Silakan masuk ke akun Anda untuk melihat riwayat pesanan.",
+//   //       icon: "info",
+//   //       showCancelButton: true,
+//   //       confirmButtonColor: "#059669",
+//   //       cancelButtonColor: "#d33",
+//   //       confirmButtonText: "Ke Halaman Login",
+//   //       cancelButtonText: "Batal"
+//   //     }).then((result) => {
+//   //       if (result.isConfirmed) {
+//   //         navigate("/login");
+//   //       }
+//   //     });
+//   //   } else {
+//   //     navigate("/orders");
+//   //   }
+//   // };
+
+//   return (
+//     <>
+//       <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
+//         <div className="flex items-center justify-between h-20 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+//           <div className="flex items-center flex-1"></div>
+
+//           {/* MENGGANTI TEKS DENGAN LOGO GAMBAR */}
+//           <div className="flex items-center justify-center flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
+//             <img 
+//               src={logoGycora} 
+//               alt="Gycora Logo" 
+//               className="object-contain h-8 md:h-10" 
+//             />
+//           </div>
+
+//           <div className="flex items-center justify-end flex-1 gap-5">
+//             {userData ? (
+//               <div className="flex items-center gap-4">
+//                 <Link to="/profile" className="flex items-center gap-2 cursor-pointer group">
+//                   <div className="flex items-center justify-center w-8 h-8 text-sm font-bold transition-colors rounded-full bg-gycora-light text-gycora-dark group-hover:bg-gycora group-hover:text-white">
+//                     {userData.first_name.charAt(0)}
+//                   </div>
+//                   <span className="hidden text-sm font-semibold text-gray-800 transition-colors md:block group-hover:text-gycora">
+//                     Hi, {userData.first_name}
+//                   </span>
+//                 </Link>
+//                 <div className="hidden w-px h-5 bg-gray-300 md:block"></div>
+//                 <button onClick={handleLogout} className="text-sm font-medium text-gray-500 transition-colors hover:text-red-600">Logout</button>
+//               </div>
+//             ) : (
+//               <Link to="/login" className="text-gray-600 transition-colors hover:text-gycora">Login</Link>
+//             )}
+
+//             <button onClick={() => navigate("/cart")} className="relative text-gray-600 transition-colors hover:text-gycora">
+//               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+//               {cartTotalItems > 0 && (
+//                 <span className="absolute -top-1.5 -right-1.5 bg-gycora text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+//                   {cartTotalItems}
+//                 </span>
+//               )}
+//             </button>
+//           </div>
+//         </div>
+
+//         <div className="hidden px-4 mx-auto border-t border-gray-100 max-w-7xl sm:px-6 lg:px-8 md:block">
+//           <nav className="flex items-center justify-center h-12 space-x-10 text-sm font-semibold text-gray-700">
+//              <Link to="/" className="transition-colors hover:text-gycora">Home</Link>
+//              <Link to="/products" className="transition-colors hover:text-gycora">Shop All</Link>
+//              <Link to="/consult" className="transition-colors hover:text-gycora">Consult With Us</Link>
+
+//              {/* --- TAUTAN ORDER YANG SUDAH DIPERBARUI --- */}
+//              {/* <button onClick={handleOrderNavigation} className="font-semibold transition-colors hover:text-gycora">
+//                Order
+//              </button> */}
+//           </nav>
+//         </div>
+//       </header>
+
+//       {/* SLIDE-OUT CART */}
+//       {/* <div className={`fixed inset-0 z-50 transition-opacity duration-300 ${isCartOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+//         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsCartOpen(false)}></div>
+//         <div className={`absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-500 ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
+//           <div className="flex items-center justify-between p-6 border-b border-gray-100">
+//             <h2 className="text-xl font-extrabold text-gray-900">Keranjang Belanja</h2>
+//             <button onClick={() => setIsCartOpen(false)} className="p-2 text-gray-400 transition-colors hover:text-gray-900">Close</button>
+//           </div>
+          
+//           <div className="flex-1 p-6 space-y-6 overflow-y-auto">
+//             {cartItems.length === 0 ? (
+//               <p className="mt-10 text-center text-gray-500">Keranjang Anda masih kosong.</p>
+//             ) : (
+//               cartItems.map((item) => (
+//                 <div key={item.id} className="flex gap-4 pb-4 border-b">
+//                   <img src={item.product.image_url} alt={item.product.name} className="object-cover w-16 h-16 rounded" />
+//                   <div className="flex-1">
+//                     <p className="text-sm font-bold">{item.product.name}</p>
+//                     {item.color && (
+//                       <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-0.5">
+//                         Warna: {item.color}
+//                       </p>
+//                     )}
+//                     <p className="text-sm font-bold text-gycora mt-0.5">{formatRupiah(item.product.price)}</p>
+//                     <div className="flex gap-2 mt-2">
+//                        <button onClick={() => handleUpdateQty(item.id, item.quantity - 1)}>-</button>
+//                        <span>{item.quantity}</span>
+//                        <button onClick={() => handleUpdateQty(item.id, item.quantity + 1)}>+</button>
+//                        <button onClick={() => handleRemoveItem(item.id)} className="ml-auto text-xs text-red-500">Hapus</button>
+//                     </div>
+//                   </div>
+//                 </div>
+//               ))
+//             )}
+//           </div>
+
+//           {cartItems.length > 0 && (
+//             <div className="p-6 border-t border-gray-100 bg-gray-50">
+//               <div className="flex justify-between mb-4 font-bold">
+//                 <p>Subtotal</p><p>{formatRupiah(cartSubtotal)}</p>
+//               </div>
+//               <button onClick={() => { setIsCartOpen(false); navigate("/checkout"); }} className="w-full py-3 font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-800">
+//                 Lanjut ke Checkout
+//               </button>
+//             </div>
+//           )}
+//         </div>
+//       </div> */}
+//     </>
+//   );
+// }
+
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useCart } from "../context/CartContext"; 
-import logoGycora from "../assets/gycora_logo.png"; // <-- Import Logo Gycora
+import logoGycora from "../assets/gycora_logo.png";
+import { BASE_URL } from "../config/api"; // Pastikan path ini benar
 
 export default function Header() {
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userData, setUserData] = useState<any>(null);
-
-  // const { cartItems, cartTotalItems, cartSubtotal, isCartOpen, setIsCartOpen, fetchCart } = useCart();
   const { cartTotalItems } = useCart();
+
+  // --- STATE UNTUK GLOBAL SEARCH MODAL ---
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [timeFilter, setTimeFilter] = useState("all"); // 'all', '7d', '30d', '90d'
+  const [isSearching, setIsSearching] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [searchResults, setSearchResults] = useState<any>({ products: [], transactions: [], carts: [] });
+
+  // Ref untuk debounce timer
+  // const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem("user_token");
     const storedUser = localStorage.getItem("user_data");
     if (token && storedUser) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUserData(JSON.parse(storedUser));
     }
   }, []);
@@ -383,50 +586,85 @@ export default function Header() {
     });
   };
 
-  // const handleRemoveItem = async (id: number) => {
-  //   // Nanti sesuaikan URL API dengan Laravel (misal port 8000)
-  //   const token = localStorage.getItem("user_token");
-  //   await fetch(`http://localhost:8000/api/carts/${id}`, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
-  //   fetchCart(); 
-  // };
+  const handleOrderNavigation = () => {
+    const token = localStorage.getItem("user_token");
+    if (!token) {
+      Swal.fire({
+        title: "Login Diperlukan",
+        text: "Silakan masuk ke akun Anda untuk melihat riwayat pesanan.",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#059669",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ke Halaman Login",
+        cancelButtonText: "Batal"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    } else {
+      navigate("/orders");
+    }
+  };
 
-  // const handleUpdateQty = async (id: number, newQty: number) => {
-  //   if (newQty < 1) return;
-  //   const token = localStorage.getItem("user_token");
-  //   const res = await fetch(`http://localhost:8000/api/carts/${id}`, {
-  //     method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ quantity: newQty }),
-  //   });
-  //   if (!res.ok) Swal.fire("Peringatan", "Stok tidak mencukupi", "warning");
-  //   fetchCart(); 
-  // };
+  // --- EFEK PENCARIAN DENGAN DEBOUNCE ---
+  useEffect(() => {
+    if (!isSearchOpen) return;
 
-  // const formatRupiah = (angka: number) => {
-  //   return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(angka);
-  // };
+    if (searchQuery.trim().length === 0) {
+      setSearchResults({ products: [], transactions: [], carts: [] });
+      setIsSearching(false);
+      return;
+    }
 
-  // --- FUNGSI BARU UNTUK CEK LOGIN SEBELUM KE HALAMAN ORDER ---
-  // const handleOrderNavigation = () => {
-  //   const token = localStorage.getItem("user_token");
-    
-  //   if (!token) {
-  //     Swal.fire({
-  //       title: "Login Diperlukan",
-  //       text: "Silakan masuk ke akun Anda untuk melihat riwayat pesanan.",
-  //       icon: "info",
-  //       showCancelButton: true,
-  //       confirmButtonColor: "#059669",
-  //       cancelButtonColor: "#d33",
-  //       confirmButtonText: "Ke Halaman Login",
-  //       cancelButtonText: "Batal"
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         navigate("/login");
-  //       }
-  //     });
-  //   } else {
-  //     navigate("/orders");
-  //   }
-  // };
+    setIsSearching(true);
+
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    // Debounce 500ms agar tidak spam request ke server
+    searchTimeoutRef.current = setTimeout(async () => {
+      try {
+        const token = localStorage.getItem("user_token");
+        // Panggilan ke backend agregator (Pastikan Anda membuat endpoint ini di Laravel!)
+        const res = await fetch(`${BASE_URL}/api/search?q=${encodeURIComponent(searchQuery)}&time=${timeFilter}`, {
+          headers: {
+            "Accept": "application/json",
+            ...(token && { "Authorization": `Bearer ${token}` })
+          }
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          // Asumsi struktur response: { products: [...], transactions: [...], carts: [...] }
+          setSearchResults(data);
+        } else {
+          setSearchResults({ products: [], transactions: [], carts: [] });
+        }
+      } catch (error) {
+        console.error("Global search error:", error);
+        setSearchResults({ products: [], transactions: [], carts: [] });
+      } finally {
+        setIsSearching(false);
+      }
+    }, 500);
+
+    return () => {
+      if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
+    };
+  }, [searchQuery, timeFilter, isSearchOpen]);
+
+  const closeSearchModal = () => {
+    setIsSearchOpen(false);
+    setSearchQuery("");
+    setSearchResults({ products: [], transactions: [], carts: [] });
+  };
+
+  const formatRupiah = (angka: number) => {
+    return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(angka || 0);
+  };
 
   return (
     <>
@@ -434,7 +672,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex items-center flex-1"></div>
 
-          {/* MENGGANTI TEKS DENGAN LOGO GAMBAR */}
+          {/* LOGO */}
           <div className="flex items-center justify-center flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
             <img 
               src={logoGycora} 
@@ -443,7 +681,7 @@ export default function Header() {
             />
           </div>
 
-          <div className="flex items-center justify-end flex-1 gap-5">
+          <div className="flex items-center justify-end flex-1 gap-4 md:gap-5">
             {userData ? (
               <div className="flex items-center gap-4">
                 <Link to="/profile" className="flex items-center gap-2 cursor-pointer group">
@@ -455,16 +693,26 @@ export default function Header() {
                   </span>
                 </Link>
                 <div className="hidden w-px h-5 bg-gray-300 md:block"></div>
-                <button onClick={handleLogout} className="text-sm font-medium text-gray-500 transition-colors hover:text-red-600">Logout</button>
+                <button onClick={handleLogout} className="hidden text-sm font-medium text-gray-500 transition-colors md:block hover:text-red-600">Logout</button>
               </div>
             ) : (
-              <Link to="/login" className="text-gray-600 transition-colors hover:text-gycora">Login</Link>
+              <Link to="/login" className="text-sm font-medium text-gray-600 transition-colors hover:text-gycora">Login</Link>
             )}
 
-            <button onClick={() => navigate("/cart")} className="relative text-gray-600 transition-colors hover:text-gycora">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            {/* IKON PENCARIAN (GLOBAL SEARCH) */}
+            <button onClick={() => setIsSearchOpen(true)} className="relative p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora">
+              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+
+            {/* IKON KERANJANG */}
+            <button onClick={() => navigate("/cart")} className="relative p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora">
+              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+              </svg>
               {cartTotalItems > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-gycora text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+                <span className="absolute top-0 right-0 bg-gycora text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
                   {cartTotalItems}
                 </span>
               )}
@@ -477,63 +725,154 @@ export default function Header() {
              <Link to="/" className="transition-colors hover:text-gycora">Home</Link>
              <Link to="/products" className="transition-colors hover:text-gycora">Shop All</Link>
              <Link to="/consult" className="transition-colors hover:text-gycora">Consult With Us</Link>
-
-             {/* --- TAUTAN ORDER YANG SUDAH DIPERBARUI --- */}
-             {/* <button onClick={handleOrderNavigation} className="font-semibold transition-colors hover:text-gycora">
+             <button onClick={handleOrderNavigation} className="font-semibold transition-colors hover:text-gycora">
                Order
-             </button> */}
+             </button>
           </nav>
         </div>
       </header>
 
-      {/* SLIDE-OUT CART */}
-      {/* <div className={`fixed inset-0 z-50 transition-opacity duration-300 ${isCartOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsCartOpen(false)}></div>
-        <div className={`absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col transform transition-transform duration-500 ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
-          <div className="flex items-center justify-between p-6 border-b border-gray-100">
-            <h2 className="text-xl font-extrabold text-gray-900">Keranjang Belanja</h2>
-            <button onClick={() => setIsCartOpen(false)} className="p-2 text-gray-400 transition-colors hover:text-gray-900">Close</button>
-          </div>
+      {/* =====================================================================
+          GLOBAL SEARCH MODAL
+      ===================================================================== */}
+      {isSearchOpen && (
+        <div className="fixed inset-0 z-[100] flex justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+          {/* Area luar klik untuk menutup modal */}
+          <div className="absolute inset-0" onClick={closeSearchModal}></div>
           
-          <div className="flex-1 p-6 space-y-6 overflow-y-auto">
-            {cartItems.length === 0 ? (
-              <p className="mt-10 text-center text-gray-500">Keranjang Anda masih kosong.</p>
-            ) : (
-              cartItems.map((item) => (
-                <div key={item.id} className="flex gap-4 pb-4 border-b">
-                  <img src={item.product.image_url} alt={item.product.name} className="object-cover w-16 h-16 rounded" />
-                  <div className="flex-1">
-                    <p className="text-sm font-bold">{item.product.name}</p>
-                    {item.color && (
-                      <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-0.5">
-                        Warna: {item.color}
-                      </p>
-                    )}
-                    <p className="text-sm font-bold text-gycora mt-0.5">{formatRupiah(item.product.price)}</p>
-                    <div className="flex gap-2 mt-2">
-                       <button onClick={() => handleUpdateQty(item.id, item.quantity - 1)}>-</button>
-                       <span>{item.quantity}</span>
-                       <button onClick={() => handleUpdateQty(item.id, item.quantity + 1)}>+</button>
-                       <button onClick={() => handleRemoveItem(item.id)} className="ml-auto text-xs text-red-500">Hapus</button>
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-
-          {cartItems.length > 0 && (
-            <div className="p-6 border-t border-gray-100 bg-gray-50">
-              <div className="flex justify-between mb-4 font-bold">
-                <p>Subtotal</p><p>{formatRupiah(cartSubtotal)}</p>
+          <div className="relative flex flex-col w-full max-w-3xl mt-16 md:mt-24 overflow-hidden bg-white shadow-2xl h-[85vh] md:h-[75vh] rounded-t-3xl md:rounded-3xl animate-fade-in-up">
+            
+            {/* Header Pencarian */}
+            <div className="flex flex-col p-4 border-b border-gray-100 md:p-6 bg-gray-50/50">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-bold text-gray-900">Pencarian Universal</h2>
+                <button onClick={closeSearchModal} className="p-1 text-gray-400 transition-colors bg-white border border-gray-200 rounded-full shadow-sm hover:text-gray-900 hover:bg-gray-100">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
               </div>
-              <button onClick={() => { setIsCartOpen(false); navigate("/checkout"); }} className="w-full py-3 font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-800">
-                Lanjut ke Checkout
-              </button>
+
+              {/* Input Pencarian */}
+              <div className="relative">
+                <svg className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input 
+                  type="text" 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Cari produk, No. Pesanan (INV-...), atau status..." 
+                  className="w-full py-3 pl-12 pr-4 text-sm font-medium transition-all bg-white border border-gray-300 shadow-sm outline-none rounded-xl focus:ring-2 focus:ring-gycora focus:border-transparent"
+                  autoFocus
+                />
+              </div>
+
+              {/* Filter Waktu (Pills) */}
+              <div className="flex gap-2 mt-4 overflow-x-auto no-scrollbar">
+                {[
+                  { id: 'all', label: 'Semua Waktu' },
+                  { id: '7d', label: '7 Hari Terakhir' },
+                  { id: '30d', label: '30 Hari Terakhir' },
+                  { id: '90d', label: '3 Bulan Terakhir' },
+                ].map((filter) => (
+                  <button 
+                    key={filter.id}
+                    onClick={() => setTimeFilter(filter.id)}
+                    className={`shrink-0 px-4 py-1.5 text-xs font-bold rounded-full transition-all border ${timeFilter === filter.id ? 'bg-gycora text-white border-gycora shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-100'}`}
+                  >
+                    {filter.label}
+                  </button>
+                ))}
+              </div>
             </div>
-          )}
+
+            {/* Area Hasil Pencarian */}
+            <div className="flex-1 p-4 overflow-y-auto bg-white md:p-6 custom-scrollbar">
+              {searchQuery.trim().length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full text-gray-400 opacity-60">
+                  <svg className="w-16 h-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-sm font-medium">Ketik kata kunci untuk memulai pencarian.</p>
+                </div>
+              ) : isSearching ? (
+                <div className="flex flex-col items-center justify-center h-full gap-3 text-gycora">
+                  <div className="w-8 h-8 border-4 rounded-full border-emerald-100 border-t-gycora animate-spin"></div>
+                  <p className="text-xs font-bold tracking-widest uppercase animate-pulse">Mencari data...</p>
+                </div>
+              ) : (
+                <div className="space-y-8 animate-fade-in">
+                  
+                  {/* --- HASIL PRODUK --- */}
+                  {searchResults.products && searchResults.products.length > 0 && (
+                    <div className="space-y-3">
+                      <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Produk Katalog</h3>
+                      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                        {searchResults.products.map((product: any) => (
+                          <div 
+                            key={`prod-${product.id}`}
+                            onClick={() => { closeSearchModal(); navigate(`/product/${product.id}`); }}
+                            className="flex items-center gap-3 p-3 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
+                          >
+                            <img src={product.image_url} alt={product.name} className="object-cover w-12 h-12 rounded-lg bg-gray-50 shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-bold text-gray-900 truncate group-hover:text-gycora">{product.name}</p>
+                              <p className="text-xs text-gray-500 font-mono mt-0.5">{product.sku}</p>
+                            </div>
+                            <span className="text-sm font-black text-gycora shrink-0">{formatRupiah(product.price)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* --- HASIL TRANSAKSI (ORDER) --- */}
+                  {searchResults.transactions && searchResults.transactions.length > 0 && (
+                    <div className="space-y-3">
+                      <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Riwayat Transaksi</h3>
+                      <div className="flex flex-col gap-3">
+                        {searchResults.transactions.map((trx: any) => (
+                          <div 
+                            key={`trx-${trx.id}`}
+                            onClick={() => { closeSearchModal(); navigate(`/orders`); }}
+                            className="flex items-center justify-between p-4 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
+                          >
+                            <div className="flex items-center gap-4">
+                              <div className="flex items-center justify-center w-10 h-10 text-gray-500 bg-gray-100 rounded-full shadow-sm group-hover:bg-white group-hover:text-gycora">
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                              </div>
+                              <div>
+                                <p className="font-mono text-sm font-bold text-gray-900 group-hover:text-gycora">{trx.order_id}</p>
+                                <p className="mt-1 text-xs text-gray-500">{new Date(trx.created_at).toLocaleDateString('id-ID')}</p>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-sm font-black text-gray-900">{formatRupiah(trx.total_amount)}</p>
+                              <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-gray-100 text-gray-600">{trx.status}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* KOSONG/TIDAK ADA HASIL */}
+                  {!isSearching && 
+                   searchResults.products?.length === 0 && 
+                   searchResults.transactions?.length === 0 && 
+                   searchResults.carts?.length === 0 && (
+                    <div className="flex flex-col items-center justify-center py-10 text-center">
+                      <p className="text-lg font-bold text-gray-900">Oops, tidak ditemukan!</p>
+                      <p className="max-w-sm mt-2 text-sm text-gray-500">Kami tidak dapat menemukan hasil untuk "{searchQuery}" dengan rentang waktu yang Anda pilih.</p>
+                    </div>
+                  )}
+
+                </div>
+              )}
+            </div>
+
+          </div>
         </div>
-      </div> */}
+      )}
     </>
   );
 }
