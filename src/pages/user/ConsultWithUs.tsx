@@ -3,41 +3,46 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 // ============================================================================
-// DUMMY DATA (DIADAPTASI DARI REFERENSI UNTUK TAMPILAN PROFESIONAL)
+// DUMMY DATA (DIPERBARUI DENGAN ASET INTERNAL/BEBAS ROYALTI)
 // ============================================================================
+
+// Ikon SVG sederhana untuk masing-masing kategori
+const IconAcne = () => <svg className="w-8 h-8 text-gycora" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+const IconHair = () => <svg className="w-8 h-8 text-gycora" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>; // Representasi sisir/arah pertumbuhan
+const IconSkin = () => <svg className="w-8 h-8 text-gycora" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>; // Sparkles untuk kulit kusam/cerah
+const IconBeard = () => <svg className="w-8 h-8 text-gycora" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>; // Representasi wajah pria
+
 const consultationCategories = [
-  { id: 1, title: "Jerawat Remaja", icon: "https://assets-production.diricare.com/production/65a35c33-86df-4c18-b02d-3663e804cc46.png" },
-  { id: 2, title: "Jerawat Dewasa", icon: "https://assets-production.diricare.com/production/37fced7d-dc89-41e9-9e3b-4fd612da4a78.png" },
-  { id: 3, title: "Kebotakan", icon: "https://assets-production.diricare.com/production/d2f33574-2362-4f88-92fa-451582c3cfe4.png" },
-  { id: 4, title: "Rambut Rontok", icon: "https://assets-production.diricare.com/production/d7b27ea7-2d1d-4531-8eb3-664d36409ecc.png" },
-  { id: 5, title: "Penumbuh Brewok", icon: "https://assets-production.diricare.com/production/110b06cb-917b-40b3-b8f8-f54cf5833a45.png" },
-  { id: 6, title: "Kulit Kusam", icon: "https://assets-production.diricare.com/production/7f2da6b6-7b47-4cd1-8455-f6025590cdab.png" },
-  { id: 7, title: "Bekas Jerawat", icon: "https://assets-production.diricare.com/production/4a069c0e-d641-4e56-9331-600198bc3b6e.png" },
-  { id: 8, title: "Ketombe", icon: "https://assets-production.diricare.com/production/6c9a07c6-1ea5-4df9-afd5-88c18fe8945f.png" },
+  { id: 1, title: "Jerawat Remaja", icon: <IconAcne /> },
+  { id: 2, title: "Jerawat Dewasa", icon: <IconAcne /> },
+  { id: 3, title: "Kebotakan", icon: <IconHair /> },
+  { id: 4, title: "Rambut Rontok", icon: <IconHair /> },
+  { id: 5, title: "Penumbuh Brewok", icon: <IconBeard /> },
+  { id: 6, title: "Kulit Kusam", icon: <IconSkin /> },
+  { id: 7, title: "Bekas Jerawat", icon: <IconAcne /> },
+  { id: 8, title: "Ketombe", icon: <IconHair /> },
 ];
 
 const clinicTreatments = [
-  { id: 1, title: "Gycora Facial Acne Repair", price: "Rp235.000", image: "https://s3.ap-southeast-3.amazonaws.com/assets-production.diricare.com/production/1f3724b1-5c09-4ebd-af40-456365391da7.png" },
-  { id: 2, title: "Promo Pico Laser 499", price: "Rp499.000", image: "https://s3.ap-southeast-3.amazonaws.com/assets-production.diricare.com/production/1ed74581-3db9-4a13-8684-c60868affef9.png" },
-  { id: 3, title: "My First Glow", price: "Rp499.000", image: "https://s3.ap-southeast-3.amazonaws.com/assets-production.diricare.com/production/4202b889-06d2-4a36-9006-f44e3499291e.png" },
-  { id: 4, title: "Glass Skin Facial", price: "Rp699.000", image: "https://s3.ap-southeast-3.amazonaws.com/assets-production.diricare.com/production/e361a908-6769-456a-b3b7-edb2df14b6e2.png" },
-  { id: 5, title: "Hair Growth Express", price: "Rp299.000", image: "https://s3.ap-southeast-3.amazonaws.com/assets-production.diricare.com/production/15557fde-9acf-4413-97fc-1a2f9140600e.png" },
-  { id: 6, title: "Laser A+ Scalp", price: "Rp1.000.000", image: "https://s3.ap-southeast-3.amazonaws.com/assets-production.diricare.com/production/b19942b8-2a19-404a-bd5b-f3c7d0b2cea4.png" },
+  { id: 1, title: "Gycora Facial Acne Repair", price: "Rp235.000", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+  { id: 2, title: "Promo Pico Laser 499", price: "Rp499.000", image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+  { id: 3, title: "My First Glow", price: "Rp499.000", image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+  { id: 4, title: "Glass Skin Facial", price: "Rp699.000", image: "https://images.unsplash.com/photo-1598440947619-2ce6598c4e1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+  { id: 5, title: "Hair Growth Express", price: "Rp299.000", image: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
+  { id: 6, title: "Laser A+ Scalp", price: "Rp1.000.000", image: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" },
 ];
 
 const otcProducts = [
-  { id: 1, title: "Gycora Micellar Water 60 ml", price: "Rp89.000", discPrice: "Rp21.500", image: "https://assets-production.diricare.com/production/contents/a48b5825-4317-403b-87a3-25ac7065b99c.jpeg" },
-  { id: 2, title: "BoostME Daily Serum 15 ml", price: "Rp135.000", discPrice: "Rp90.000", image: "https://assets-production.diricare.com/production/contents/f7a574b6-8d93-4550-941e-1a58e6a161c1.jpeg" },
-  { id: 3, title: "RefineME Acne Serum 15 ml", price: "Rp139.000", discPrice: "Rp30.000", image: "https://assets-production.diricare.com/production/contents/30506867-c6ad-4fef-a396-73af8d5d49ae.png" },
-  { id: 4, title: "PurifyME Gentle Cleanser", price: "Rp85.000", discPrice: "Rp65.000", image: "https://assets-production.diricare.com/production/contents/efb5ad38-bcbd-4c7f-9b62-92403a242faa.jpeg" },
+  { id: 1, title: "Gycora Micellar Water 60 ml", price: "Rp89.000", discPrice: "Rp21.500", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
+  { id: 2, title: "BoostME Daily Serum 15 ml", price: "Rp135.000", discPrice: "Rp90.000", image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
+  { id: 3, title: "RefineME Acne Serum 15 ml", price: "Rp139.000", discPrice: "Rp30.000", image: "https://images.unsplash.com/photo-1615397323218-c2bda069f9d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
+  { id: 4, title: "PurifyME Gentle Cleanser", price: "Rp85.000", discPrice: "Rp65.000", image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" },
 ];
 
+// Placeholder untuk logo media
 const mediaLogos = [
-  "https://assets-production.diricare.com/production/master-landing-page/techinasia.png",
-  "https://assets-production.diricare.com/production/master-landing-page/tribun-news.png",
-  "https://assets-production.diricare.com/production/master-landing-page/katadata.png",
-  "https://assets-production.diricare.com/production/master-landing-page/kontan.png",
-  "https://assets-production.diricare.com/production/master-landing-page/kompas.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Tech_in_Asia_logo.svg/512px-Tech_in_Asia_logo.svg.png",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Kompas_Logo.svg/512px-Kompas_Logo.svg.png",
 ];
 
 const faqs = [
@@ -50,9 +55,6 @@ const faqs = [
 export default function ConsultWithUs() {
   const navigate = useNavigate();
   
-  // SOLUSI: LAZY INITIALIZATION
-  // Kita mengambil data dari localStorage saat pertama kali state dibuat,
-  // sehingga kita tidak perlu memanggil setState di dalam useEffect.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userData] = useState<any>(() => {
     const storedUser = localStorage.getItem("user_data");
@@ -94,7 +96,6 @@ export default function ConsultWithUs() {
       
       {/* ================= HERO SECTION ================= */}
       <div className="relative bg-[linear-gradient(180deg,#0072CD_0%,#009CDE_100%)] md:bg-[linear-gradient(181deg,#0072CD_0.75%,#58A8DD_49.94%,#59CBE8_99.12%)] overflow-hidden">
-        {/* Latar Belakang Abstrak Halus */}
         <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl opacity-20"></div>
         <div className="relative flex flex-col items-center gap-12 px-4 py-16 mx-auto text-center max-w-7xl sm:px-6 lg:px-8 lg:py-24 md:text-left md:flex-row">
           <div className="flex-1 space-y-6">
@@ -114,8 +115,16 @@ export default function ConsultWithUs() {
               </button>
             </div>
           </div>
-          <div className="justify-end flex-1 hidden md:flex">
-            <img src="https://assets-production.diricare.com/production/master-landing-page/clinical-team.png" alt="Doctor Team" className="w-full max-w-lg drop-shadow-2xl animate-fade-in-up" />
+          
+          <div className="relative justify-end flex-1 hidden md:flex">
+             {/* Lingkaran dekoratif di belakang foto dokter */}
+             <div className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 w-80 h-80 bg-white/20 blur-2xl"></div>
+             {/* Foto Dokter dari Unsplash */}
+             <img 
+               src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+               alt="Gycora Dermatologist" 
+               className="relative z-10 w-full max-w-md rounded-[2rem] shadow-2xl border-4 border-white/50 animate-fade-in-up object-cover h-[450px]" 
+             />
           </div>
         </div>
       </div>
@@ -194,8 +203,8 @@ export default function ConsultWithUs() {
               onClick={() => handleStartConsultation(category.title)}
               className="relative flex flex-col items-center w-40 p-4 transition-all duration-300 bg-white border border-gray-200 cursor-pointer snap-center shrink-0 md:w-auto md:p-6 rounded-2xl group hover:border-gycora hover:shadow-xl hover:-translate-y-1"
             >
-              <div className="flex items-center justify-center w-20 h-20 mb-4 transition-colors border border-gray-100 rounded-full bg-gray-50 group-hover:bg-emerald-50">
-                <img src={category.icon} alt={category.title} className="object-contain transition-transform duration-300 w-14 h-14 group-hover:scale-110" />
+              <div className="flex items-center justify-center w-16 h-16 mb-4 transition-colors border border-gray-100 rounded-full bg-gray-50 group-hover:bg-emerald-50">
+                {category.icon}
               </div>
               <h3 className="text-sm font-bold text-center text-gray-900 group-hover:text-gycora">
                 {category.title}
