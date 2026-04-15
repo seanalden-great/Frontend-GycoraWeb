@@ -53,6 +53,7 @@ import SupplierPage from "./pages/admin/SupplierPage";
 import InvoicePage from "./pages/admin/InvoicePage";
 import ScrollToTop from "./components/ScrollToTop";
 import WhatsAppButton from "./components/WhatsAppButton";
+import ConsultWithUs from "./pages/user/ConsultWithUs";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -112,6 +113,7 @@ export default function App() {
             <Route path="/payment-success" element={<PaymentSuccessPage />} />
             <Route path="/tracking/:id" element={<TrackingPage />} />
             <Route path="/favorites" element={<FavoritePage />} />
+            <Route path="/consult" element={<ConsultWithUs />} />
             {/* Tambahkan Route lainnya (profile, checkout, dll) di sini nanti */}
             {/* --- RUTE KHUSUS ADMIN --- */}
             {/* Semua rute admin dibungkus manual menggunakan element AdminLayout */}

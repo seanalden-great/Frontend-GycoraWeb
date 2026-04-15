@@ -476,7 +476,7 @@ export default function Header() {
           <nav className="flex items-center justify-center h-12 space-x-10 text-sm font-semibold text-gray-700">
              <Link to="/" className="transition-colors hover:text-gycora">Home</Link>
              <Link to="/products" className="transition-colors hover:text-gycora">Shop All</Link>
-             <Link to="/contacts" className="transition-colors hover:text-gycora">Consult With Us</Link>
+             <Link to="/consult" className="transition-colors hover:text-gycora">Consult With Us</Link>
 
              {/* --- TAUTAN ORDER YANG SUDAH DIPERBARUI --- */}
              {/* <button onClick={handleOrderNavigation} className="font-semibold transition-colors hover:text-gycora">
