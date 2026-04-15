@@ -54,6 +54,7 @@ import InvoicePage from "./pages/admin/InvoicePage";
 import ScrollToTop from "./components/ScrollToTop";
 import WhatsAppButton from "./components/WhatsAppButton";
 import ConsultWithUs from "./pages/user/ConsultWithUs";
+import AdminTreatments from "./pages/admin/AdminTreatments";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -86,7 +87,7 @@ export default function App() {
         {/* LETAKKAN DI SINI! 
         Setiap kali URL berubah, komponen ini akan mereset scroll ke atas 
       */}
-      <ScrollToTop />
+        <ScrollToTop />
         <LayoutWrapper>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -292,6 +293,14 @@ export default function App() {
               element={
                 <AdminLayout>
                   <InvoicePage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/treatments"
+              element={
+                <AdminLayout>
+                  <AdminTreatments />
                 </AdminLayout>
               }
             />
