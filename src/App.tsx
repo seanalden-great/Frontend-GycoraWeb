@@ -52,6 +52,7 @@ import TransferReceivePage from "./pages/admin/TransferReceivePage";
 import SupplierPage from "./pages/admin/SupplierPage";
 import InvoicePage from "./pages/admin/InvoicePage";
 import ScrollToTop from "./components/ScrollToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -69,6 +70,10 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
       {shouldShowHeaderFooter && <Header />}
       <main className="flex flex-col flex-1">{children}</main>
       {shouldShowHeaderFooter && <Footer />}
+      {/* LETAKKAN WHATSAPP BUTTON DI SINI! 
+          Ia akan muncul melayang di semua halaman public (selain admin) 
+      */}
+      <WhatsAppButton />
     </div>
   );
 }
