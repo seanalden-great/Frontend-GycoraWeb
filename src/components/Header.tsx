@@ -405,28 +405,28 @@ export default function Header() {
   // };
 
   // --- FUNGSI BARU UNTUK CEK LOGIN SEBELUM KE HALAMAN ORDER ---
-  const handleOrderNavigation = () => {
-    const token = localStorage.getItem("user_token");
+  // const handleOrderNavigation = () => {
+  //   const token = localStorage.getItem("user_token");
     
-    if (!token) {
-      Swal.fire({
-        title: "Login Diperlukan",
-        text: "Silakan masuk ke akun Anda untuk melihat riwayat pesanan.",
-        icon: "info",
-        showCancelButton: true,
-        confirmButtonColor: "#059669",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ke Halaman Login",
-        cancelButtonText: "Batal"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/login");
-        }
-      });
-    } else {
-      navigate("/orders");
-    }
-  };
+  //   if (!token) {
+  //     Swal.fire({
+  //       title: "Login Diperlukan",
+  //       text: "Silakan masuk ke akun Anda untuk melihat riwayat pesanan.",
+  //       icon: "info",
+  //       showCancelButton: true,
+  //       confirmButtonColor: "#059669",
+  //       cancelButtonColor: "#d33",
+  //       confirmButtonText: "Ke Halaman Login",
+  //       cancelButtonText: "Batal"
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         navigate("/login");
+  //       }
+  //     });
+  //   } else {
+  //     navigate("/orders");
+  //   }
+  // };
 
   return (
     <>
