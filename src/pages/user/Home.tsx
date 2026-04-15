@@ -3189,7 +3189,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config/api"; 
 import Swal from "sweetalert2"; 
 
-// --- IMPORT GAMBAR DARI LOKAL UNTUK SLIDER ---
 import slide1 from "/landing_page_images/hero_slide_1.jpg";
 import slide2 from "/landing_page_images/hero_slide_2.jpg";
 import slide3 from "/landing_page_images/hero_slide_3.jpg";
