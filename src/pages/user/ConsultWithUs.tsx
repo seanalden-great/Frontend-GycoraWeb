@@ -1091,9 +1091,9 @@ const mediaLogos = [
 ];
 
 // Aset lokal untuk shuffle header
-import img1 from "../../assets/consult_images/header_1.jpg";
-import img2 from "../../assets/consult_images/header_2.jpg";
-import img3 from "../../assets/consult_images/header_3.jpg";
+import img1 from "../../assets/consult_images/header_1.png";
+import img2 from "../../assets/consult_images/header_2.png";
+import img3 from "../../assets/consult_images/header_3.png";
 
 export default function ConsultWithUs() {
   const navigate = useNavigate();
