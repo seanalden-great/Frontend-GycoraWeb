@@ -59,11 +59,45 @@ import ForgotPasswordPage from "./pages/user/auth/ForgotPasswordPage";
 import CodeVerificationPage from "./pages/user/auth/CodeVerificationPage";
 import ResetPasswordPage from "./pages/user/auth/ResetPasswordPage";
 
+// function LayoutWrapper({ children }: { children: React.ReactNode }) {
+//   const location = useLocation();
+//   const isAdminArea = location.pathname.startsWith("/admin");
+//   const isAuthPage =
+//     location.pathname === "/login" || location.pathname === "/register";
+
+//   // Jika ini area admin, LayoutWrapper murni me-return children tanpa Header/Footer publik
+//   if (isAdminArea) return <>{children}</>;
+
+//   const shouldShowHeaderFooter = !isAuthPage;
+
+//   return (
+//     <div className="flex flex-col min-h-screen font-sans text-gray-900 bg-white">
+//       {shouldShowHeaderFooter && <Header />}
+//       <main className="flex flex-col flex-1">{children}</main>
+//       {shouldShowHeaderFooter && <Footer />}
+//       {/* LETAKKAN WHATSAPP BUTTON DI SINI! 
+//           Ia akan muncul melayang di semua halaman public (selain admin) 
+//       */}
+//       <WhatsAppButton />
+//     </div>
+//   );
+// }
+
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const isAdminArea = location.pathname.startsWith("/admin");
-  const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/register";
+  
+  // [PERBAIKAN] Buat array berisi semua rute yang tidak boleh menampilkan Header/Footer
+  const authPaths = [
+    "/login", 
+    "/register", 
+    "/forgot-password", 
+    "/verify-code", 
+    "/reset-password"
+  ];
+  
+  // Cek apakah pathname saat ini ada di dalam array authPaths
+  const isAuthPage = authPaths.includes(location.pathname);
 
   // Jika ini area admin, LayoutWrapper murni me-return children tanpa Header/Footer publik
   if (isAdminArea) return <>{children}</>;
@@ -73,12 +107,13 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen font-sans text-gray-900 bg-white">
       {shouldShowHeaderFooter && <Header />}
+      
       <main className="flex flex-col flex-1">{children}</main>
+      
       {shouldShowHeaderFooter && <Footer />}
-      {/* LETAKKAN WHATSAPP BUTTON DI SINI! 
-          Ia akan muncul melayang di semua halaman public (selain admin) 
-      */}
-      <WhatsAppButton />
+      
+      {/* Tombol WhatsApp Floating juga hanya muncul jika Header/Footer muncul */}
+      {shouldShowHeaderFooter && <WhatsAppButton />}
     </div>
   );
 }
