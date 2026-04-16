@@ -1085,15 +1085,25 @@ const consultationCategories = [
   { id: 8, title: "Ketombe", icon: <IconHair /> },
 ];
 
-const mediaLogos = [
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Tech_in_Asia_logo.svg/512px-Tech_in_Asia_logo.svg.png",
-  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Kompas_Logo.svg/512px-Kompas_Logo.svg.png",
-];
-
+// --- IMPORT ASET LOKAL ---
 // Aset lokal untuk shuffle header
 import img1 from "../../assets/consult_images/header_1.png";
 import img2 from "../../assets/consult_images/header_2.png";
 import img3 from "../../assets/consult_images/header_3.png";
+
+// Aset lokal untuk Logo Media / Marketplace
+// Pastikan nama file ini sesuai dengan yang ada di folder src/assets/ Anda
+import logoShopee from "../../assets/shopee.png"; 
+import logoTokopedia from "../../assets/tokopedia.png";
+import logoTiktok from "../../assets/tiktok.png";
+import logoInstagram from "../../assets/instagram.png";
+
+const mediaLogos = [
+  logoShopee,
+  logoTokopedia,
+  logoTiktok,
+  logoInstagram,
+];
 
 export default function ConsultWithUs() {
   const navigate = useNavigate();
@@ -1355,7 +1365,6 @@ export default function ConsultWithUs() {
       </div>
 
       {/* ================= OTC / ESSENTIALS PRODUCTS ================= */}
-      {/* Menggunakan fitur 'Link' yang tadi diimpor namun tidak dipanggil */}
       <div className="py-24 bg-white border-b border-gray-100">
         <div className="px-6 mx-auto max-w-7xl lg:px-8">
           <div className="flex flex-col justify-between gap-4 mb-12 md:flex-row md:items-end">
@@ -1390,13 +1399,13 @@ export default function ConsultWithUs() {
         </div>
       </div>
 
-      {/* ================= MEDIA COVERAGE ================= */}
+      {/* ================= MEDIA COVERAGE / PARTNERS ================= */}
       <div className="py-12 border-b border-gray-200 bg-gray-50">
         <div className="px-6 mx-auto max-w-7xl lg:px-8">
-          <h3 className="mb-8 text-sm font-bold tracking-widest text-center text-gray-400 uppercase">Telah Diliput Oleh Media Nasional</h3>
-          <div className="flex flex-wrap items-center justify-center gap-8 transition-all duration-500 md:gap-16 opacity-60 grayscale hover:grayscale-0">
+          <h3 className="mb-8 text-sm font-bold tracking-widest text-center text-gray-400 uppercase">Tersedia Juga Di</h3>
+          <div className="flex flex-wrap items-center justify-center gap-8 transition-all duration-500 md:gap-16 opacity-70 grayscale hover:grayscale-0">
             {mediaLogos.map((logo, idx) => (
-              <img key={idx} src={logo} alt="Media Coverage" className="object-contain h-8 md:h-10" />
+              <img key={idx} src={logo} alt="Partner Logo" className="object-contain h-8 md:h-12" />
             ))}
           </div>
         </div>
