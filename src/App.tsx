@@ -55,6 +55,9 @@ import ScrollToTop from "./components/ScrollToTop";
 import WhatsAppButton from "./components/WhatsAppButton";
 import ConsultWithUs from "./pages/user/ConsultWithUs";
 import AdminTreatments from "./pages/admin/AdminTreatments";
+import ForgotPasswordPage from "./pages/user/auth/ForgotPasswordPage";
+import CodeVerificationPage from "./pages/user/auth/CodeVerificationPage";
+import ResetPasswordPage from "./pages/user/auth/ResetPasswordPage";
 
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -90,10 +93,16 @@ export default function App() {
         <ScrollToTop />
         <LayoutWrapper>
           <Routes>
+            {/* ========================================== */}
+            {/* RUTE USER PUBLIK & AUTENTIKASI */}
+            {/* ========================================== */}
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<UserLogin />} />{" "}
-            {/* <-- Tambahkan ini */}
-            <Route path="/register" element={<UserRegister />} />{" "}
+            <Route path="/login" element={<UserLogin />} /> 
+            <Route path="/register" element={<UserRegister />} /> 
+            
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/verify-code" element={<CodeVerificationPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             {/* <-- Tambahkan ini */}
             <Route path="/profile" element={<UserProfile />} />
             {/* Rute Produk */}
