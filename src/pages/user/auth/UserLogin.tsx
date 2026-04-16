@@ -194,44 +194,43 @@
 // }
 
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; 
+import { Link } from "react-router-dom"; 
 import Swal from "sweetalert2";
 import { BASE_URL } from "../../../config/api";
 import logoGycora from "../../../assets/gycora_logo.png";
 
-export default function AdminLogin() {
-  const navigate = useNavigate(); 
+export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const res = await fetch(`${BASE_URL}/api/admin/login`, {
+      const res = await fetch(`${BASE_URL}/api/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        localStorage.setItem("admin_token", data.access_token);
-        localStorage.setItem("admin_user", JSON.stringify(data.user));
+        localStorage.setItem("user_token", data.access_token);
+        localStorage.setItem("user_data", JSON.stringify(data.user));
 
         Swal.fire({
-          icon: "success", title: "Login Berhasil!", text: `Selamat datang kembali, ${data.user.first_name}`, showConfirmButton: false, timer: 1500,
+          icon: "success", title: "Login Berhasil", showConfirmButton: false, timer: 1500,
+        }).then(() => {
+           window.location.href = "/"; 
         });
-
-        navigate("/admin/dashboard"); 
       } else {
-        Swal.fire("Akses Ditolak", data.message, "error");
+        Swal.fire("Login Gagal", data.message, "error");
       }
     } catch (error) {
-      console.error("Login Admin Error:", error); 
+      console.error("Login request failed:", error);
       Swal.fire("Error", "Gagal terhubung ke server", "error");
     } finally {
       setLoading(false);
@@ -239,32 +238,34 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4 font-sans bg-gray-50">
-      <div className="w-full max-w-md p-8 bg-white border border-gray-100 shadow-lg rounded-2xl">
-        <div className="mb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <img src={logoGycora} alt="Gycora Logo" className="object-contain h-10" />
-          </div>
-          <h1 className="text-3xl font-extrabold text-gycora">Gycora Portal</h1>
-          <p className="mt-2 text-sm text-gray-500">Masuk ke panel manajemen (Admin/Staf)</p>
+    <div className="flex items-center justify-center min-h-screen p-4 font-sans bg-white">
+      <div className="w-full max-w-md p-8 border border-gray-100 shadow-sm rounded-2xl">
+        <div className="flex justify-center mb-6">
+          <img src={logoGycora} alt="Gycora Logo" className="object-contain h-10" />
         </div>
+        <h1 className="mb-2 text-3xl font-extrabold text-center text-gray-900">Login</h1>
+        <p className="mb-8 text-sm text-center text-gray-500">Selamat datang kembali di Gycora.</p>
 
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label className="block mb-2 text-sm font-semibold text-gray-700">Email</label>
-            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-3 transition-all border border-gray-200 rounded-lg outline-none bg-gray-50 focus:ring-2 focus:ring-gycora" placeholder="admin@gycora.com" />
+            <label className="block mb-1 text-sm font-medium text-gray-700">Email</label>
+            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:border-gycora focus:ring-1 focus:ring-gycora" />
           </div>
           <div>
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-semibold text-gray-700">Password</label>
-              <Link to="/admin/forgot-password" className="text-xs font-bold transition-colors text-gycora hover:text-gycora-dark">Lupa Password?</Link>
+            <div className="flex items-center justify-between mb-1">
+              <label className="text-sm font-medium text-gray-700">Password</label>
+              <Link to="/forgot-password" className="text-xs font-semibold transition-colors text-gycora hover:text-gycora-dark">Lupa Password?</Link>
             </div>
-            <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 transition-all border border-gray-200 rounded-lg outline-none bg-gray-50 focus:ring-2 focus:ring-gycora" placeholder="••••••••" />
+            <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 border border-gray-300 rounded-lg outline-none focus:border-gycora focus:ring-1 focus:ring-gycora" />
           </div>
-          <button type="submit" disabled={loading} className="w-full px-4 py-3 font-bold text-white transition-colors rounded-lg bg-gycora hover:bg-gycora-dark disabled:opacity-70">
-            {loading ? "Memverifikasi..." : "Masuk ke Dashboard"}
+          <button type="submit" disabled={loading} className="w-full px-4 py-3 font-bold text-white transition-colors bg-gray-900 rounded-lg hover:bg-gray-800 disabled:opacity-70">
+            {loading ? "Memproses..." : "Login"}
           </button>
         </form>
+
+        <p className="mt-6 text-sm text-center text-gray-500">
+          Belum punya akun? <Link to="/register" className="font-semibold text-gycora hover:underline">Daftar sekarang</Link>
+        </p>
       </div>
     </div>
   );
