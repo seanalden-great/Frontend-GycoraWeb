@@ -5189,12 +5189,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config/api"; 
 import Swal from "sweetalert2"; 
 
-// --- IMPORT GAMBAR DARI LOKAL UNTUK SLIDER ---
+// --- IMPORT GAMBAR DARI LOKAL UNTUK SLIDER & ASET ---
 import slide1 from "/landing_page_images/hero_slide_1.jpg";
 import slide2 from "/landing_page_images/hero_slide_2.jpg";
 import slide3 from "/landing_page_images/hero_slide_3.jpg";
 import slide4 from "/landing_page_images/hero_slide_4.jpg";
 import slide5 from "/landing_page_images/hero_slide_5.jpg"; 
+
+// Import aset baru untuk seksi janji temu
+import gycoraPromise from "/landing_page_images/gycora_promise.webp";
 
 const heroSlides = [
   { id: 1, image: slide1, alt: "Gycora Premium Hair Care 1" },
@@ -5459,7 +5462,7 @@ export default function Home() {
                     <button onClick={() => setCurrentSlide(prev => prev === 0 ? heroSlides.length - 1 : prev - 1)} className="p-3 text-gray-800 transition-colors rounded-full shadow-md bg-white/80 hover:bg-white backdrop-blur-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                     </button>
-                    <button onClick={() => setCurrentSlide(prev => prev === heroSlides.length - 1 ? 0 : prev - 1 + 2)} className="p-3 text-gray-800 transition-colors rounded-full shadow-md bg-white/80 hover:bg-white backdrop-blur-sm">
+                    <button onClick={() => setCurrentSlide(prev => prev === heroSlides.length - 1 ? 0 : prev + 1)} className="p-3 text-gray-800 transition-colors rounded-full shadow-md bg-white/80 hover:bg-white backdrop-blur-sm">
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                     </button>
                   </div>
@@ -5500,19 +5503,17 @@ export default function Home() {
                 </button>
               </div>
             </div>
+            {/* WADAH GAMBAR DISESUAIKAN UNTUK RESOLUSI 1080x1350 (Portrait 4:5) */}
             <div className="flex-1 w-full lg:w-auto">
-              <div className="relative">
+              {/* Menambahkan aspek rasio 4/5 dan membatasi lebar maksimal agar tidak terlalu besar di desktop */}
+              <div className="relative aspect-[4/5] max-w-md mx-auto lg:max-w-none lg:mx-0">
                 {/* Aksen glow di belakang gambar */}
                 <div className="absolute inset-0 transform scale-105 bg-emerald-500 rounded-3xl blur-2xl opacity-20"></div>
-                {/* GAMBAR UNSPLASH DIUBAH MENJADI RAMBUT DISISIR */}
+                {/* MENGGUNAKAN ASET LOKAL, MENGHAPUS onError, TINGGI DISESUAIKAN KE FULL */}
                 <img 
-                  src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                  alt="Gycora Hair Care Routine" 
-                  className="relative object-cover w-full shadow-2xl h-96 rounded-3xl"
-                  onError={(e) => {
-                    // Fallback jika Unsplash bermasalah
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
-                  }}
+                  src={gycoraPromise} 
+                  alt="Gycora Promise Hair Care Routine" 
+                  className="relative object-cover w-full h-full shadow-2xl rounded-3xl"
                 />
               </div>
             </div>
