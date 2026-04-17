@@ -173,36 +173,36 @@ export default function App() {
               }
             />
             {/* --- RUTE KHUSUS ADMIN --- */}
-            <Route
+            {/* <Route
               path="/admin/login"
               element={
                 <AdminLayout>
                   <AdminLogin />
                 </AdminLayout>
               }
-            />
+            /> */}
             <Route
               path="/admin/forgot-password"
               element={
-                <AdminLayout>
+                // <AdminLayout>
                   <AdminForgotPasswordPage />
-                </AdminLayout>
+                // </AdminLayout>
               }
             />
             <Route
               path="/admin/verify-code"
               element={
-                <AdminLayout>
+                // <AdminLayout>
                   <AdminCodeVerificationPage />
-                </AdminLayout>
+                // </AdminLayout>
               }
             />
             <Route
               path="/admin/reset-password"
               element={
-                <AdminLayout>
+                // <AdminLayout>
                   <AdminCodeVerificationPage />
-                </AdminLayout>
+                // </AdminLayout>
               }
             />
             <Route
