@@ -61,6 +61,7 @@ import ResetPasswordPage from "./pages/user/auth/ResetPasswordPage";
 import AdminForgotPasswordPage from "./pages/admin/AdminForgotPasswordPage";
 import AdminCodeVerificationPage from "./pages/admin/AdminCodeVerificationPage";
 import AdminResetPasswordPage from "./pages/admin/AdminResetPasswordPage";
+import AdminReviews from "./pages/admin/AdminReviews";
 
 // function LayoutWrapper({ children }: { children: React.ReactNode }) {
 //   const location = useLocation();
@@ -380,6 +381,14 @@ export default function App() {
               element={
                 <AdminLayout>
                   <AdminTreatments />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/reviews"
+              element={
+                <AdminLayout>
+                  <AdminReviews />
                 </AdminLayout>
               }
             />
