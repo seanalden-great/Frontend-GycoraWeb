@@ -58,6 +58,8 @@ import AdminTreatments from "./pages/admin/AdminTreatments";
 import ForgotPasswordPage from "./pages/user/auth/ForgotPasswordPage";
 import CodeVerificationPage from "./pages/user/auth/CodeVerificationPage";
 import ResetPasswordPage from "./pages/user/auth/ResetPasswordPage";
+import AdminForgotPasswordPage from "./pages/admin/AdminForgotPasswordPage";
+import AdminCodeVerificationPage from "./pages/admin/AdminCodeVerificationPage";
 
 // function LayoutWrapper({ children }: { children: React.ReactNode }) {
 //   const location = useLocation();
@@ -171,6 +173,38 @@ export default function App() {
               }
             />
             {/* --- RUTE KHUSUS ADMIN --- */}
+            <Route
+              path="/admin/login"
+              element={
+                <AdminLayout>
+                  <AdminLogin />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/forgot-password"
+              element={
+                <AdminLayout>
+                  <AdminForgotPasswordPage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/verify-code"
+              element={
+                <AdminLayout>
+                  <AdminCodeVerificationPage />
+                </AdminLayout>
+              }
+            />
+            <Route
+              path="/admin/reset-password"
+              element={
+                <AdminLayout>
+                  <AdminCodeVerificationPage />
+                </AdminLayout>
+              }
+            />
             <Route
               path="/admin/login"
               element={
