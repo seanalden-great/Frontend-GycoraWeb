@@ -89,7 +89,7 @@ export default function ChatListPage() {
       key: '5b29faa8d41035b749a1', // Ganti dengan PUSHER_APP_KEY dari file .env Laravel Anda
       cluster: 'ap1',             // Ganti dengan PUSHER_APP_CLUSTER Anda (misal: ap1, mt1)
       forceTLS: true,
-      authEndpoint: `${BASE_URL}/broadcasting/auth`, // Endpoint auth Sanctum untuk private channel
+      authEndpoint: `${BASE_URL}/broadcasting/auth`,
       auth: {
         headers: {
           Authorization: `Bearer ${token}`,
