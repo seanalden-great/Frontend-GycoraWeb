@@ -62,6 +62,7 @@ import AdminForgotPasswordPage from "./pages/admin/AdminForgotPasswordPage";
 import AdminCodeVerificationPage from "./pages/admin/AdminCodeVerificationPage";
 import AdminResetPasswordPage from "./pages/admin/AdminResetPasswordPage";
 import AdminReviews from "./pages/admin/AdminReviews";
+import ChatListPage from "./pages/user/ChatListPage";
 
 // function LayoutWrapper({ children }: { children: React.ReactNode }) {
 //   const location = useLocation();
@@ -79,8 +80,8 @@ import AdminReviews from "./pages/admin/AdminReviews";
 //       {shouldShowHeaderFooter && <Header />}
 //       <main className="flex flex-col flex-1">{children}</main>
 //       {shouldShowHeaderFooter && <Footer />}
-//       {/* LETAKKAN WHATSAPP BUTTON DI SINI! 
-//           Ia akan muncul melayang di semua halaman public (selain admin) 
+//       {/* LETAKKAN WHATSAPP BUTTON DI SINI!
+//           Ia akan muncul melayang di semua halaman public (selain admin)
 //       */}
 //       <WhatsAppButton />
 //     </div>
@@ -90,16 +91,16 @@ import AdminReviews from "./pages/admin/AdminReviews";
 function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const isAdminArea = location.pathname.startsWith("/admin");
-  
+
   // [PERBAIKAN] Buat array berisi semua rute yang tidak boleh menampilkan Header/Footer
   const authPaths = [
-    "/login", 
-    "/register", 
-    "/forgot-password", 
-    "/verify-code", 
-    "/reset-password"
+    "/login",
+    "/register",
+    "/forgot-password",
+    "/verify-code",
+    "/reset-password",
   ];
-  
+
   // Cek apakah pathname saat ini ada di dalam array authPaths
   const isAuthPage = authPaths.includes(location.pathname);
 
@@ -111,11 +112,11 @@ function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen font-sans text-gray-900 bg-white">
       {shouldShowHeaderFooter && <Header />}
-      
+
       <main className="flex flex-col flex-1">{children}</main>
-      
+
       {shouldShowHeaderFooter && <Footer />}
-      
+
       {/* Tombol WhatsApp Floating juga hanya muncul jika Header/Footer muncul */}
       {shouldShowHeaderFooter && <WhatsAppButton />}
     </div>
@@ -136,9 +137,9 @@ export default function App() {
             {/* RUTE USER PUBLIK & AUTENTIKASI */}
             {/* ========================================== */}
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<UserLogin />} /> 
-            <Route path="/register" element={<UserRegister />} /> 
-            
+            <Route path="/login" element={<UserLogin />} />
+            <Route path="/register" element={<UserRegister />} />
+
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/verify-code" element={<CodeVerificationPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
@@ -174,6 +175,7 @@ export default function App() {
                 </AdminLayout>
               }
             />
+            <Route path="/chat" element={<ChatListPage />} />
             {/* --- RUTE KHUSUS ADMIN --- */}
             {/* <Route
               path="/admin/login"
@@ -187,7 +189,7 @@ export default function App() {
               path="/admin/forgot-password"
               element={
                 // <AdminLayout>
-                  <AdminForgotPasswordPage />
+                <AdminForgotPasswordPage />
                 // </AdminLayout>
               }
             />
@@ -195,7 +197,7 @@ export default function App() {
               path="/admin/verify-code"
               element={
                 // <AdminLayout>
-                  <AdminCodeVerificationPage />
+                <AdminCodeVerificationPage />
                 // </AdminLayout>
               }
             />
@@ -203,7 +205,7 @@ export default function App() {
               path="/admin/reset-password"
               element={
                 // <AdminLayout>
-                  <AdminResetPasswordPage />
+                <AdminResetPasswordPage />
                 // </AdminLayout>
               }
             />
