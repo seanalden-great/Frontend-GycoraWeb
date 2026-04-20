@@ -515,7 +515,7 @@ export default function AdminUsersList() {
       key: '5b29faa8d41035b749a1', // Pastikan key ini sama dengan .env Laravel Anda
       cluster: 'ap1',
       forceTLS: true,
-      authEndpoint: `${BASE_URL}/api/broadcasting/auth`,
+      authEndpoint: `${BASE_URL}/broadcasting/auth`,
       auth: {
         headers: {
           Authorization: `Bearer ${token}`,
