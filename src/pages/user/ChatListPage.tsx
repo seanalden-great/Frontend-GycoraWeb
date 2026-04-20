@@ -1,9 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config/api";
-// Jika menggunakan Echo, import di sini:
-// import Echo from "laravel-echo";
-// import Pusher from "pusher-js";
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
+
+// --- SOLUSI ERROR TYPESCRIPT ---
+// Memberi tahu TypeScript bahwa objek window sekarang memiliki properti Pusher
+declare global {
+  interface Window {
+    Pusher: any;
+  }
+}
+
+// Setup Pusher di Window object agar dikenali oleh Echo
+window.Pusher = Pusher;
 
 interface Staff {
   id: number;
@@ -59,31 +70,52 @@ export default function ChatListPage() {
     fetchStaff();
   }, [navigate]);
 
-  // Scroll to bottom
+  // Auto Scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // --- LARAVEL ECHO LISTENER (Aktifkan saat backend siap) ---
-  /*
+  // ==========================================================
+  // LARAVEL ECHO LISTENER (REAL-TIME FIX)
+  // ==========================================================
   useEffect(() => {
     if (!currentUser) return;
-    
-    // Pastikan konfigurasi Echo sesuai dengan backend Anda
-    // window.Pusher = Pusher;
-    // window.Echo = new Echo({ ...config });
 
-    window.Echo.private(`chat.${currentUser.id}`)
-      .listen('MessageSent', (e: any) => {
-        // Jika pesan datang dari orang yang sedang di-chat, tambahkan ke UI
-        if (activeChat && e.message.sender_id === activeChat.id) {
-          setMessages(prev => [...prev, e.message]);
+    const token = localStorage.getItem("user_token");
+
+    // Inisialisasi koneksi Echo
+    const echoInstance = new Echo({
+      broadcaster: 'pusher',
+      key: '5b29faa8d41035b749a1', // Ganti dengan PUSHER_APP_KEY dari file .env Laravel Anda
+      cluster: 'ap1',             // Ganti dengan PUSHER_APP_CLUSTER Anda (misal: ap1, mt1)
+      forceTLS: true,
+      authEndpoint: `${BASE_URL}/api/broadcasting/auth`, // Endpoint auth Sanctum untuk private channel
+      auth: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
         }
+      }
+    });
+
+    // Mulai mendengarkan di private channel milik user yang login
+    echoInstance.private(`chat.${currentUser.id}`)
+      // .listen() menerima nama Event dari Laravel. 
+      // Jika di Laravel nama classnya MessageSent, formatnya '.MessageSent' atau 'MessageSent' (tergantung versi Echo).
+      .listen('MessageSent', (e: any) => {
+        // Jika pesan datang dari staf yang SEDANG DIBUKA pop-up chatnya, tambahkan ke layar
+        if (activeChat && e.message.sender_id === activeChat.id) {
+          setMessages((prev) => [...prev, e.message]);
+        }
+        
+        // (Opsional) Jika pop-up tidak terbuka, Anda bisa men-trigger notifikasi toast/suara di sini
       });
 
-    return () => window.Echo.leave(`chat.${currentUser.id}`);
+    // Cleanup saat komponen ditutup agar tidak terjadi duplicate listener
+    return () => {
+      echoInstance.leave(`chat.${currentUser.id}`);
+    };
   }, [currentUser, activeChat]);
-  */
 
   const openChat = async (staff: Staff) => {
     setActiveChat(staff);
@@ -102,7 +134,7 @@ export default function ChatListPage() {
     const messageText = newMessage.trim();
     setNewMessage(""); // Kosongkan input seketika
 
-    // Optimistic update
+    // Optimistic update (Pengirim melihat pesannya langsung)
     const tempMsg: Message = {
       id: Date.now(),
       sender_id: currentUser.id,
@@ -157,7 +189,7 @@ export default function ChatListPage() {
         </div>
       )}
 
-      {/* --- MODAL CHAT POP-UP (FIXED POSITIONING) --- */}
+      {/* --- MODAL CHAT POP-UP --- */}
       {activeChat && (
         <div className="fixed bottom-0 right-0 z-[100] w-full md:w-96 md:right-8 md:bottom-0 shadow-2xl bg-white border border-gray-200 flex flex-col h-[500px] md:rounded-t-2xl animate-fade-in-up">
           
@@ -177,7 +209,7 @@ export default function ChatListPage() {
             </button>
           </div>
 
-          {/* Body Pesan (Scrollable) */}
+          {/* Body Pesan */}
           <div className="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-4 custom-scrollbar">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full opacity-50">
@@ -198,7 +230,7 @@ export default function ChatListPage() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Footer Input Fixed */}
+          {/* Footer Input */}
           <div className="p-3 bg-white border-t border-gray-100 shrink-0">
             <form onSubmit={handleSendMessage} className="flex items-center gap-2">
               <input 

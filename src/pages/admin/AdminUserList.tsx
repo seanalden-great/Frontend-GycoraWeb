@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useState, useEffect } from "react";
 // import Swal from "sweetalert2";
 // import { BASE_URL } from "../../config/api";
@@ -141,6 +142,14 @@ import { useState, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import { BASE_URL } from "../../config/api";
 
+// --- SOLUSI ERROR TYPESCRIPT ---
+// Memberi tahu TypeScript bahwa objek window sekarang memiliki properti Pusher
+declare global {
+  interface Window {
+    Echo: any;
+  }
+}
+
 interface User {
   id: number;
   first_name: string;
@@ -205,7 +214,6 @@ export default function AdminUsersList() {
   }, [messages]);
 
   // --- LARAVEL ECHO LISTENER ADMIN ---
-  /*
   useEffect(() => {
     if (!adminUser) return;
     window.Echo.private(`chat.${adminUser.id}`)
@@ -216,7 +224,6 @@ export default function AdminUsersList() {
       });
     return () => window.Echo.leave(`chat.${adminUser.id}`);
   }, [adminUser, activeChat]);
-  */
 
   const openChat = async (user: User) => {
     setActiveChat(user);
