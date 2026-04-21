@@ -2735,7 +2735,7 @@ export default function ProductDetail() {
 
   const [isFavorited, setIsFavorited] = useState(false);
 
-  const { cartItems, fetchCart } = useCart(); 
+  const { fetchCart } = useCart(); 
 
   useEffect(() => {
     const fetchProduct = async () => {
