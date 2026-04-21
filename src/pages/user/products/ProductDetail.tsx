@@ -2815,21 +2815,21 @@ export default function ProductDetail() {
     }
   };
 
-  const colorsAlreadyInCart = useMemo(() => {
-    if (!product) return [];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return cartItems
-      .filter((item: any) => item.product.id === product.id && item.color)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .map((item: any) => {
-        try {
-          const parsed = JSON.parse(item.color);
-          return parsed.hex || item.color;
-        } catch {
-          return item.color; // Jika string lama
-        }
-      });
-  }, [cartItems, product]);
+  // const colorsAlreadyInCart = useMemo(() => {
+  //   if (!product) return [];
+  //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //   return cartItems
+  //     .filter((item: any) => item.product.id === product.id && item.color)
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     .map((item: any) => {
+  //       try {
+  //         const parsed = JSON.parse(item.color);
+  //         return parsed.hex || item.color;
+  //       } catch {
+  //         return item.color; // Jika string lama
+  //       }
+  //     });
+  // }, [cartItems, product]);
 
   const allColors = useMemo(() => {
     if (!product || !Array.isArray(product.color)) return [];
