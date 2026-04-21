@@ -1956,7 +1956,7 @@ export default function CartPage() {
                         <div className="flex flex-wrap items-center mt-2 gap-x-3 gap-y-1">
                           <p className="text-xs italic tracking-wider text-gray-400">{formatPrice(item.product.price)} / pc</p>
                           <span className="hidden w-1 h-1 bg-gray-300 rounded-full sm:block"></span>
-                          <p className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">Stok Tersedia: <span className="text-gray-900">{item.product.stock}</span></p>
+                          {/* <p className="text-[10px] font-bold tracking-widest text-gray-500 uppercase">Stok Tersedia: <span className="text-gray-900">{item.product.stock}</span></p> */}
                         </div>
                       </div>
 
