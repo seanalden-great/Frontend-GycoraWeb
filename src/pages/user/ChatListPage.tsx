@@ -89,7 +89,7 @@ export default function ChatListPage() {
       key: '5b29faa8d41035b749a1', // Ganti dengan PUSHER_APP_KEY dari file .env Laravel Anda
       cluster: 'ap1',             // Ganti dengan PUSHER_APP_CLUSTER Anda (misal: ap1, mt1)
       forceTLS: true,
-      authEndpoint: `${BASE_URL}/broadcasting/auth`,
+      authEndpoint: `${BASE_URL}/api/broadcasting/auth`,
       auth: {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -174,7 +174,7 @@ export default function ChatListPage() {
               onClick={() => openChat(staff)}
               className="flex items-center gap-4 p-5 transition-all bg-white border border-gray-200 cursor-pointer rounded-2xl hover:border-gycora hover:shadow-lg group"
             >
-              <div className="flex items-center justify-center w-14 h-14 font-bold text-white rounded-full bg-gycora shadow-inner shrink-0">
+              <div className="flex items-center justify-center font-bold text-white rounded-full shadow-inner w-14 h-14 bg-gycora shrink-0">
                 {staff.first_name.charAt(0)}{staff.last_name.charAt(0)}
               </div>
               <div className="flex-1">
@@ -210,7 +210,7 @@ export default function ChatListPage() {
           </div>
 
           {/* Body Pesan */}
-          <div className="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-4 custom-scrollbar">
+          <div className="flex-1 p-4 space-y-4 overflow-y-auto bg-gray-50 custom-scrollbar">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full opacity-50">
                 <p className="text-sm font-medium text-gray-500">Mulai obrolan Anda di sini...</p>
