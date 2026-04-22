@@ -1566,7 +1566,7 @@ export default function ConsultWithUs() {
   const [isLoading, setIsLoading] = useState(true);
 
   // NOMOR WA ADMIN KLINIK (Ganti dengan nomor asli)
-  const ADMIN_WA_NUMBER = "6281234567890";
+  const ADMIN_WA_NUMBER = "6289517999768";
 
   useEffect(() => {
     const fetchLandingData = async () => {
