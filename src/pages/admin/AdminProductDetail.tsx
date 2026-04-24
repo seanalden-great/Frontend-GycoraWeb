@@ -1134,6 +1134,7 @@
 //   );
 // }
 
+// Menambah harga diskon
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import Swal from "sweetalert2";
