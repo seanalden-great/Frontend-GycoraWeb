@@ -78,16 +78,54 @@ export default function ChatListPage() {
   // ==========================================================
   // LARAVEL ECHO LISTENER (REAL-TIME FIX)
   // ==========================================================
+  // useEffect(() => {
+  //   if (!currentUser) return;
+
+  //   const token = localStorage.getItem("user_token");
+
+  //   // Inisialisasi koneksi Echo
+  //   const echoInstance = new Echo({
+  //     broadcaster: 'pusher',
+  //     key: '5b29faa8d41035b749a1', // Ganti dengan PUSHER_APP_KEY dari file .env Laravel Anda
+  //     cluster: 'ap1',             // Ganti dengan PUSHER_APP_CLUSTER Anda (misal: ap1, mt1)
+  //     forceTLS: true,
+  //     authEndpoint: `${BASE_URL}/api/broadcasting/auth`,
+  //     auth: {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         Accept: "application/json",
+  //       }
+  //     }
+  //   });
+
+  //   // Mulai mendengarkan di private channel milik user yang login
+  //   echoInstance.private(`chat.${currentUser.id}`)
+  //     // .listen() menerima nama Event dari Laravel. 
+  //     // Jika di Laravel nama classnya MessageSent, formatnya '.MessageSent' atau 'MessageSent' (tergantung versi Echo).
+  //     .listen('MessageSent', (e: any) => {
+  //       // Jika pesan datang dari staf yang SEDANG DIBUKA pop-up chatnya, tambahkan ke layar
+  //       if (activeChat && e.message.sender_id === activeChat.id) {
+  //         setMessages((prev) => [...prev, e.message]);
+  //       }
+        
+  //       // (Opsional) Jika pop-up tidak terbuka, Anda bisa men-trigger notifikasi toast/suara di sini
+  //     });
+
+  //   // Cleanup saat komponen ditutup agar tidak terjadi duplicate listener
+  //   return () => {
+  //     echoInstance.leave(`chat.${currentUser.id}`);
+  //   };
+  // }, [currentUser, activeChat]);
+
   useEffect(() => {
     if (!currentUser) return;
 
-    const token = localStorage.getItem("user_token");
+    const token = localStorage.getItem("admin_token");
 
-    // Inisialisasi koneksi Echo
     const echoInstance = new Echo({
       broadcaster: 'pusher',
-      key: '5b29faa8d41035b749a1', // Ganti dengan PUSHER_APP_KEY dari file .env Laravel Anda
-      cluster: 'ap1',             // Ganti dengan PUSHER_APP_CLUSTER Anda (misal: ap1, mt1)
+      key: '5b29faa8d41035b749a1',
+      cluster: 'ap1',
       forceTLS: true,
       authEndpoint: `${BASE_URL}/api/broadcasting/auth`,
       auth: {
@@ -98,20 +136,29 @@ export default function ChatListPage() {
       }
     });
 
-    // Mulai mendengarkan di private channel milik user yang login
+    window.Echo = echoInstance;
+
+    // Pastikan channel name cocok dengan backend
     echoInstance.private(`chat.${currentUser.id}`)
-      // .listen() menerima nama Event dari Laravel. 
-      // Jika di Laravel nama classnya MessageSent, formatnya '.MessageSent' atau 'MessageSent' (tergantung versi Echo).
-      .listen('MessageSent', (e: any) => {
-        // Jika pesan datang dari staf yang SEDANG DIBUKA pop-up chatnya, tambahkan ke layar
-        if (activeChat && e.message.sender_id === activeChat.id) {
-          setMessages((prev) => [...prev, e.message]);
-        }
+      // PERBAIKAN: Tambahkan titik di depan nama event
+      .listen('.MessageSent', (e: any) => {
         
-        // (Opsional) Jika pop-up tidak terbuka, Anda bisa men-trigger notifikasi toast/suara di sini
+        console.log("Pesan diterima admin:", e); // Tambahkan ini untuk debugging!
+
+        // Pastikan kita mengakses objek pesan dengan benar
+        // Terkadang Laravel membungkusnya dalam e.message, kadang langsung di e
+        const incomingMsg = e.message || e; 
+
+        // Tampilkan pesan JIKA pengirimnya adalah user yang sedang dibuka chatnya
+        if (activeChat && incomingMsg.sender_id === activeChat.id) {
+          setMessages(prev => {
+            // Hindari duplikasi pesan (jika ID pesan sudah ada)
+            if (prev.some(m => m.id === incomingMsg.id)) return prev;
+            return [...prev, incomingMsg];
+          });
+        }
       });
 
-    // Cleanup saat komponen ditutup agar tidak terjadi duplicate listener
     return () => {
       echoInstance.leave(`chat.${currentUser.id}`);
     };

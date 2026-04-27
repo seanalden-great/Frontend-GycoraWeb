@@ -504,15 +504,50 @@ export default function AdminUsersList() {
   // ==========================================================
   // LARAVEL ECHO LISTENER ADMIN (REAL-TIME FIX)
   // ==========================================================
+  // useEffect(() => {
+  //   if (!adminUser) return;
+
+  //   const token = localStorage.getItem("admin_token");
+
+  //   // Inisialisasi Echo khusus untuk Admin
+  //   const echoInstance = new Echo({
+  //     broadcaster: 'pusher',
+  //     key: '5b29faa8d41035b749a1', // Pastikan key ini sama dengan .env Laravel Anda
+  //     cluster: 'ap1',
+  //     forceTLS: true,
+  //   authEndpoint: `${BASE_URL}/api/broadcasting/auth`,
+  //     auth: {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         Accept: "application/json",
+  //       }
+  //     }
+  //   });
+
+  //   // Simpan ke window agar tidak undefined jika dipanggil di tempat lain
+  //   window.Echo = echoInstance;
+
+  //   echoInstance.private(`chat.${adminUser.id}`)
+  //     .listen('MessageSent', (e: any) => {
+  //       // Hanya tambahkan ke layar jika admin sedang membuka chat dengan user tersebut
+  //       if (activeChat && e.message.sender_id === activeChat.id) {
+  //         setMessages(prev => [...prev, e.message]);
+  //       }
+  //     });
+
+  //   return () => {
+  //     echoInstance.leave(`chat.${adminUser.id}`);
+  //   };
+  // }, [adminUser, activeChat]);
+
   useEffect(() => {
     if (!adminUser) return;
 
     const token = localStorage.getItem("admin_token");
 
-    // Inisialisasi Echo khusus untuk Admin
     const echoInstance = new Echo({
       broadcaster: 'pusher',
-      key: '5b29faa8d41035b749a1', // Pastikan key ini sama dengan .env Laravel Anda
+      key: '5b29faa8d41035b749a1',
       cluster: 'ap1',
       forceTLS: true,
       authEndpoint: `${BASE_URL}/api/broadcasting/auth`,
@@ -524,14 +559,26 @@ export default function AdminUsersList() {
       }
     });
 
-    // Simpan ke window agar tidak undefined jika dipanggil di tempat lain
     window.Echo = echoInstance;
 
+    // Pastikan channel name cocok dengan backend
     echoInstance.private(`chat.${adminUser.id}`)
-      .listen('MessageSent', (e: any) => {
-        // Hanya tambahkan ke layar jika admin sedang membuka chat dengan user tersebut
-        if (activeChat && e.message.sender_id === activeChat.id) {
-          setMessages(prev => [...prev, e.message]);
+      // PERBAIKAN: Tambahkan titik di depan nama event
+      .listen('.MessageSent', (e: any) => {
+        
+        console.log("Pesan diterima admin:", e); // Tambahkan ini untuk debugging!
+
+        // Pastikan kita mengakses objek pesan dengan benar
+        // Terkadang Laravel membungkusnya dalam e.message, kadang langsung di e
+        const incomingMsg = e.message || e; 
+
+        // Tampilkan pesan JIKA pengirimnya adalah user yang sedang dibuka chatnya
+        if (activeChat && incomingMsg.sender_id === activeChat.id) {
+          setMessages(prev => {
+            // Hindari duplikasi pesan (jika ID pesan sudah ada)
+            if (prev.some(m => m.id === incomingMsg.id)) return prev;
+            return [...prev, incomingMsg];
+          });
         }
       });
 
