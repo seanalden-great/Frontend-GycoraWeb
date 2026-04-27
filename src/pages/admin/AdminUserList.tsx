@@ -29,14 +29,14 @@
 //           "Authorization": `Bearer ${token}`
 //         }
 //       });
-      
+
 //       if (!res.ok) throw new Error("Gagal load data pelanggan");
-      
+
 //       const data = await res.json();
-      
+
 //       // 3. Perbaiki typo logika ternary (jika tidak ada data.data, ambil data langsung)
 //       const responseData = data.data ? data.data : data;
-      
+
 //       setUsers(responseData || []);
 //     } catch (error) {
 //       console.error("Gagal mengambil data users:", error);
@@ -69,7 +69,7 @@
 
 //   return (
 //     <div className="p-8 mx-auto space-y-6 font-sans max-w-7xl animate-fade-in-up">
-      
+
 //       {/* Header Panel */}
 //       <div className="flex items-center justify-between p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
 //         <div>
@@ -124,7 +124,7 @@
 //                   </td>
 //                 </tr>
 //               ))}
-              
+
 //               {users.length === 0 && (
 //                 <tr>
 //                   <td colSpan={5} className="p-8 text-center text-gray-500">Belum ada pelanggan yang terdaftar.</td>
@@ -177,7 +177,7 @@
 //   const [messages, setMessages] = useState<Message[]>([]);
 //   const [newMessage, setNewMessage] = useState("");
 //   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
 //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 //   const [adminUser, setAdminUser] = useState<any>(null);
 
@@ -190,9 +190,9 @@
 //       const res = await fetch(`${BASE_URL}/api/admin/users`, {
 //         headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` }
 //       });
-      
+
 //       if (!res.ok) throw new Error("Gagal load data pelanggan");
-      
+
 //       const data = await res.json();
 //       const responseData = data.data ? data.data : data;
 //       setUsers(responseData || []);
@@ -280,7 +280,7 @@
 
 //   return (
 //     <div className="relative p-8 mx-auto space-y-6 font-sans max-w-7xl animate-fade-in-up">
-      
+
 //       {/* Header Panel */}
 //       <div className="flex items-center justify-between p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
 //         <div>
@@ -328,11 +328,11 @@
 //                   <td className="p-4 text-sm text-gray-600 whitespace-nowrap">
 //                     {formatDate(u.created_at)}
 //                   </td>
-                  
+
 //                   {/* --- AKSI TOMBOL CHAT --- */}
 //                   <td className="p-4">
 //                     <div className="flex items-center justify-center gap-2">
-//                       <button 
+//                       <button
 //                         onClick={() => openChat(u)}
 //                         className="flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-white transition-colors bg-gycora rounded-lg shadow-sm hover:bg-gycora-dark"
 //                         title="Chat dengan Pelanggan"
@@ -347,7 +347,7 @@
 //                   </td>
 //                 </tr>
 //               ))}
-              
+
 //               {users.length === 0 && (
 //                 <tr>
 //                   <td colSpan={5} className="p-8 text-center text-gray-500">Belum ada pelanggan yang terdaftar.</td>
@@ -361,7 +361,7 @@
 //       {/* --- MODAL CHAT POPUP (SISI ADMIN - FIXED POSITIONING) --- */}
 //       {activeChat && (
 //         <div className="fixed bottom-0 right-0 z-[100] w-full md:w-96 md:right-8 md:bottom-0 shadow-2xl bg-white border border-gray-200 flex flex-col h-[500px] md:rounded-t-2xl animate-fade-in-up">
-          
+
 //           {/* Header Fixed */}
 //           <div className="flex items-center justify-between p-4 text-white bg-gray-900 shrink-0 md:rounded-t-2xl">
 //             <div className="flex items-center gap-3">
@@ -402,8 +402,8 @@
 //           {/* Footer Input Fixed */}
 //           <div className="p-3 bg-white border-t border-gray-100 shrink-0">
 //             <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-//               <input 
-//                 type="text" 
+//               <input
+//                 type="text"
 //                 value={newMessage}
 //                 onChange={(e) => setNewMessage(e.target.value)}
 //                 placeholder="Ketik balasan untuk pelanggan..."
@@ -439,6 +439,14 @@ declare global {
 // Setup Pusher di Window object
 window.Pusher = Pusher;
 
+interface Staff {
+  id: number;
+  first_name: string;
+  last_name: string;
+  usertype: string;
+  profile_image?: string;
+}
+
 interface User {
   id: number;
   first_name: string;
@@ -466,8 +474,16 @@ export default function AdminUsersList() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   const [adminUser, setAdminUser] = useState<any>(null);
+
+  // TAMBAHKAN REF INI DI DEKAT STATE ACTIVECHAT (DI BAGIAN ATAS KOMPONEN)
+  const activeChatRef = useRef<Staff | null>(null);
+
+  // Setiap kali activeChat berubah, update Ref-nya
+  useEffect(() => {
+    activeChatRef.current = activeChat;
+  }, [activeChat]);
 
   const fetchUsers = async () => {
     try {
@@ -476,11 +492,14 @@ export default function AdminUsersList() {
       if (userStr) setAdminUser(JSON.parse(userStr));
 
       const res = await fetch(`${BASE_URL}/api/admin/users`, {
-        headers: { "Accept": "application/json", "Authorization": `Bearer ${token}` }
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
-      
+
       if (!res.ok) throw new Error("Gagal load data pelanggan");
-      
+
       const data = await res.json();
       const responseData = data.data ? data.data : data;
       setUsers(responseData || []);
@@ -546,52 +565,50 @@ export default function AdminUsersList() {
     const token = localStorage.getItem("admin_token");
 
     const echoInstance = new Echo({
-      broadcaster: 'pusher',
-      key: '5b29faa8d41035b749a1',
-      cluster: 'ap1',
+      broadcaster: "pusher",
+      key: "5b29faa8d41035b749a1",
+      cluster: "ap1",
       forceTLS: true,
       authEndpoint: `${BASE_URL}/api/broadcasting/auth`,
       auth: {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
-        }
-      }
+        },
+      },
     });
 
     window.Echo = echoInstance;
 
-    // Pastikan channel name cocok dengan backend
-    echoInstance.private(`chat.${adminUser.id}`)
-      // PERBAIKAN: Tambahkan titik di depan nama event
-      .listen('.MessageSent', (e: any) => {
-        
-        console.log("Pesan diterima admin:", e); // Tambahkan ini untuk debugging!
+    echoInstance
+      .private(`chat.${adminUser.id}`)
+      .listen(".MessageSent", (e: any) => {
+        console.log("Pesan diterima:", e);
+        const incomingMsg = e.message || e;
 
-        // Pastikan kita mengakses objek pesan dengan benar
-        // Terkadang Laravel membungkusnya dalam e.message, kadang langsung di e
-        const incomingMsg = e.message || e; 
-
-        // Tampilkan pesan JIKA pengirimnya adalah user yang sedang dibuka chatnya
-        if (activeChat && incomingMsg.sender_id === activeChat.id) {
-          setMessages(prev => {
-            // Hindari duplikasi pesan (jika ID pesan sudah ada)
-            if (prev.some(m => m.id === incomingMsg.id)) return prev;
+        // GUNAKAN activeChatRef.current, BUKAN activeChat
+        if (
+          activeChatRef.current &&
+          incomingMsg.sender_id === activeChatRef.current.id
+        ) {
+          setMessages((prev) => {
+            if (prev.some((m) => m.id === incomingMsg.id)) return prev;
             return [...prev, incomingMsg];
           });
         }
       });
 
     return () => {
+      // Echo hanya di-cleanup saat currentUser logout/ganti, bukan saat ganti teman chat
       echoInstance.leave(`chat.${adminUser.id}`);
     };
-  }, [adminUser, activeChat]);
+  }, [adminUser]);
 
   const openChat = async (user: User) => {
     setActiveChat(user);
     const token = localStorage.getItem("admin_token");
     const res = await fetch(`${BASE_URL}/api/messages/${user.id}`, {
-      headers: { "Authorization": `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
     if (res.ok) setMessages(await res.json());
   };
@@ -612,13 +629,19 @@ export default function AdminUsersList() {
       message: messageText,
       created_at: new Date().toISOString(),
     };
-    setMessages(prev => [...prev, tempMsg]);
+    setMessages((prev) => [...prev, tempMsg]);
 
     try {
       await fetch(`${BASE_URL}/api/messages`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-        body: JSON.stringify({ receiver_id: activeChat.id, message: messageText })
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          receiver_id: activeChat.id,
+          message: messageText,
+        }),
       });
     } catch (error) {
       console.error("Gagal mengirim:", error);
@@ -627,8 +650,10 @@ export default function AdminUsersList() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return new Intl.DateTimeFormat('id-ID', {
-      day: 'numeric', month: 'long', year: 'numeric'
+    return new Intl.DateTimeFormat("id-ID", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     }).format(date);
   };
 
@@ -642,12 +667,13 @@ export default function AdminUsersList() {
 
   return (
     <div className="relative p-8 mx-auto space-y-6 font-sans max-w-7xl animate-fade-in-up">
-      
       {/* Header Panel */}
       <div className="flex items-center justify-between p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Daftar Pelanggan</h1>
-          <p className="mt-1 text-sm text-gray-500">Kelola data pengguna terdaftar di Gycora.</p>
+          <p className="mt-1 text-sm text-gray-500">
+            Kelola data pengguna terdaftar di Gycora.
+          </p>
         </div>
         <div className="px-4 py-2 text-sm font-bold border rounded-lg bg-emerald-50 text-emerald-700 border-emerald-100">
           Total: {users.length} Pelanggan
@@ -660,46 +686,75 @@ export default function AdminUsersList() {
           <table className="w-full text-left border-collapse">
             <thead className="border-b border-gray-100 bg-gray-50">
               <tr>
-                <th className="p-4 text-xs font-bold text-gray-500 uppercase">Pelanggan</th>
-                <th className="p-4 text-xs font-bold text-gray-500 uppercase">Email</th>
-                <th className="p-4 text-xs font-bold text-center text-gray-500 uppercase">Status Berlangganan</th>
-                <th className="p-4 text-xs font-bold text-gray-500 uppercase">Tanggal Daftar</th>
-                <th className="p-4 text-xs font-bold text-center text-gray-500 uppercase">Aksi</th>
+                <th className="p-4 text-xs font-bold text-gray-500 uppercase">
+                  Pelanggan
+                </th>
+                <th className="p-4 text-xs font-bold text-gray-500 uppercase">
+                  Email
+                </th>
+                <th className="p-4 text-xs font-bold text-center text-gray-500 uppercase">
+                  Status Berlangganan
+                </th>
+                <th className="p-4 text-xs font-bold text-gray-500 uppercase">
+                  Tanggal Daftar
+                </th>
+                <th className="p-4 text-xs font-bold text-center text-gray-500 uppercase">
+                  Aksi
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {users.map(u => (
+              {users.map((u) => (
                 <tr key={u.id} className="transition-colors hover:bg-gray-50">
                   <td className="flex items-center gap-3 p-4">
                     <div className="flex items-center justify-center w-10 h-10 text-sm font-bold uppercase rounded-full bg-gycora-light text-gycora-dark shrink-0">
-                      {u.first_name.charAt(0)}{u.last_name.charAt(0)}
+                      {u.first_name.charAt(0)}
+                      {u.last_name.charAt(0)}
                     </div>
                     <div>
-                      <span className="block text-sm font-semibold text-gray-900">{u.first_name} {u.last_name}</span>
+                      <span className="block text-sm font-semibold text-gray-900">
+                        {u.first_name} {u.last_name}
+                      </span>
                       <span className="text-xs text-gray-500">ID: {u.id}</span>
                     </div>
                   </td>
                   <td className="p-4 text-sm text-gray-600">{u.email}</td>
                   <td className="p-4 text-center">
                     {u.is_subscribed ? (
-                      <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">Subscribed</span>
+                      <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">
+                        Subscribed
+                      </span>
                     ) : (
-                      <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600">Reguler</span>
+                      <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-600">
+                        Reguler
+                      </span>
                     )}
                   </td>
                   <td className="p-4 text-sm text-gray-600 whitespace-nowrap">
                     {formatDate(u.created_at)}
                   </td>
-                  
+
                   {/* --- AKSI TOMBOL CHAT --- */}
                   <td className="p-4">
                     <div className="flex items-center justify-center gap-2">
-                      <button 
+                      <button
                         onClick={() => openChat(u)}
                         className="flex items-center gap-1 px-3 py-1.5 text-xs font-bold text-white transition-colors bg-gycora rounded-lg shadow-sm hover:bg-gycora-dark"
                         title="Chat dengan Pelanggan"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                          />
+                        </svg>
                         Chat
                       </button>
                       <button className="px-3 py-1.5 text-xs font-bold text-gray-700 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200">
@@ -709,10 +764,12 @@ export default function AdminUsersList() {
                   </td>
                 </tr>
               ))}
-              
+
               {users.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-gray-500">Belum ada pelanggan yang terdaftar.</td>
+                  <td colSpan={5} className="p-8 text-center text-gray-500">
+                    Belum ada pelanggan yang terdaftar.
+                  </td>
                 </tr>
               )}
             </tbody>
@@ -723,7 +780,6 @@ export default function AdminUsersList() {
       {/* --- MODAL CHAT POPUP (SISI ADMIN - FIXED POSITIONING) --- */}
       {activeChat && (
         <div className="fixed bottom-0 right-0 z-[100] w-full md:w-96 md:right-8 md:bottom-0 shadow-2xl bg-white border border-gray-200 flex flex-col h-[500px] md:rounded-t-2xl animate-fade-in-up">
-          
           {/* Header Fixed */}
           <div className="flex items-center justify-between p-4 text-white bg-gray-900 shrink-0 md:rounded-t-2xl">
             <div className="flex items-center gap-3">
@@ -731,12 +787,31 @@ export default function AdminUsersList() {
                 {activeChat.first_name.charAt(0)}
               </div>
               <div>
-                <h4 className="text-sm font-bold leading-tight">{activeChat.first_name} {activeChat.last_name}</h4>
-                <p className="text-[10px] tracking-widest text-gray-400 uppercase">Pelanggan</p>
+                <h4 className="text-sm font-bold leading-tight">
+                  {activeChat.first_name} {activeChat.last_name}
+                </h4>
+                <p className="text-[10px] tracking-widest text-gray-400 uppercase">
+                  Pelanggan
+                </p>
               </div>
             </div>
-            <button onClick={() => setActiveChat(null)} className="p-2 text-gray-300 transition-colors rounded-full hover:bg-white/20 hover:text-white">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            <button
+              onClick={() => setActiveChat(null)}
+              className="p-2 text-gray-300 transition-colors rounded-full hover:bg-white/20 hover:text-white"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
             </button>
           </div>
 
@@ -744,15 +819,27 @@ export default function AdminUsersList() {
           <div className="flex-1 p-4 space-y-4 overflow-y-auto bg-gray-50 custom-scrollbar">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full opacity-50">
-                <p className="text-sm font-medium text-gray-500">Belum ada percakapan dengan pelanggan ini.</p>
+                <p className="text-sm font-medium text-gray-500">
+                  Belum ada percakapan dengan pelanggan ini.
+                </p>
               </div>
             ) : (
-              messages.map(msg => (
-                <div key={msg.id} className={`flex ${msg.sender_id === adminUser?.id ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] p-3 rounded-2xl text-sm shadow-sm ${msg.sender_id === adminUser?.id ? 'bg-gray-900 text-white rounded-br-none' : 'bg-white border border-gray-200 text-gray-800 rounded-bl-none'}`}>
+              messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`flex ${msg.sender_id === adminUser?.id ? "justify-end" : "justify-start"}`}
+                >
+                  <div
+                    className={`max-w-[80%] p-3 rounded-2xl text-sm shadow-sm ${msg.sender_id === adminUser?.id ? "bg-gray-900 text-white rounded-br-none" : "bg-white border border-gray-200 text-gray-800 rounded-bl-none"}`}
+                  >
                     {msg.message}
-                    <p className={`text-[9px] mt-1 text-right ${msg.sender_id === adminUser?.id ? 'text-gray-400' : 'text-gray-400'}`}>
-                      {new Date(msg.created_at).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}
+                    <p
+                      className={`text-[9px] mt-1 text-right ${msg.sender_id === adminUser?.id ? "text-gray-400" : "text-gray-400"}`}
+                    >
+                      {new Date(msg.created_at).toLocaleTimeString("id-ID", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </p>
                   </div>
                 </div>
@@ -763,23 +850,34 @@ export default function AdminUsersList() {
 
           {/* Footer Input Fixed */}
           <div className="p-3 bg-white border-t border-gray-100 shrink-0">
-            <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-              <input 
-                type="text" 
+            <form
+              onSubmit={handleSendMessage}
+              className="flex items-center gap-2"
+            >
+              <input
+                type="text"
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 placeholder="Ketik balasan untuk pelanggan..."
                 className="flex-1 px-4 py-2.5 text-sm transition-colors border border-gray-200 rounded-full outline-none focus:border-gray-900 bg-gray-50 focus:bg-white"
               />
-              <button type="submit" disabled={!newMessage.trim()} className="p-2.5 text-white transition-colors rounded-full bg-gray-900 hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed shadow-md">
-                <svg className="w-5 h-5 translate-x-[1px] -translate-y-[1px]" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" /></svg>
+              <button
+                type="submit"
+                disabled={!newMessage.trim()}
+                className="p-2.5 text-white transition-colors rounded-full bg-gray-900 hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              >
+                <svg
+                  className="w-5 h-5 translate-x-[1px] -translate-y-[1px]"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
               </button>
             </form>
           </div>
-
         </div>
       )}
-
     </div>
   );
 }
