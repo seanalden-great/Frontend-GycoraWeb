@@ -279,7 +279,7 @@
 //   }
 
 //   return (
-//     <div className="p-8 mx-auto space-y-6 font-sans max-w-7xl animate-fade-in-up relative">
+//     <div className="relative p-8 mx-auto space-y-6 font-sans max-w-7xl animate-fade-in-up">
       
 //       {/* Header Panel */}
 //       <div className="flex items-center justify-between p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
@@ -363,9 +363,9 @@
 //         <div className="fixed bottom-0 right-0 z-[100] w-full md:w-96 md:right-8 md:bottom-0 shadow-2xl bg-white border border-gray-200 flex flex-col h-[500px] md:rounded-t-2xl animate-fade-in-up">
           
 //           {/* Header Fixed */}
-//           <div className="flex items-center justify-between p-4 text-white shrink-0 bg-gray-900 md:rounded-t-2xl">
+//           <div className="flex items-center justify-between p-4 text-white bg-gray-900 shrink-0 md:rounded-t-2xl">
 //             <div className="flex items-center gap-3">
-//               <div className="flex items-center justify-center w-10 h-10 font-bold bg-white rounded-full shadow-sm text-gray-900">
+//               <div className="flex items-center justify-center w-10 h-10 font-bold text-gray-900 bg-white rounded-full shadow-sm">
 //                 {activeChat.first_name.charAt(0)}
 //               </div>
 //               <div>
@@ -373,13 +373,13 @@
 //                 <p className="text-[10px] tracking-widest text-gray-400 uppercase">Pelanggan</p>
 //               </div>
 //             </div>
-//             <button onClick={() => setActiveChat(null)} className="p-2 transition-colors rounded-full hover:bg-white/20 text-gray-300 hover:text-white">
+//             <button onClick={() => setActiveChat(null)} className="p-2 text-gray-300 transition-colors rounded-full hover:bg-white/20 hover:text-white">
 //               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
 //             </button>
 //           </div>
 
 //           {/* Body Pesan (Scrollable) */}
-//           <div className="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-4 custom-scrollbar">
+//           <div className="flex-1 p-4 space-y-4 overflow-y-auto bg-gray-50 custom-scrollbar">
 //             {messages.length === 0 ? (
 //               <div className="flex flex-col items-center justify-center h-full opacity-50">
 //                 <p className="text-sm font-medium text-gray-500">Belum ada percakapan dengan pelanggan ini.</p>
@@ -515,7 +515,7 @@ export default function AdminUsersList() {
       key: '5b29faa8d41035b749a1', // Pastikan key ini sama dengan .env Laravel Anda
       cluster: 'ap1',
       forceTLS: true,
-      authEndpoint: `${BASE_URL}/broadcasting/auth`,
+      authEndpoint: `${BASE_URL}/api/broadcasting/auth`,
       auth: {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -594,7 +594,7 @@ export default function AdminUsersList() {
   }
 
   return (
-    <div className="p-8 mx-auto space-y-6 font-sans max-w-7xl animate-fade-in-up relative">
+    <div className="relative p-8 mx-auto space-y-6 font-sans max-w-7xl animate-fade-in-up">
       
       {/* Header Panel */}
       <div className="flex items-center justify-between p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
@@ -678,9 +678,9 @@ export default function AdminUsersList() {
         <div className="fixed bottom-0 right-0 z-[100] w-full md:w-96 md:right-8 md:bottom-0 shadow-2xl bg-white border border-gray-200 flex flex-col h-[500px] md:rounded-t-2xl animate-fade-in-up">
           
           {/* Header Fixed */}
-          <div className="flex items-center justify-between p-4 text-white shrink-0 bg-gray-900 md:rounded-t-2xl">
+          <div className="flex items-center justify-between p-4 text-white bg-gray-900 shrink-0 md:rounded-t-2xl">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 font-bold bg-white rounded-full shadow-sm text-gray-900">
+              <div className="flex items-center justify-center w-10 h-10 font-bold text-gray-900 bg-white rounded-full shadow-sm">
                 {activeChat.first_name.charAt(0)}
               </div>
               <div>
@@ -688,13 +688,13 @@ export default function AdminUsersList() {
                 <p className="text-[10px] tracking-widest text-gray-400 uppercase">Pelanggan</p>
               </div>
             </div>
-            <button onClick={() => setActiveChat(null)} className="p-2 transition-colors rounded-full hover:bg-white/20 text-gray-300 hover:text-white">
+            <button onClick={() => setActiveChat(null)} className="p-2 text-gray-300 transition-colors rounded-full hover:bg-white/20 hover:text-white">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
 
           {/* Body Pesan (Scrollable) */}
-          <div className="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-4 custom-scrollbar">
+          <div className="flex-1 p-4 space-y-4 overflow-y-auto bg-gray-50 custom-scrollbar">
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full opacity-50">
                 <p className="text-sm font-medium text-gray-500">Belum ada percakapan dengan pelanggan ini.</p>
