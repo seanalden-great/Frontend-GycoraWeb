@@ -427,6 +427,7 @@ import Swal from "sweetalert2";
 import { BASE_URL } from "../../config/api";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
+import { useNavigate } from "react-router-dom"; // TAMBAHKAN INI
 
 // --- SOLUSI ERROR TYPESCRIPT ---
 declare global {
@@ -466,6 +467,7 @@ interface Message {
 }
 
 export default function AdminUsersList() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -757,9 +759,12 @@ export default function AdminUsersList() {
                         </svg>
                         Chat
                       </button>
-                      <button className="px-3 py-1.5 text-xs font-bold text-gray-700 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200">
-                        Detail
-                      </button>
+                      <button 
+      onClick={() => navigate(`/admin/users/${u.id}`)} 
+      className="px-3 py-1.5 text-xs font-bold text-gray-700 transition-colors bg-gray-100 border border-gray-200 rounded-lg hover:bg-gray-200"
+    >
+      Detail
+    </button>
                     </div>
                   </td>
                 </tr>

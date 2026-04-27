@@ -63,6 +63,7 @@ import AdminCodeVerificationPage from "./pages/admin/AdminCodeVerificationPage";
 import AdminResetPasswordPage from "./pages/admin/AdminResetPasswordPage";
 import AdminReviews from "./pages/admin/AdminReviews";
 import ChatListPage from "./pages/user/ChatListPage";
+import UserDetailPage from "./pages/admin/UserDetailPage";
 
 // function LayoutWrapper({ children }: { children: React.ReactNode }) {
 //   const location = useLocation();
@@ -394,6 +395,7 @@ export default function App() {
                 </AdminLayout>
               }
             />
+            <Route path="/admin/users/:id" element={<UserDetailPage />} />
             {/* Contoh untuk nanti jika ingin menambah Dashboard/Login Admin:
             <Route path="/admin/login" element={<AdminLayout><AdminLogin /></AdminLayout>} />
             <Route path="/admin/dashboard" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
