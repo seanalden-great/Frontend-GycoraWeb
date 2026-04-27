@@ -120,7 +120,7 @@ export default function ChatListPage() {
   useEffect(() => {
     if (!currentUser) return;
 
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem("user_token");
 
     const echoInstance = new Echo({
       broadcaster: 'pusher',
