@@ -3,8 +3,12 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../config/api";
 
+import { useMessage } from "../../context/MessageContext";
+
 export default function MessageViewPage() {
   const navigate = useNavigate();
+
+  const { fetchUnreadMessages } = useMessage(); // Gunakan context
 
   const [messages, setMessages] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,6 +16,24 @@ export default function MessageViewPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  // const fetchMessages = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const token = localStorage.getItem("admin_token");
+  //     const res = await fetch(`${BASE_URL}/api/admin/messages`, {
+  //       headers: { Authorization: `Bearer ${token}`, Accept: "application/json" },
+  //     });
+  //     if (res.ok) {
+  //       const data = await res.json();
+  //       setMessages(data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Gagal memuat pesan:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const fetchMessages = async () => {
     setIsLoading(true);
@@ -23,6 +45,7 @@ export default function MessageViewPage() {
       if (res.ok) {
         const data = await res.json();
         setMessages(data);
+        fetchUnreadMessages();
       }
     } catch (error) {
       console.error("Gagal memuat pesan:", error);

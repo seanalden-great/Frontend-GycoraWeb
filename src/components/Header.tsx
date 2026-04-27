@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useEffect, useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
-// import { useCart } from "../context/CartContext"; 
+// import { useCart } from "../context/CartContext";
 
 // export default function Header() {
 //   const navigate = useNavigate();
@@ -38,7 +39,7 @@
 //     // Nanti sesuaikan URL API dengan Laravel (misal port 8000)
 //     const token = localStorage.getItem("user_token");
 //     await fetch(`http://localhost:8000/api/carts/${id}`, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
-//     fetchCart(); 
+//     fetchCart();
 //   };
 
 //   const handleUpdateQty = async (id: number, newQty: number) => {
@@ -48,7 +49,7 @@
 //       method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ quantity: newQty }),
 //     });
 //     if (!res.ok) Swal.fire("Peringatan", "Stok tidak mencukupi", "warning");
-//     fetchCart(); 
+//     fetchCart();
 //   };
 
 //   const formatRupiah = (angka: number) => {
@@ -108,7 +109,7 @@
 //           <nav className="flex items-center justify-center h-12 space-x-10 text-sm font-semibold text-gray-700">
 //              {/* --- TAUTAN BARU: Home --- */}
 //              <Link to="/" className="transition-colors hover:text-gycora">Home</Link>
-             
+
 //              {/* Tautan Lama: Shop All */}
 //              <Link to="/products" className="transition-colors hover:text-gycora">Shop All</Link>
 
@@ -127,7 +128,7 @@
 //             <h2 className="text-xl font-extrabold text-gray-900">Keranjang Belanja</h2>
 //             <button onClick={() => setIsCartOpen(false)} className="p-2 text-gray-400 transition-colors hover:text-gray-900">Close</button>
 //           </div>
-          
+
 //           <div className="flex-1 p-6 space-y-6 overflow-y-auto">
 //             {cartItems.length === 0 ? (
 //               <p className="mt-10 text-center text-gray-500">Keranjang Anda masih kosong.</p>
@@ -169,7 +170,7 @@
 // import { useEffect, useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
-// import { useCart } from "../context/CartContext"; 
+// import { useCart } from "../context/CartContext";
 
 // export default function Header() {
 //   const navigate = useNavigate();
@@ -205,7 +206,7 @@
 //     // Nanti sesuaikan URL API dengan Laravel (misal port 8000)
 //     const token = localStorage.getItem("user_token");
 //     await fetch(`http://localhost:8000/api/carts/${id}`, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
-//     fetchCart(); 
+//     fetchCart();
 //   };
 
 //   const handleUpdateQty = async (id: number, newQty: number) => {
@@ -215,7 +216,7 @@
 //       method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ quantity: newQty }),
 //     });
 //     if (!res.ok) Swal.fire("Peringatan", "Stok tidak mencukupi", "warning");
-//     fetchCart(); 
+//     fetchCart();
 //   };
 
 //   const formatRupiah = (angka: number) => {
@@ -225,7 +226,7 @@
 //   // --- FUNGSI BARU UNTUK CEK LOGIN SEBELUM KE HALAMAN ORDER ---
 //   const handleOrderNavigation = () => {
 //     const token = localStorage.getItem("user_token");
-    
+
 //     if (!token) {
 //       Swal.fire({
 //         title: "Login Diperlukan",
@@ -308,7 +309,7 @@
 //             <h2 className="text-xl font-extrabold text-gray-900">Keranjang Belanja</h2>
 //             <button onClick={() => setIsCartOpen(false)} className="p-2 text-gray-400 transition-colors hover:text-gray-900">Close</button>
 //           </div>
-          
+
 //           <div className="flex-1 p-6 space-y-6 overflow-y-auto">
 //             {cartItems.length === 0 ? (
 //               <p className="mt-10 text-center text-gray-500">Keranjang Anda masih kosong.</p>
@@ -350,7 +351,7 @@
 // import { useEffect, useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
-// import { useCart } from "../context/CartContext"; 
+// import { useCart } from "../context/CartContext";
 // import logoGycora from "../assets/gycora_logo.png"; // <-- Import Logo Gycora
 
 // export default function Header() {
@@ -388,7 +389,7 @@
 //   //   // Nanti sesuaikan URL API dengan Laravel (misal port 8000)
 //   //   const token = localStorage.getItem("user_token");
 //   //   await fetch(`http://localhost:8000/api/carts/${id}`, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
-//   //   fetchCart(); 
+//   //   fetchCart();
 //   // };
 
 //   // const handleUpdateQty = async (id: number, newQty: number) => {
@@ -398,7 +399,7 @@
 //   //     method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ quantity: newQty }),
 //   //   });
 //   //   if (!res.ok) Swal.fire("Peringatan", "Stok tidak mencukupi", "warning");
-//   //   fetchCart(); 
+//   //   fetchCart();
 //   // };
 
 //   // const formatRupiah = (angka: number) => {
@@ -408,7 +409,7 @@
 //   // --- FUNGSI BARU UNTUK CEK LOGIN SEBELUM KE HALAMAN ORDER ---
 //   // const handleOrderNavigation = () => {
 //   //   const token = localStorage.getItem("user_token");
-    
+
 //   //   if (!token) {
 //   //     Swal.fire({
 //   //       title: "Login Diperlukan",
@@ -437,10 +438,10 @@
 
 //           {/* MENGGANTI TEKS DENGAN LOGO GAMBAR */}
 //           <div className="flex items-center justify-center flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
-//             <img 
-//               src={logoGycora} 
-//               alt="Gycora Logo" 
-//               className="object-contain h-8 md:h-10" 
+//             <img
+//               src={logoGycora}
+//               alt="Gycora Logo"
+//               className="object-contain h-8 md:h-10"
 //             />
 //           </div>
 
@@ -495,7 +496,7 @@
 //             <h2 className="text-xl font-extrabold text-gray-900">Keranjang Belanja</h2>
 //             <button onClick={() => setIsCartOpen(false)} className="p-2 text-gray-400 transition-colors hover:text-gray-900">Close</button>
 //           </div>
-          
+
 //           <div className="flex-1 p-6 space-y-6 overflow-y-auto">
 //             {cartItems.length === 0 ? (
 //               <p className="mt-10 text-center text-gray-500">Keranjang Anda masih kosong.</p>
@@ -542,7 +543,7 @@
 // import { useEffect, useState, useRef } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
-// import { useCart } from "../context/CartContext"; 
+// import { useCart } from "../context/CartContext";
 // import logoGycora from "../assets/gycora_logo.png";
 // import { BASE_URL } from "../config/api"; // Pastikan path ini benar
 
@@ -674,10 +675,10 @@
 
 //           {/* LOGO */}
 //           <div className="flex items-center justify-center flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
-//             <img 
-//               src={logoGycora} 
-//               alt="Gycora Logo" 
-//               className="object-contain h-8 md:h-10" 
+//             <img
+//               src={logoGycora}
+//               alt="Gycora Logo"
+//               className="object-contain h-8 md:h-10"
 //             />
 //           </div>
 
@@ -739,9 +740,9 @@
 //         <div className="fixed inset-0 z-[100] flex justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
 //           {/* Area luar klik untuk menutup modal */}
 //           <div className="absolute inset-0" onClick={closeSearchModal}></div>
-          
+
 //           <div className="relative flex flex-col w-full max-w-3xl mt-16 md:mt-24 overflow-hidden bg-white shadow-2xl h-[85vh] md:h-[75vh] rounded-t-3xl md:rounded-3xl animate-fade-in-up">
-            
+
 //             {/* Header Pencarian */}
 //             <div className="flex flex-col p-4 border-b border-gray-100 md:p-6 bg-gray-50/50">
 //               <div className="flex items-center justify-between mb-4">
@@ -756,11 +757,11 @@
 //                 <svg className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 //                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 //                 </svg>
-//                 <input 
-//                   type="text" 
+//                 <input
+//                   type="text"
 //                   value={searchQuery}
 //                   onChange={(e) => setSearchQuery(e.target.value)}
-//                   placeholder="Cari produk, No. Pesanan (INV-...), atau status..." 
+//                   placeholder="Cari produk, No. Pesanan (INV-...), atau status..."
 //                   className="w-full py-3 pl-12 pr-4 text-sm font-medium transition-all bg-white border border-gray-300 shadow-sm outline-none rounded-xl focus:ring-2 focus:ring-gycora focus:border-transparent"
 //                   autoFocus
 //                 />
@@ -774,7 +775,7 @@
 //                   { id: '30d', label: '30 Hari Terakhir' },
 //                   { id: '90d', label: '3 Bulan Terakhir' },
 //                 ].map((filter) => (
-//                   <button 
+//                   <button
 //                     key={filter.id}
 //                     onClick={() => setTimeFilter(filter.id)}
 //                     className={`shrink-0 px-4 py-1.5 text-xs font-bold rounded-full transition-all border ${timeFilter === filter.id ? 'bg-gycora text-white border-gycora shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-100'}`}
@@ -801,14 +802,14 @@
 //                 </div>
 //               ) : (
 //                 <div className="space-y-8 animate-fade-in">
-                  
+
 //                   {/* --- HASIL PRODUK --- */}
 //                   {searchResults.products && searchResults.products.length > 0 && (
 //                     <div className="space-y-3">
 //                       <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Produk Katalog</h3>
 //                       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
 //                         {searchResults.products.map((product: any) => (
-//                           <div 
+//                           <div
 //                             key={`prod-${product.id}`}
 //                             onClick={() => { closeSearchModal(); navigate(`/product/${product.id}`); }}
 //                             className="flex items-center gap-3 p-3 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
@@ -831,7 +832,7 @@
 //                       <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Riwayat Transaksi</h3>
 //                       <div className="flex flex-col gap-3">
 //                         {searchResults.transactions.map((trx: any) => (
-//                           <div 
+//                           <div
 //                             key={`trx-${trx.id}`}
 //                             onClick={() => { closeSearchModal(); navigate(`/orders`); }}
 //                             className="flex items-center justify-between p-4 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
@@ -856,9 +857,9 @@
 //                   )}
 
 //                   {/* KOSONG/TIDAK ADA HASIL */}
-//                   {!isSearching && 
-//                    searchResults.products?.length === 0 && 
-//                    searchResults.transactions?.length === 0 && 
+//                   {!isSearching &&
+//                    searchResults.products?.length === 0 &&
+//                    searchResults.transactions?.length === 0 &&
 //                    searchResults.carts?.length === 0 && (
 //                     <div className="flex flex-col items-center justify-center py-10 text-center">
 //                       <p className="text-lg font-bold text-gray-900">Oops, tidak ditemukan!</p>
@@ -880,9 +881,9 @@
 // import { useEffect, useState, useRef } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
-// import { useCart } from "../context/CartContext"; 
+// import { useCart } from "../context/CartContext";
 // import logoGycora from "../assets/gycora_logo.png";
-// import { BASE_URL } from "../config/api"; 
+// import { BASE_URL } from "../config/api";
 
 // export default function Header() {
 //   const navigate = useNavigate();
@@ -897,7 +898,7 @@
 //   // --- STATE UNTUK GLOBAL SEARCH MODAL ---
 //   const [isSearchOpen, setIsSearchOpen] = useState(false);
 //   const [searchQuery, setSearchQuery] = useState("");
-//   const [timeFilter, setTimeFilter] = useState("all"); 
+//   const [timeFilter, setTimeFilter] = useState("all");
 //   const [isSearching, setIsSearching] = useState(false);
 //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 //   const [searchResults, setSearchResults] = useState<any>({ products: [], transactions: [], carts: [] });
@@ -999,10 +1000,10 @@
 
 //           {/* LOGO */}
 //           <div className="flex items-center justify-center flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
-//             <img 
-//               src={logoGycora} 
-//               alt="Gycora Logo" 
-//               className="object-contain h-8 md:h-10" 
+//             <img
+//               src={logoGycora}
+//               alt="Gycora Logo"
+//               className="object-contain h-8 md:h-10"
 //             />
 //           </div>
 
@@ -1010,7 +1011,7 @@
 //             {userData ? (
 //               // --- AREA DROPDOWN PROFIL BARU ---
 //               <div className="relative" ref={dropdownRef}>
-//                 <button 
+//                 <button
 //                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
 //                   className="flex items-center gap-2 cursor-pointer group focus:outline-none"
 //                 >
@@ -1028,16 +1029,16 @@
 //                 {/* Modal Dropdown */}
 //                 {isDropdownOpen && (
 //                   <div className="absolute right-0 w-48 py-2 mt-3 bg-white border border-gray-100 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] animate-fade-in-up origin-top-right">
-//                     <Link 
-//                       to="/profile" 
+//                     <Link
+//                       to="/profile"
 //                       onClick={() => setIsDropdownOpen(false)}
 //                       className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gycora"
 //                     >
 //                       <svg className="w-4 h-4 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
 //                       Profil Saya
 //                     </Link>
-//                     <Link 
-//                       to="/orders" 
+//                     <Link
+//                       to="/orders"
 //                       onClick={() => setIsDropdownOpen(false)}
 //                       className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gycora"
 //                     >
@@ -1045,7 +1046,7 @@
 //                       Pesanan Saya
 //                     </Link>
 //                     <div className="my-1 border-t border-gray-100"></div>
-//                     <button 
+//                     <button
 //                       onClick={() => {
 //                         setIsDropdownOpen(false);
 //                         handleLogout();
@@ -1100,9 +1101,9 @@
 //         <div className="fixed inset-0 z-[100] flex justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
 //           {/* Area luar klik untuk menutup modal */}
 //           <div className="absolute inset-0" onClick={closeSearchModal}></div>
-          
+
 //           <div className="relative flex flex-col w-full max-w-3xl mt-16 md:mt-24 overflow-hidden bg-white shadow-2xl h-[85vh] md:h-[75vh] rounded-t-3xl md:rounded-3xl animate-fade-in-up">
-            
+
 //             {/* Header Pencarian */}
 //             <div className="flex flex-col p-4 border-b border-gray-100 md:p-6 bg-gray-50/50">
 //               <div className="flex items-center justify-between mb-4">
@@ -1117,11 +1118,11 @@
 //                 <svg className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 //                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 //                 </svg>
-//                 <input 
-//                   type="text" 
+//                 <input
+//                   type="text"
 //                   value={searchQuery}
 //                   onChange={(e) => setSearchQuery(e.target.value)}
-//                   placeholder="Cari produk, No. Pesanan (INV-...), atau status..." 
+//                   placeholder="Cari produk, No. Pesanan (INV-...), atau status..."
 //                   className="w-full py-3 pl-12 pr-4 text-sm font-medium transition-all bg-white border border-gray-300 shadow-sm outline-none rounded-xl focus:ring-2 focus:ring-gycora focus:border-transparent"
 //                   autoFocus
 //                 />
@@ -1135,7 +1136,7 @@
 //                   { id: '30d', label: '30 Hari Terakhir' },
 //                   { id: '90d', label: '3 Bulan Terakhir' },
 //                 ].map((filter) => (
-//                   <button 
+//                   <button
 //                     key={filter.id}
 //                     onClick={() => setTimeFilter(filter.id)}
 //                     className={`shrink-0 px-4 py-1.5 text-xs font-bold rounded-full transition-all border ${timeFilter === filter.id ? 'bg-gycora text-white border-gycora shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-100'}`}
@@ -1162,14 +1163,14 @@
 //                 </div>
 //               ) : (
 //                 <div className="space-y-8 animate-fade-in">
-                  
+
 //                   {/* --- HASIL PRODUK --- */}
 //                   {searchResults.products && searchResults.products.length > 0 && (
 //                     <div className="space-y-3">
 //                       <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Produk Katalog</h3>
 //                       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
 //                         {searchResults.products.map((product: any) => (
-//                           <div 
+//                           <div
 //                             key={`prod-${product.id}`}
 //                             onClick={() => { closeSearchModal(); navigate(`/product/${product.id}`); }}
 //                             className="flex items-center gap-3 p-3 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
@@ -1192,7 +1193,7 @@
 //                       <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Riwayat Transaksi</h3>
 //                       <div className="flex flex-col gap-3">
 //                         {searchResults.transactions.map((trx: any) => (
-//                           <div 
+//                           <div
 //                             key={`trx-${trx.id}`}
 //                             onClick={() => { closeSearchModal(); navigate(`/orders`); }}
 //                             className="flex items-center justify-between p-4 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
@@ -1217,9 +1218,9 @@
 //                   )}
 
 //                   {/* KOSONG/TIDAK ADA HASIL */}
-//                   {!isSearching && 
-//                    searchResults.products?.length === 0 && 
-//                    searchResults.transactions?.length === 0 && 
+//                   {!isSearching &&
+//                    searchResults.products?.length === 0 &&
+//                    searchResults.transactions?.length === 0 &&
 //                    searchResults.carts?.length === 0 && (
 //                     <div className="flex flex-col items-center justify-center py-10 text-center">
 //                       <p className="text-lg font-bold text-gray-900">Oops, tidak ditemukan!</p>
@@ -1241,9 +1242,9 @@
 // import { useEffect, useState, useRef } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import Swal from "sweetalert2";
-// import { useCart } from "../context/CartContext"; 
+// import { useCart } from "../context/CartContext";
 // import logoGycora from "../assets/gycora_logo.png";
-// import { BASE_URL } from "../config/api"; 
+// import { BASE_URL } from "../config/api";
 
 // export default function Header() {
 //   const navigate = useNavigate();
@@ -1258,7 +1259,7 @@
 //   // --- STATE UNTUK GLOBAL SEARCH MODAL ---
 //   const [isSearchOpen, setIsSearchOpen] = useState(false);
 //   const [searchQuery, setSearchQuery] = useState("");
-//   const [timeFilter, setTimeFilter] = useState("all"); 
+//   const [timeFilter, setTimeFilter] = useState("all");
 //   const [isSearching, setIsSearching] = useState(false);
 //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 //   const [searchResults, setSearchResults] = useState<any>({ products: [], transactions: [], carts: [] });
@@ -1360,10 +1361,10 @@
 
 //           {/* LOGO */}
 //           <div className="flex items-center justify-center flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
-//             <img 
-//               src={logoGycora} 
-//               alt="Gycora Logo" 
-//               className="object-contain h-8 md:h-10" 
+//             <img
+//               src={logoGycora}
+//               alt="Gycora Logo"
+//               className="object-contain h-8 md:h-10"
 //             />
 //           </div>
 
@@ -1371,7 +1372,7 @@
 //             {userData ? (
 //               // --- AREA DROPDOWN PROFIL ---
 //               <div className="relative" ref={dropdownRef}>
-//                 <button 
+//                 <button
 //                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
 //                   className="flex items-center gap-2 cursor-pointer group focus:outline-none"
 //                 >
@@ -1389,16 +1390,16 @@
 //                 {/* Modal Dropdown */}
 //                 {isDropdownOpen && (
 //                   <div className="absolute right-0 w-48 py-2 mt-3 bg-white border border-gray-100 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] animate-fade-in-up origin-top-right">
-//                     <Link 
-//                       to="/profile" 
+//                     <Link
+//                       to="/profile"
 //                       onClick={() => setIsDropdownOpen(false)}
 //                       className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gycora"
 //                     >
 //                       <svg className="w-4 h-4 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
 //                       Profil Saya
 //                     </Link>
-//                     <Link 
-//                       to="/orders" 
+//                     <Link
+//                       to="/orders"
 //                       onClick={() => setIsDropdownOpen(false)}
 //                       className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gycora"
 //                     >
@@ -1406,7 +1407,7 @@
 //                       Pesanan Saya
 //                     </Link>
 //                     <div className="my-1 border-t border-gray-100"></div>
-//                     <button 
+//                     <button
 //                       onClick={() => {
 //                         setIsDropdownOpen(false);
 //                         handleLogout();
@@ -1470,9 +1471,9 @@
 //         <div className="fixed inset-0 z-[100] flex justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
 //           {/* Area luar klik untuk menutup modal */}
 //           <div className="absolute inset-0" onClick={closeSearchModal}></div>
-          
+
 //           <div className="relative flex flex-col w-full max-w-3xl mt-16 md:mt-24 overflow-hidden bg-white shadow-2xl h-[85vh] md:h-[75vh] rounded-t-3xl md:rounded-3xl animate-fade-in-up">
-            
+
 //             {/* Header Pencarian */}
 //             <div className="flex flex-col p-4 border-b border-gray-100 md:p-6 bg-gray-50/50">
 //               <div className="flex items-center justify-between mb-4">
@@ -1487,11 +1488,11 @@
 //                 <svg className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 //                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 //                 </svg>
-//                 <input 
-//                   type="text" 
+//                 <input
+//                   type="text"
 //                   value={searchQuery}
 //                   onChange={(e) => setSearchQuery(e.target.value)}
-//                   placeholder="Cari produk, No. Pesanan (INV-...), atau status..." 
+//                   placeholder="Cari produk, No. Pesanan (INV-...), atau status..."
 //                   className="w-full py-3 pl-12 pr-4 text-sm font-medium transition-all bg-white border border-gray-300 shadow-sm outline-none rounded-xl focus:ring-2 focus:ring-gycora focus:border-transparent"
 //                   autoFocus
 //                 />
@@ -1505,7 +1506,7 @@
 //                   { id: '30d', label: '30 Hari Terakhir' },
 //                   { id: '90d', label: '3 Bulan Terakhir' },
 //                 ].map((filter) => (
-//                   <button 
+//                   <button
 //                     key={filter.id}
 //                     onClick={() => setTimeFilter(filter.id)}
 //                     className={`shrink-0 px-4 py-1.5 text-xs font-bold rounded-full transition-all border ${timeFilter === filter.id ? 'bg-gycora text-white border-gycora shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-100'}`}
@@ -1532,14 +1533,14 @@
 //                 </div>
 //               ) : (
 //                 <div className="space-y-8 animate-fade-in">
-                  
+
 //                   {/* --- HASIL PRODUK --- */}
 //                   {searchResults.products && searchResults.products.length > 0 && (
 //                     <div className="space-y-3">
 //                       <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Produk Katalog</h3>
 //                       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
 //                         {searchResults.products.map((product: any) => (
-//                           <div 
+//                           <div
 //                             key={`prod-${product.id}`}
 //                             onClick={() => { closeSearchModal(); navigate(`/product/${product.id}`); }}
 //                             className="flex items-center gap-3 p-3 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
@@ -1562,7 +1563,7 @@
 //                       <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Riwayat Transaksi</h3>
 //                       <div className="flex flex-col gap-3">
 //                         {searchResults.transactions.map((trx: any) => (
-//                           <div 
+//                           <div
 //                             key={`trx-${trx.id}`}
 //                             onClick={() => { closeSearchModal(); navigate(`/orders`); }}
 //                             className="flex items-center justify-between p-4 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
@@ -1587,9 +1588,496 @@
 //                   )}
 
 //                   {/* KOSONG/TIDAK ADA HASIL */}
-//                   {!isSearching && 
-//                    searchResults.products?.length === 0 && 
-//                    searchResults.transactions?.length === 0 && 
+//                   {!isSearching &&
+//                    searchResults.products?.length === 0 &&
+//                    searchResults.transactions?.length === 0 &&
+//                    searchResults.carts?.length === 0 && (
+//                     <div className="flex flex-col items-center justify-center py-10 text-center">
+//                       <p className="text-lg font-bold text-gray-900">Oops, tidak ditemukan!</p>
+//                       <p className="max-w-sm mt-2 text-sm text-gray-500">Kami tidak dapat menemukan hasil untuk "{searchQuery}" dengan rentang waktu yang Anda pilih.</p>
+//                     </div>
+//                   )}
+
+//                 </div>
+//               )}
+//             </div>
+
+//           </div>
+//         </div>
+//       )}
+//     </>
+//   );
+// }
+
+// import { useEffect, useState, useRef } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import Swal from "sweetalert2";
+// import { useCart } from "../context/CartContext";
+// import logoGycora from "../assets/gycora_logo.png";
+// import { BASE_URL } from "../config/api";
+
+// export default function Header() {
+//   const navigate = useNavigate();
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const [userData, setUserData] = useState<any>(null);
+//   const { cartTotalItems } = useCart();
+
+//   // --- STATE UNTUK DROPDOWN PROFIL ---
+//   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+//   const dropdownRef = useRef<HTMLDivElement>(null);
+
+//   // --- STATE UNTUK MOBILE MENU (BARU) ---
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+//   // --- STATE UNTUK GLOBAL SEARCH MODAL ---
+//   const [isSearchOpen, setIsSearchOpen] = useState(false);
+//   const [searchQuery, setSearchQuery] = useState("");
+//   const [timeFilter, setTimeFilter] = useState("all");
+//   const [isSearching, setIsSearching] = useState(false);
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   const [searchResults, setSearchResults] = useState<any>({ products: [], transactions: [], carts: [] });
+//   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("user_token");
+//     const storedUser = localStorage.getItem("user_data");
+//     if (token && storedUser) {
+//       setUserData(JSON.parse(storedUser));
+//     }
+//   }, []);
+
+//   // --- EFEK KLIK DI LUAR DROPDOWN ---
+//   useEffect(() => {
+//     function handleClickOutside(event: MouseEvent) {
+//       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+//         setIsDropdownOpen(false);
+//       }
+//     }
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => document.removeEventListener("mousedown", handleClickOutside);
+//   }, []);
+
+//   // --- MENCEGAH SCROLL SAAT MOBILE MENU DIBUKA ---
+//   useEffect(() => {
+//     if (isMobileMenuOpen || isSearchOpen) {
+//       document.body.style.overflow = 'hidden';
+//     } else {
+//       document.body.style.overflow = 'unset';
+//     }
+//     return () => {
+//       document.body.style.overflow = 'unset';
+//     };
+//   }, [isMobileMenuOpen, isSearchOpen]);
+
+//   const handleLogout = () => {
+//     Swal.fire({
+//       title: "Keluar?", icon: "warning", showCancelButton: true, confirmButtonColor: "#059669", cancelButtonColor: "#d33", confirmButtonText: "Ya, Keluar"
+//     }).then((result) => {
+//       if (result.isConfirmed) {
+//         localStorage.removeItem("user_token");
+//         localStorage.removeItem("user_data");
+//         setUserData(null);
+//         setIsMobileMenuOpen(false); // Tutup mobile menu jika sedang terbuka
+//         navigate("/");
+//         Swal.fire({ title: "Berhasil Keluar", icon: "success", timer: 1500, showConfirmButton: false });
+//       }
+//     });
+//   };
+
+//   // --- EFEK PENCARIAN DENGAN DEBOUNCE ---
+//   useEffect(() => {
+//     if (!isSearchOpen) return;
+
+//     if (searchQuery.trim().length === 0) {
+//       setSearchResults({ products: [], transactions: [], carts: [] });
+//       setIsSearching(false);
+//       return;
+//     }
+
+//     setIsSearching(true);
+
+//     if (searchTimeoutRef.current) {
+//       clearTimeout(searchTimeoutRef.current);
+//     }
+
+//     searchTimeoutRef.current = setTimeout(async () => {
+//       try {
+//         const token = localStorage.getItem("user_token");
+//         const res = await fetch(`${BASE_URL}/api/search?q=${encodeURIComponent(searchQuery)}&time=${timeFilter}`, {
+//           headers: {
+//             "Accept": "application/json",
+//             ...(token && { "Authorization": `Bearer ${token}` })
+//           }
+//         });
+
+//         if (res.ok) {
+//           const data = await res.json();
+//           setSearchResults(data);
+//         } else {
+//           setSearchResults({ products: [], transactions: [], carts: [] });
+//         }
+//       } catch (error) {
+//         console.error("Global search error:", error);
+//         setSearchResults({ products: [], transactions: [], carts: [] });
+//       } finally {
+//         setIsSearching(false);
+//       }
+//     }, 500);
+
+//     return () => {
+//       if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
+//     };
+//   }, [searchQuery, timeFilter, isSearchOpen]);
+
+//   const closeSearchModal = () => {
+//     setIsSearchOpen(false);
+//     setSearchQuery("");
+//     setSearchResults({ products: [], transactions: [], carts: [] });
+//   };
+
+//   const formatRupiah = (angka: number) => {
+//     return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(angka || 0);
+//   };
+
+//   return (
+//     <>
+//       <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
+//         <div className="flex items-center justify-between h-20 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+
+//           {/* BAGIAN KIRI: Hamburger Menu (Mobile) & Navigasi Kiri (Desktop) */}
+//           <div className="flex items-center flex-1">
+//             {/* Mobile Menu Button */}
+//             <button
+//               onClick={() => setIsMobileMenuOpen(true)}
+//               className="p-2 -ml-2 text-gray-600 transition-colors rounded-md md:hidden hover:bg-gray-100 focus:outline-none"
+//             >
+//               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+//               </svg>
+//             </button>
+//           </div>
+
+//           {/* BAGIAN TENGAH: LOGO */}
+//           <div className="flex items-center justify-center flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
+//             <img
+//               src={logoGycora}
+//               alt="Gycora Logo"
+//               className="object-contain h-8 md:h-10"
+//             />
+//           </div>
+
+//           {/* BAGIAN KANAN: Ikon & Profil */}
+//           <div className="flex items-center justify-end flex-1 gap-2 md:gap-5">
+//             {userData ? (
+//               // --- AREA DROPDOWN PROFIL (Desktop) ---
+//               <div className="relative hidden md:block" ref={dropdownRef}>
+//                 <button
+//                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+//                   className="flex items-center gap-2 cursor-pointer group focus:outline-none"
+//                 >
+//                   <div className="flex items-center justify-center w-8 h-8 text-sm font-bold transition-colors rounded-full bg-gycora-light text-gycora-dark group-hover:bg-gycora group-hover:text-white">
+//                     {userData.first_name.charAt(0)}
+//                   </div>
+//                   <span className="hidden text-sm font-semibold text-gray-800 transition-colors md:block group-hover:text-gycora">
+//                     Hi, {userData.first_name}
+//                   </span>
+//                   <svg className={`hidden md:block w-4 h-4 text-gray-500 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+//                   </svg>
+//                 </button>
+
+//                 {/* Modal Dropdown Desktop */}
+//                 {isDropdownOpen && (
+//                   <div className="absolute right-0 w-48 py-2 mt-3 bg-white border border-gray-100 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] animate-fade-in-up origin-top-right">
+//                     <Link
+//                       to="/profile"
+//                       onClick={() => setIsDropdownOpen(false)}
+//                       className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gycora"
+//                     >
+//                       <svg className="w-4 h-4 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+//                       Profil Saya
+//                     </Link>
+//                     <Link
+//                       to="/orders"
+//                       onClick={() => setIsDropdownOpen(false)}
+//                       className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gycora"
+//                     >
+//                       <svg className="w-4 h-4 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+//                       Pesanan Saya
+//                     </Link>
+//                     <div className="my-1 border-t border-gray-100"></div>
+//                     <button
+//                       onClick={() => {
+//                         setIsDropdownOpen(false);
+//                         handleLogout();
+//                       }}
+//                       className="flex items-center w-full px-4 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
+//                     >
+//                       <svg className="w-4 h-4 mr-3 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+//                       Keluar
+//                     </button>
+//                   </div>
+//                 )}
+//               </div>
+//             ) : (
+//               <Link to="/login" className="hidden text-sm font-medium text-gray-600 transition-colors md:block hover:text-gycora">Login</Link>
+//             )}
+
+//             {/* IKON PENCARIAN (GLOBAL SEARCH) */}
+//             <button onClick={() => setIsSearchOpen(true)} className="relative p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora">
+//               <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+//               </svg>
+//             </button>
+
+//             {/* IKON CHAT (HANYA MUNCUL JIKA SUDAH LOGIN) */}
+//             {userData && (
+//               <button onClick={() => navigate("/chat")} className="relative hidden md:block p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora" title="Chat dengan Pakar">
+//                 <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+//                 </svg>
+//               </button>
+//             )}
+
+//             {/* IKON KERANJANG */}
+//             <button id="cart-icon" onClick={() => navigate("/cart")} className="relative p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora">
+//               <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+//               </svg>
+//               {cartTotalItems > 0 && (
+//                 <span className="absolute top-0 right-0 bg-gycora text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
+//                   {cartTotalItems}
+//                 </span>
+//               )}
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* BOTTOM NAVIGATION (Hanya Desktop) */}
+//         <div className="hidden px-4 mx-auto border-t border-gray-100 max-w-7xl sm:px-6 lg:px-8 md:block">
+//           <nav className="flex items-center justify-center h-12 space-x-10 text-sm font-semibold text-gray-700">
+//              <Link to="/" className="transition-colors hover:text-gycora">Home</Link>
+//              <Link to="/products" className="transition-colors hover:text-gycora">Shop All</Link>
+//              <Link to="/consult" className="transition-colors hover:text-gycora">Consult With Us</Link>
+//           </nav>
+//         </div>
+//       </header>
+
+//       {/* =====================================================================
+//           SIDEBAR MOBILE MENU (BARU)
+//       ===================================================================== */}
+//       {isMobileMenuOpen && (
+//         <div className="fixed inset-0 z-[100] md:hidden">
+//           {/* Overlay Background */}
+//           <div
+//             className="absolute inset-0 transition-opacity bg-black/50 backdrop-blur-sm"
+//             onClick={() => setIsMobileMenuOpen(false)}
+//           ></div>
+
+//           {/* Panel Menu */}
+//           <div className="absolute inset-y-0 left-0 flex flex-col w-4/5 max-w-sm overflow-y-auto bg-white shadow-2xl animate-fade-in-right">
+//             <div className="flex items-center justify-between p-4 border-b border-gray-100">
+//               <img src={logoGycora} alt="Gycora" className="h-6" />
+//               <button
+//                 onClick={() => setIsMobileMenuOpen(false)}
+//                 className="p-2 text-gray-500 bg-gray-100 rounded-full hover:bg-gray-200"
+//               >
+//                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+//               </button>
+//             </div>
+
+//             {/* Jika User Login, tampilkan info singkat di atas */}
+//             {userData && (
+//               <div className="flex items-center gap-3 p-4 border-b border-gray-100 bg-emerald-50/30">
+//                 <div className="flex items-center justify-center w-12 h-12 font-bold rounded-full bg-gycora-light text-gycora-dark">
+//                   {userData.first_name.charAt(0)}
+//                 </div>
+//                 <div>
+//                   <p className="text-sm font-bold text-gray-900">{userData.first_name} {userData.last_name}</p>
+//                   <p className="text-xs text-gray-500">{userData.email}</p>
+//                 </div>
+//               </div>
+//             )}
+
+//             {/* Menu Navigasi */}
+//             <nav className="flex flex-col flex-1 p-4 space-y-2">
+//               <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">Home</Link>
+//               <Link to="/products" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">Shop All</Link>
+//               <Link to="/consult" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">Consult With Us</Link>
+
+//               {/* Menu Khusus Login */}
+//               {userData && (
+//                 <>
+//                   <div className="my-2 border-t border-gray-100"></div>
+//                   <Link to="/chat" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">
+//                     <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+//                     Live Chat Pakar
+//                   </Link>
+//                   <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">
+//                     <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+//                     Profil Saya
+//                   </Link>
+//                   <Link to="/orders" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">
+//                     <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+//                     Pesanan Saya
+//                   </Link>
+//                 </>
+//               )}
+//             </nav>
+
+//             {/* Footer Menu (Auth Action) */}
+//             <div className="p-4 border-t border-gray-100">
+//               {userData ? (
+//                 <button
+//                   onClick={handleLogout}
+//                   className="flex items-center justify-center w-full gap-2 px-4 py-3 text-sm font-bold text-red-600 transition-colors bg-red-50 hover:bg-red-100 rounded-xl"
+//                 >
+//                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+//                   Keluar
+//                 </button>
+//               ) : (
+//                 <div className="flex flex-col gap-2">
+//                   <button onClick={() => { setIsMobileMenuOpen(false); navigate("/login"); }} className="w-full px-4 py-3 text-sm font-bold text-center text-white bg-gray-900 shadow-md rounded-xl hover:bg-black">
+//                     Masuk
+//                   </button>
+//                   <button onClick={() => { setIsMobileMenuOpen(false); navigate("/register"); }} className="w-full px-4 py-3 text-sm font-bold text-center text-gray-700 bg-white border border-gray-200 shadow-sm rounded-xl hover:bg-gray-50">
+//                     Daftar Akun Baru
+//                   </button>
+//                 </div>
+//               )}
+//             </div>
+
+//           </div>
+//         </div>
+//       )}
+
+//       {/* =====================================================================
+//           GLOBAL SEARCH MODAL
+//       ===================================================================== */}
+//       {isSearchOpen && (
+//         <div className="fixed inset-0 z-[100] flex justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+//           {/* Area luar klik untuk menutup modal */}
+//           <div className="absolute inset-0" onClick={closeSearchModal}></div>
+
+//           <div className="relative flex flex-col w-full max-w-3xl mt-16 md:mt-24 overflow-hidden bg-white shadow-2xl h-[85vh] md:h-[75vh] rounded-t-3xl md:rounded-3xl animate-fade-in-up">
+
+//             {/* Header Pencarian */}
+//             <div className="flex flex-col p-4 border-b border-gray-100 md:p-6 bg-gray-50/50">
+//               <div className="flex items-center justify-between mb-4">
+//                 <h2 className="text-lg font-bold text-gray-900">Pencarian Universal</h2>
+//                 <button onClick={closeSearchModal} className="p-1 text-gray-400 transition-colors bg-white border border-gray-200 rounded-full shadow-sm hover:text-gray-900 hover:bg-gray-100">
+//                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+//                 </button>
+//               </div>
+
+//               {/* Input Pencarian */}
+//               <div className="relative">
+//                 <svg className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+//                 </svg>
+//                 <input
+//                   type="text"
+//                   value={searchQuery}
+//                   onChange={(e) => setSearchQuery(e.target.value)}
+//                   placeholder="Cari produk, No. Pesanan (INV-...), atau status..."
+//                   className="w-full py-3 pl-12 pr-4 text-sm font-medium transition-all bg-white border border-gray-300 shadow-sm outline-none rounded-xl focus:ring-2 focus:ring-gycora focus:border-transparent"
+//                   autoFocus
+//                 />
+//               </div>
+
+//               {/* Filter Waktu (Pills) */}
+//               <div className="flex gap-2 mt-4 overflow-x-auto no-scrollbar">
+//                 {[
+//                   { id: 'all', label: 'Semua Waktu' },
+//                   { id: '7d', label: '7 Hari Terakhir' },
+//                   { id: '30d', label: '30 Hari Terakhir' },
+//                   { id: '90d', label: '3 Bulan Terakhir' },
+//                 ].map((filter) => (
+//                   <button
+//                     key={filter.id}
+//                     onClick={() => setTimeFilter(filter.id)}
+//                     className={`shrink-0 px-4 py-1.5 text-xs font-bold rounded-full transition-all border ${timeFilter === filter.id ? 'bg-gycora text-white border-gycora shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-100'}`}
+//                   >
+//                     {filter.label}
+//                   </button>
+//                 ))}
+//               </div>
+//             </div>
+
+//             {/* Area Hasil Pencarian */}
+//             <div className="flex-1 p-4 overflow-y-auto bg-white md:p-6 custom-scrollbar">
+//               {searchQuery.trim().length === 0 ? (
+//                 <div className="flex flex-col items-center justify-center h-full text-gray-400 opacity-60">
+//                   <svg className="w-16 h-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
+//                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+//                   </svg>
+//                   <p className="text-sm font-medium">Ketik kata kunci untuk memulai pencarian.</p>
+//                 </div>
+//               ) : isSearching ? (
+//                 <div className="flex flex-col items-center justify-center h-full gap-3 text-gycora">
+//                   <div className="w-8 h-8 border-4 rounded-full border-emerald-100 border-t-gycora animate-spin"></div>
+//                   <p className="text-xs font-bold tracking-widest uppercase animate-pulse">Mencari data...</p>
+//                 </div>
+//               ) : (
+//                 <div className="space-y-8 animate-fade-in">
+
+//                   {/* --- HASIL PRODUK --- */}
+//                   {searchResults.products && searchResults.products.length > 0 && (
+//                     <div className="space-y-3">
+//                       <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Produk Katalog</h3>
+//                       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+//                         {searchResults.products.map((product: any) => (
+//                           <div
+//                             key={`prod-${product.id}`}
+//                             onClick={() => { closeSearchModal(); navigate(`/product/${product.id}`); }}
+//                             className="flex items-center gap-3 p-3 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
+//                           >
+//                             <img src={product.image_url} alt={product.name} className="object-cover w-12 h-12 rounded-lg bg-gray-50 shrink-0" />
+//                             <div className="flex-1 min-w-0">
+//                               <p className="text-sm font-bold text-gray-900 truncate group-hover:text-gycora">{product.name}</p>
+//                               <p className="text-xs text-gray-500 font-mono mt-0.5">{product.sku}</p>
+//                             </div>
+//                             <span className="text-sm font-black text-gycora shrink-0">{formatRupiah(product.price)}</span>
+//                           </div>
+//                         ))}
+//                       </div>
+//                     </div>
+//                   )}
+
+//                   {/* --- HASIL TRANSAKSI (ORDER) --- */}
+//                   {searchResults.transactions && searchResults.transactions.length > 0 && (
+//                     <div className="space-y-3">
+//                       <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Riwayat Transaksi</h3>
+//                       <div className="flex flex-col gap-3">
+//                         {searchResults.transactions.map((trx: any) => (
+//                           <div
+//                             key={`trx-${trx.id}`}
+//                             onClick={() => { closeSearchModal(); navigate(`/orders`); }}
+//                             className="flex items-center justify-between p-4 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
+//                           >
+//                             <div className="flex items-center gap-4">
+//                               <div className="flex items-center justify-center w-10 h-10 text-gray-500 bg-gray-100 rounded-full shadow-sm group-hover:bg-white group-hover:text-gycora">
+//                                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+//                               </div>
+//                               <div>
+//                                 <p className="font-mono text-sm font-bold text-gray-900 group-hover:text-gycora">{trx.order_id}</p>
+//                                 <p className="mt-1 text-xs text-gray-500">{new Date(trx.created_at).toLocaleDateString('id-ID')}</p>
+//                               </div>
+//                             </div>
+//                             <div className="text-right">
+//                               <p className="text-sm font-black text-gray-900">{formatRupiah(trx.total_amount)}</p>
+//                               <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-gray-100 text-gray-600">{trx.status}</span>
+//                             </div>
+//                           </div>
+//                         ))}
+//                       </div>
+//                     </div>
+//                   )}
+
+//                   {/* KOSONG/TIDAK ADA HASIL */}
+//                   {!isSearching &&
+//                    searchResults.products?.length === 0 &&
+//                    searchResults.transactions?.length === 0 &&
 //                    searchResults.carts?.length === 0 && (
 //                     <div className="flex flex-col items-center justify-center py-10 text-center">
 //                       <p className="text-lg font-bold text-gray-900">Oops, tidak ditemukan!</p>
@@ -1611,44 +2099,61 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useCart } from "../context/CartContext"; 
+import { useCart } from "../context/CartContext";
+import { useMessage } from "../context/MessageContext"; // <-- TAMBAHKAN INI
 import logoGycora from "../assets/gycora_logo.png";
-import { BASE_URL } from "../config/api"; 
+import { BASE_URL } from "../config/api";
 
 export default function Header() {
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userData, setUserData] = useState<any>(null);
-  const { cartTotalItems } = useCart();
+  // Tambahkan state terpisah untuk mendeteksi apakah ini akun admin
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [adminData, setAdminData] = useState<any>(null);
 
-  // --- STATE UNTUK DROPDOWN PROFIL ---
+  const { cartTotalItems } = useCart();
+  const { unreadCount, fetchUnreadMessages } = useMessage(); // <-- GUNAKAN CONTEXT
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // --- STATE UNTUK MOBILE MENU (BARU) ---
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // --- STATE UNTUK GLOBAL SEARCH MODAL ---
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [timeFilter, setTimeFilter] = useState("all"); 
+  const [timeFilter, setTimeFilter] = useState("all");
   const [isSearching, setIsSearching] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [searchResults, setSearchResults] = useState<any>({ products: [], transactions: [], carts: [] });
+  const [searchResults, setSearchResults] = useState<any>({
+    products: [],
+    transactions: [],
+    carts: [],
+  });
   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("user_token");
+    // Cek User Biasa
+    const userToken = localStorage.getItem("user_token");
     const storedUser = localStorage.getItem("user_data");
-    if (token && storedUser) {
+    if (userToken && storedUser) {
       setUserData(JSON.parse(storedUser));
     }
-  }, []);
+
+    // Cek Admin (Sangat penting karena Admin dan User punya dashboard berbeda)
+    const adminToken = localStorage.getItem("admin_token");
+    const storedAdmin = localStorage.getItem("admin_user");
+    if (adminToken && storedAdmin) {
+      setAdminData(JSON.parse(storedAdmin));
+      fetchUnreadMessages(); // Refresh badge saat admin terdeteksi login
+    }
+  }, [fetchUnreadMessages]);
 
   // --- EFEK KLIK DI LUAR DROPDOWN ---
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     }
@@ -1659,18 +2164,23 @@ export default function Header() {
   // --- MENCEGAH SCROLL SAAT MOBILE MENU DIBUKA ---
   useEffect(() => {
     if (isMobileMenuOpen || isSearchOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isMobileMenuOpen, isSearchOpen]);
 
   const handleLogout = () => {
     Swal.fire({
-      title: "Keluar?", icon: "warning", showCancelButton: true, confirmButtonColor: "#059669", cancelButtonColor: "#d33", confirmButtonText: "Ya, Keluar"
+      title: "Keluar?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#059669",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Keluar",
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("user_token");
@@ -1678,7 +2188,12 @@ export default function Header() {
         setUserData(null);
         setIsMobileMenuOpen(false); // Tutup mobile menu jika sedang terbuka
         navigate("/");
-        Swal.fire({ title: "Berhasil Keluar", icon: "success", timer: 1500, showConfirmButton: false });
+        Swal.fire({
+          title: "Berhasil Keluar",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+        });
       }
     });
   };
@@ -1702,12 +2217,15 @@ export default function Header() {
     searchTimeoutRef.current = setTimeout(async () => {
       try {
         const token = localStorage.getItem("user_token");
-        const res = await fetch(`${BASE_URL}/api/search?q=${encodeURIComponent(searchQuery)}&time=${timeFilter}`, {
-          headers: {
-            "Accept": "application/json",
-            ...(token && { "Authorization": `Bearer ${token}` })
-          }
-        });
+        const res = await fetch(
+          `${BASE_URL}/api/search?q=${encodeURIComponent(searchQuery)}&time=${timeFilter}`,
+          {
+            headers: {
+              Accept: "application/json",
+              ...(token && { Authorization: `Bearer ${token}` }),
+            },
+          },
+        );
 
         if (res.ok) {
           const data = await res.json();
@@ -1735,33 +2253,49 @@ export default function Header() {
   };
 
   const formatRupiah = (angka: number) => {
-    return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(angka || 0);
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(angka || 0);
   };
 
   return (
     <>
       <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
         <div className="flex items-center justify-between h-20 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          
           {/* BAGIAN KIRI: Hamburger Menu (Mobile) & Navigasi Kiri (Desktop) */}
           <div className="flex items-center flex-1">
             {/* Mobile Menu Button */}
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(true)}
               className="p-2 -ml-2 text-gray-600 transition-colors rounded-md md:hidden hover:bg-gray-100 focus:outline-none"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
           </div>
 
           {/* BAGIAN TENGAH: LOGO */}
-          <div className="flex items-center justify-center flex-shrink-0 cursor-pointer" onClick={() => navigate("/")}>
-            <img 
-              src={logoGycora} 
-              alt="Gycora Logo" 
-              className="object-contain h-8 md:h-10" 
+          <div
+            className="flex items-center justify-center flex-shrink-0 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <img
+              src={logoGycora}
+              alt="Gycora Logo"
+              className="object-contain h-8 md:h-10"
             />
           </div>
 
@@ -1770,7 +2304,7 @@ export default function Header() {
             {userData ? (
               // --- AREA DROPDOWN PROFIL (Desktop) ---
               <div className="relative hidden md:block" ref={dropdownRef}>
-                <button 
+                <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="flex items-center gap-2 cursor-pointer group focus:outline-none"
                 >
@@ -1780,68 +2314,181 @@ export default function Header() {
                   <span className="hidden text-sm font-semibold text-gray-800 transition-colors md:block group-hover:text-gycora">
                     Hi, {userData.first_name}
                   </span>
-                  <svg className={`hidden md:block w-4 h-4 text-gray-500 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                  <svg
+                    className={`hidden md:block w-4 h-4 text-gray-500 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
 
                 {/* Modal Dropdown Desktop */}
                 {isDropdownOpen && (
                   <div className="absolute right-0 w-48 py-2 mt-3 bg-white border border-gray-100 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] animate-fade-in-up origin-top-right">
-                    <Link 
-                      to="/profile" 
+                    <Link
+                      to="/profile"
                       onClick={() => setIsDropdownOpen(false)}
                       className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gycora"
                     >
-                      <svg className="w-4 h-4 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                      <svg
+                        className="w-4 h-4 mr-3 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
                       Profil Saya
                     </Link>
-                    <Link 
-                      to="/orders" 
+                    <Link
+                      to="/orders"
                       onClick={() => setIsDropdownOpen(false)}
                       className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 hover:text-gycora"
                     >
-                      <svg className="w-4 h-4 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                      <svg
+                        className="w-4 h-4 mr-3 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                        />
+                      </svg>
                       Pesanan Saya
                     </Link>
                     <div className="my-1 border-t border-gray-100"></div>
-                    <button 
+                    <button
                       onClick={() => {
                         setIsDropdownOpen(false);
                         handleLogout();
                       }}
                       className="flex items-center w-full px-4 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
                     >
-                      <svg className="w-4 h-4 mr-3 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                      <svg
+                        className="w-4 h-4 mr-3 text-red-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                        />
+                      </svg>
                       Keluar
                     </button>
                   </div>
                 )}
               </div>
             ) : (
-              <Link to="/login" className="hidden text-sm font-medium text-gray-600 transition-colors md:block hover:text-gycora">Login</Link>
+              <Link
+                to="/login"
+                className="hidden text-sm font-medium text-gray-600 transition-colors md:block hover:text-gycora"
+              >
+                Login
+              </Link>
             )}
 
             {/* IKON PENCARIAN (GLOBAL SEARCH) */}
-            <button onClick={() => setIsSearchOpen(true)} className="relative p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora">
-              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="relative p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora"
+            >
+              <svg
+                className="w-5 h-5 md:w-6 md:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
             </button>
 
+            {/* --- BARU: IKON PESAN (INBOX) KHUSUS ADMIN --- */}
+            {adminData && (
+              <button 
+                onClick={() => navigate("/admin/messages")} // Sesuaikan route Inbox Admin Anda
+                className="relative p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora" 
+                title="Pesan Masuk"
+              >
+                {/* Icon Inbox / Amplop */}
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                
+                {/* Badge Unread Count */}
+                {unreadCount > 0 && (
+                  <span className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white translate-x-1 -translate-y-1 bg-red-500 rounded-full shadow-sm animate-pulse">
+                    {unreadCount > 99 ? '99+' : unreadCount}
+                  </span>
+                )}
+              </button>
+            )}
+
             {/* IKON CHAT (HANYA MUNCUL JIKA SUDAH LOGIN) */}
             {userData && (
-              <button onClick={() => navigate("/chat")} className="relative hidden md:block p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora" title="Chat dengan Pakar">
-                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              <button
+                onClick={() => navigate("/chat")}
+                className="relative hidden md:block p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora"
+                title="Chat dengan Pakar"
+              >
+                <svg
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  />
                 </svg>
               </button>
             )}
 
             {/* IKON KERANJANG */}
-            <button id="cart-icon" onClick={() => navigate("/cart")} className="relative p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora">
-              <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            <button
+              id="cart-icon"
+              onClick={() => navigate("/cart")}
+              className="relative p-1.5 md:p-1 text-gray-600 transition-colors rounded-full hover:bg-gray-100 hover:text-gycora"
+            >
+              <svg
+                className="w-5 h-5 md:w-6 md:h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
               </svg>
               {cartTotalItems > 0 && (
                 <span className="absolute top-0 right-0 bg-gycora text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center translate-x-1 -translate-y-1">
@@ -1855,9 +2502,18 @@ export default function Header() {
         {/* BOTTOM NAVIGATION (Hanya Desktop) */}
         <div className="hidden px-4 mx-auto border-t border-gray-100 max-w-7xl sm:px-6 lg:px-8 md:block">
           <nav className="flex items-center justify-center h-12 space-x-10 text-sm font-semibold text-gray-700">
-             <Link to="/" className="transition-colors hover:text-gycora">Home</Link>
-             <Link to="/products" className="transition-colors hover:text-gycora">Shop All</Link>
-             <Link to="/consult" className="transition-colors hover:text-gycora">Consult With Us</Link>
+            <Link to="/" className="transition-colors hover:text-gycora">
+              Home
+            </Link>
+            <Link
+              to="/products"
+              className="transition-colors hover:text-gycora"
+            >
+              Shop All
+            </Link>
+            <Link to="/consult" className="transition-colors hover:text-gycora">
+              Consult With Us
+            </Link>
           </nav>
         </div>
       </header>
@@ -1868,8 +2524,8 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[100] md:hidden">
           {/* Overlay Background */}
-          <div 
-            className="absolute inset-0 transition-opacity bg-black/50 backdrop-blur-sm" 
+          <div
+            className="absolute inset-0 transition-opacity bg-black/50 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           ></div>
 
@@ -1877,11 +2533,23 @@ export default function Header() {
           <div className="absolute inset-y-0 left-0 flex flex-col w-4/5 max-w-sm overflow-y-auto bg-white shadow-2xl animate-fade-in-right">
             <div className="flex items-center justify-between p-4 border-b border-gray-100">
               <img src={logoGycora} alt="Gycora" className="h-6" />
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-2 text-gray-500 bg-gray-100 rounded-full hover:bg-gray-200"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
               </button>
             </div>
 
@@ -1892,7 +2560,9 @@ export default function Header() {
                   {userData.first_name.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-gray-900">{userData.first_name} {userData.last_name}</p>
+                  <p className="text-sm font-bold text-gray-900">
+                    {userData.first_name} {userData.last_name}
+                  </p>
                   <p className="text-xs text-gray-500">{userData.email}</p>
                 </div>
               </div>
@@ -1900,24 +2570,90 @@ export default function Header() {
 
             {/* Menu Navigasi */}
             <nav className="flex flex-col flex-1 p-4 space-y-2">
-              <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">Home</Link>
-              <Link to="/products" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">Shop All</Link>
-              <Link to="/consult" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">Consult With Us</Link>
-              
+              <Link
+                to="/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora"
+              >
+                Home
+              </Link>
+              <Link
+                to="/products"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora"
+              >
+                Shop All
+              </Link>
+              <Link
+                to="/consult"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora"
+              >
+                Consult With Us
+              </Link>
+
               {/* Menu Khusus Login */}
               {userData && (
                 <>
                   <div className="my-2 border-t border-gray-100"></div>
-                  <Link to="/chat" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                  <Link
+                    to="/chat"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora"
+                  >
+                    <svg
+                      className="w-5 h-5 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                      />
+                    </svg>
                     Live Chat Pakar
                   </Link>
-                  <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                  <Link
+                    to="/profile"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora"
+                  >
+                    <svg
+                      className="w-5 h-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
+                    </svg>
                     Profil Saya
                   </Link>
-                  <Link to="/orders" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                  <Link
+                    to="/orders"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gycora"
+                  >
+                    <svg
+                      className="w-5 h-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                      />
+                    </svg>
                     Pesanan Saya
                   </Link>
                 </>
@@ -1927,25 +2663,48 @@ export default function Header() {
             {/* Footer Menu (Auth Action) */}
             <div className="p-4 border-t border-gray-100">
               {userData ? (
-                <button 
+                <button
                   onClick={handleLogout}
                   className="flex items-center justify-center w-full gap-2 px-4 py-3 text-sm font-bold text-red-600 transition-colors bg-red-50 hover:bg-red-100 rounded-xl"
                 >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                    />
+                  </svg>
                   Keluar
                 </button>
               ) : (
                 <div className="flex flex-col gap-2">
-                  <button onClick={() => { setIsMobileMenuOpen(false); navigate("/login"); }} className="w-full px-4 py-3 text-sm font-bold text-center text-white bg-gray-900 shadow-md rounded-xl hover:bg-black">
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      navigate("/login");
+                    }}
+                    className="w-full px-4 py-3 text-sm font-bold text-center text-white bg-gray-900 shadow-md rounded-xl hover:bg-black"
+                  >
                     Masuk
                   </button>
-                  <button onClick={() => { setIsMobileMenuOpen(false); navigate("/register"); }} className="w-full px-4 py-3 text-sm font-bold text-center text-gray-700 bg-white border border-gray-200 shadow-sm rounded-xl hover:bg-gray-50">
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      navigate("/register");
+                    }}
+                    className="w-full px-4 py-3 text-sm font-bold text-center text-gray-700 bg-white border border-gray-200 shadow-sm rounded-xl hover:bg-gray-50"
+                  >
                     Daftar Akun Baru
                   </button>
                 </div>
               )}
             </div>
-
           </div>
         </div>
       )}
@@ -1957,28 +2716,54 @@ export default function Header() {
         <div className="fixed inset-0 z-[100] flex justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
           {/* Area luar klik untuk menutup modal */}
           <div className="absolute inset-0" onClick={closeSearchModal}></div>
-          
+
           <div className="relative flex flex-col w-full max-w-3xl mt-16 md:mt-24 overflow-hidden bg-white shadow-2xl h-[85vh] md:h-[75vh] rounded-t-3xl md:rounded-3xl animate-fade-in-up">
-            
             {/* Header Pencarian */}
             <div className="flex flex-col p-4 border-b border-gray-100 md:p-6 bg-gray-50/50">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold text-gray-900">Pencarian Universal</h2>
-                <button onClick={closeSearchModal} className="p-1 text-gray-400 transition-colors bg-white border border-gray-200 rounded-full shadow-sm hover:text-gray-900 hover:bg-gray-100">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                <h2 className="text-lg font-bold text-gray-900">
+                  Pencarian Universal
+                </h2>
+                <button
+                  onClick={closeSearchModal}
+                  className="p-1 text-gray-400 transition-colors bg-white border border-gray-200 rounded-full shadow-sm hover:text-gray-900 hover:bg-gray-100"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
                 </button>
               </div>
 
               {/* Input Pencarian */}
               <div className="relative">
-                <svg className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <svg
+                  className="absolute left-4 top-3.5 w-5 h-5 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
                 </svg>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Cari produk, No. Pesanan (INV-...), atau status..." 
+                  placeholder="Cari produk, No. Pesanan (INV-...), atau status..."
                   className="w-full py-3 pl-12 pr-4 text-sm font-medium transition-all bg-white border border-gray-300 shadow-sm outline-none rounded-xl focus:ring-2 focus:ring-gycora focus:border-transparent"
                   autoFocus
                 />
@@ -1987,15 +2772,15 @@ export default function Header() {
               {/* Filter Waktu (Pills) */}
               <div className="flex gap-2 mt-4 overflow-x-auto no-scrollbar">
                 {[
-                  { id: 'all', label: 'Semua Waktu' },
-                  { id: '7d', label: '7 Hari Terakhir' },
-                  { id: '30d', label: '30 Hari Terakhir' },
-                  { id: '90d', label: '3 Bulan Terakhir' },
+                  { id: "all", label: "Semua Waktu" },
+                  { id: "7d", label: "7 Hari Terakhir" },
+                  { id: "30d", label: "30 Hari Terakhir" },
+                  { id: "90d", label: "3 Bulan Terakhir" },
                 ].map((filter) => (
-                  <button 
+                  <button
                     key={filter.id}
                     onClick={() => setTimeFilter(filter.id)}
-                    className={`shrink-0 px-4 py-1.5 text-xs font-bold rounded-full transition-all border ${timeFilter === filter.id ? 'bg-gycora text-white border-gycora shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-100'}`}
+                    className={`shrink-0 px-4 py-1.5 text-xs font-bold rounded-full transition-all border ${timeFilter === filter.id ? "bg-gycora text-white border-gycora shadow-md" : "bg-white text-gray-500 border-gray-200 hover:bg-gray-100"}`}
                   >
                     {filter.label}
                   </button>
@@ -2007,87 +2792,147 @@ export default function Header() {
             <div className="flex-1 p-4 overflow-y-auto bg-white md:p-6 custom-scrollbar">
               {searchQuery.trim().length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-gray-400 opacity-60">
-                  <svg className="w-16 h-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-16 h-16 mb-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
-                  <p className="text-sm font-medium">Ketik kata kunci untuk memulai pencarian.</p>
+                  <p className="text-sm font-medium">
+                    Ketik kata kunci untuk memulai pencarian.
+                  </p>
                 </div>
               ) : isSearching ? (
                 <div className="flex flex-col items-center justify-center h-full gap-3 text-gycora">
                   <div className="w-8 h-8 border-4 rounded-full border-emerald-100 border-t-gycora animate-spin"></div>
-                  <p className="text-xs font-bold tracking-widest uppercase animate-pulse">Mencari data...</p>
+                  <p className="text-xs font-bold tracking-widest uppercase animate-pulse">
+                    Mencari data...
+                  </p>
                 </div>
               ) : (
                 <div className="space-y-8 animate-fade-in">
-                  
                   {/* --- HASIL PRODUK --- */}
-                  {searchResults.products && searchResults.products.length > 0 && (
-                    <div className="space-y-3">
-                      <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Produk Katalog</h3>
-                      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                        {searchResults.products.map((product: any) => (
-                          <div 
-                            key={`prod-${product.id}`}
-                            onClick={() => { closeSearchModal(); navigate(`/product/${product.id}`); }}
-                            className="flex items-center gap-3 p-3 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
-                          >
-                            <img src={product.image_url} alt={product.name} className="object-cover w-12 h-12 rounded-lg bg-gray-50 shrink-0" />
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-bold text-gray-900 truncate group-hover:text-gycora">{product.name}</p>
-                              <p className="text-xs text-gray-500 font-mono mt-0.5">{product.sku}</p>
+                  {searchResults.products &&
+                    searchResults.products.length > 0 && (
+                      <div className="space-y-3">
+                        <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">
+                          Produk Katalog
+                        </h3>
+                        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                          {searchResults.products.map((product: any) => (
+                            <div
+                              key={`prod-${product.id}`}
+                              onClick={() => {
+                                closeSearchModal();
+                                navigate(`/product/${product.id}`);
+                              }}
+                              className="flex items-center gap-3 p-3 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
+                            >
+                              <img
+                                src={product.image_url}
+                                alt={product.name}
+                                className="object-cover w-12 h-12 rounded-lg bg-gray-50 shrink-0"
+                              />
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-bold text-gray-900 truncate group-hover:text-gycora">
+                                  {product.name}
+                                </p>
+                                <p className="text-xs text-gray-500 font-mono mt-0.5">
+                                  {product.sku}
+                                </p>
+                              </div>
+                              <span className="text-sm font-black text-gycora shrink-0">
+                                {formatRupiah(product.price)}
+                              </span>
                             </div>
-                            <span className="text-sm font-black text-gycora shrink-0">{formatRupiah(product.price)}</span>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
                   {/* --- HASIL TRANSAKSI (ORDER) --- */}
-                  {searchResults.transactions && searchResults.transactions.length > 0 && (
-                    <div className="space-y-3">
-                      <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">Riwayat Transaksi</h3>
-                      <div className="flex flex-col gap-3">
-                        {searchResults.transactions.map((trx: any) => (
-                          <div 
-                            key={`trx-${trx.id}`}
-                            onClick={() => { closeSearchModal(); navigate(`/orders`); }}
-                            className="flex items-center justify-between p-4 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
-                          >
-                            <div className="flex items-center gap-4">
-                              <div className="flex items-center justify-center w-10 h-10 text-gray-500 bg-gray-100 rounded-full shadow-sm group-hover:bg-white group-hover:text-gycora">
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  {searchResults.transactions &&
+                    searchResults.transactions.length > 0 && (
+                      <div className="space-y-3">
+                        <h3 className="pb-2 text-xs font-bold tracking-widest text-gray-400 uppercase border-b border-gray-100">
+                          Riwayat Transaksi
+                        </h3>
+                        <div className="flex flex-col gap-3">
+                          {searchResults.transactions.map((trx: any) => (
+                            <div
+                              key={`trx-${trx.id}`}
+                              onClick={() => {
+                                closeSearchModal();
+                                navigate(`/orders`);
+                              }}
+                              className="flex items-center justify-between p-4 transition-colors border border-gray-100 cursor-pointer rounded-xl hover:bg-emerald-50/50 hover:border-emerald-200 group"
+                            >
+                              <div className="flex items-center gap-4">
+                                <div className="flex items-center justify-center w-10 h-10 text-gray-500 bg-gray-100 rounded-full shadow-sm group-hover:bg-white group-hover:text-gycora">
+                                  <svg
+                                    className="w-5 h-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2"
+                                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                    />
+                                  </svg>
+                                </div>
+                                <div>
+                                  <p className="font-mono text-sm font-bold text-gray-900 group-hover:text-gycora">
+                                    {trx.order_id}
+                                  </p>
+                                  <p className="mt-1 text-xs text-gray-500">
+                                    {new Date(
+                                      trx.created_at,
+                                    ).toLocaleDateString("id-ID")}
+                                  </p>
+                                </div>
                               </div>
-                              <div>
-                                <p className="font-mono text-sm font-bold text-gray-900 group-hover:text-gycora">{trx.order_id}</p>
-                                <p className="mt-1 text-xs text-gray-500">{new Date(trx.created_at).toLocaleDateString('id-ID')}</p>
+                              <div className="text-right">
+                                <p className="text-sm font-black text-gray-900">
+                                  {formatRupiah(trx.total_amount)}
+                                </p>
+                                <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-gray-100 text-gray-600">
+                                  {trx.status}
+                                </span>
                               </div>
                             </div>
-                            <div className="text-right">
-                              <p className="text-sm font-black text-gray-900">{formatRupiah(trx.total_amount)}</p>
-                              <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-gray-100 text-gray-600">{trx.status}</span>
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
                   {/* KOSONG/TIDAK ADA HASIL */}
-                  {!isSearching && 
-                   searchResults.products?.length === 0 && 
-                   searchResults.transactions?.length === 0 && 
-                   searchResults.carts?.length === 0 && (
-                    <div className="flex flex-col items-center justify-center py-10 text-center">
-                      <p className="text-lg font-bold text-gray-900">Oops, tidak ditemukan!</p>
-                      <p className="max-w-sm mt-2 text-sm text-gray-500">Kami tidak dapat menemukan hasil untuk "{searchQuery}" dengan rentang waktu yang Anda pilih.</p>
-                    </div>
-                  )}
-
+                  {!isSearching &&
+                    searchResults.products?.length === 0 &&
+                    searchResults.transactions?.length === 0 &&
+                    searchResults.carts?.length === 0 && (
+                      <div className="flex flex-col items-center justify-center py-10 text-center">
+                        <p className="text-lg font-bold text-gray-900">
+                          Oops, tidak ditemukan!
+                        </p>
+                        <p className="max-w-sm mt-2 text-sm text-gray-500">
+                          Kami tidak dapat menemukan hasil untuk "{searchQuery}"
+                          dengan rentang waktu yang Anda pilih.
+                        </p>
+                      </div>
+                    )}
                 </div>
               )}
             </div>
-
           </div>
         </div>
       )}
